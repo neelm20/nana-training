@@ -503,21 +503,21 @@ function render(){
   if (p.rest) out += '<div class="rest-art"><span class="hand">Rest &amp; recover, love</span>'+p.rest+'</div>';
   p.items.forEach((it,i) => {
     const on = isFuture ? false : ((i in saved) ? saved[i] : (p.done && !isToday && !it.skipped));
-    const label = isFuture ? opens : (on ? "Done" : (isToday ? "Mark done" : "Not done"));
+    const label = isFuture ? opens : (on ? "Done" : "Mark done");
     out += '<article class="card'+(on?' done':'')+'" '+col+' data-i="'+i+'">'
       + '<div class="card-top"><span class="step">'+(i+1)+'</span><h3>'+it.n+'</h3><span class="rx">'+it.rx+'</span></div>'
       + (it.cue ? '<p class="cue">'+it.cue+'</p>' : '')
       + (it.skipped ? '<span class="skipped">Skipped this time</span>' : '')
       + media(it)
       + '<div class="card-foot"><a class="how" href="'+yt(it.q||it.n)+'" target="_blank" rel="noopener">'+playIcon+'Watch video</a>'
-      + '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'"'+(isToday?'':' disabled title="You can only tick off today\'s workout"')+'>'+(isFuture?lockIcon:checkIcon)+'<span>'+label+'</span></button></div>'
+      + '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'"'+(isFuture?' disabled title="You can tick this off on the day"':'')+'>'+(isFuture?lockIcon:checkIcon)+'<span>'+label+'</span></button></div>'
       + '</article>';
   });
   if (p.items.length && p.t !== "rest") out += '<div class="after">'+heart+'<span>After: protein shake, and send Neel your sweaty post-workout pic 😘</span></div>';
   const el = document.getElementById("day");
   el.innerHTML = out;
   el.querySelectorAll(".done-btn").forEach(b => b.addEventListener("click", () => {
-    if (current !== todayIso) return;
+    if (current > todayIso) return;
     const card = b.closest(".card"), i = card.dataset.i, on = b.getAttribute("aria-pressed") !== "true";
     const s = store.get("chk-"+current) || {}; s[i] = on; store.set("chk-"+current, s);
     b.setAttribute("aria-pressed", on); b.querySelector("span").textContent = on ? "Done" : "Mark done";
