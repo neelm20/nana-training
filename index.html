@@ -493,7 +493,7 @@ function render(){
   if (p.note) out += '<div class="note">'+p.note+'</div>';
   if (p.rest) out += '<div class="rest-art"><span class="hand">Rest &amp; recover, love</span>'+p.rest+'</div>';
   p.items.forEach((it,i) => {
-    const on = (i in saved) ? saved[i] : (p.done && !it.skipped);
+    const on = (i in saved) ? saved[i] : (p.done && current < todayIso && !it.skipped);
     out += '<article class="card'+(on?' done':'')+'" '+col+' data-i="'+i+'">'
       + '<div class="card-top"><span class="step">'+(i+1)+'</span><h3>'+it.n+'</h3><span class="rx">'+it.rx+'</span></div>'
       + (it.cue ? '<p class="cue">'+it.cue+'</p>' : '')
