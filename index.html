@@ -207,7 +207,7 @@ img{max-width:100%}
       <table class="num">
         <thead><tr><th>Week</th><th>Wed run</th><th>Sat run</th></tr></thead>
         <tbody>
-          <tr><td>This week</td><td>—</td><td>Fri: 6 × (1 min jog + 2 min walk)</td></tr>
+          <tr><td>This week</td><td>—</td><td>6 × (1 min jog + 2 min walk)</td></tr>
           <tr><td>Week 1</td><td>6 × (1½ jog + 1½ walk)</td><td>5 × (3 jog + 1½ walk)</td></tr>
           <tr><td>Week 2</td><td>5 × (3 jog + 1½ walk)</td><td>3 × (5 jog + 2 walk)</td></tr>
           <tr><td>Week 3</td><td>3 × (6 jog + 1½ walk)</td><td>2 × (10 jog + 2 walk)</td></tr>
@@ -340,26 +340,30 @@ const plan = {
     E.stretch
   ]},
   "2026-09-24":{t:"lower",title:"Lower body B",mins:"~60 min",
-    note:"<b>Squat and hinge day.</b> Tuesday was machines and glutes. Today uses free weights so your legs and glutes also get stronger for running. Core is here too because you skipped abs on Monday.",
+    note:"<b>Squat, hinge and jump day.</b> First time for most of these, so go light and learn the moves. Stop each set with about 3 reps left in the tank. Heavier comes next week.",
     items:[
-    E.warm,
-    X("Goblet squat","3 × 10","Hold one dumbbell at your chest. Sit down between your heels, chest up, knees follow your toes. Rest 90 s."),
-    X("Dumbbell Romanian deadlift","3 × 10","Soft knees, push your hips back, slide the dumbbells down your thighs until your hamstrings stretch. Flat back."),
-    X("Bulgarian split squat","2 × 8 each leg","Back foot on a bench. Start with bodyweight; add light dumbbells if it's easy. Lean slightly forward for more glute."),
-    X("Hip abduction machine","3 × 15","Lean your chest a little forward, push out and pause for 1 s. The burn is the side of your glutes working."),
+    Object.assign({},E.warm,{cue:"Loosen everything up, top to bottom. Then do 2 light sets of goblet squats to ease in."}),
+    X("Box jumps","3 × 5","Jump onto a low box or step, land softly, then STEP down. Full rest between sets. You're fresh now, so this is when jumping works.","box jump beginner",{im:"Front_Box_Jump"}),
+    X("Goblet squat","3 × 8–10","Hold one dumbbell at your chest. Sit down between your heels and pause 1 s at the bottom. Chest up, knees follow your toes. Rest 90 s."),
+    X("Dumbbell Romanian deadlift","3 × 8–10","Light today. Soft knees, push your hips back, slide the dumbbells down your thighs until your hamstrings stretch. Flat back. Stop 3 reps before it gets hard."),
+    X("Dumbbell step-ups","2 × 8 each leg","Step onto a bench or box, push through the front heel, stand tall at the top. Don't push off the back foot. This is running strength.","dumbbell step up",{im:"Dumbbell_Step_Ups"}),
+    X("Hip abduction machine","2 × 15","Lean your chest a little forward, push out and pause for 1 s. The burn is the side of your glutes working."),
     E.core,
     E.stretch
   ]},
-  "2026-09-25":{t:"run",title:"First run day",mins:"~45 min",
+  "2026-09-25":{t:"rest",title:"Recovery + stretch",mins:"~45 min",
+    note:"<b>No run today.</b> Your legs need a day after yesterday, so the first run is tomorrow. A walk and a good stretch will help any soreness go away faster.",
+    items:[
+    X("Easy walk","25–30 min","Outside if you can. Easy pace, get some sunlight.","gentle yoga for recovery",{im:"Trail_Running_Walking"}),
+    E.flow
+  ]},
+  "2026-09-26":{t:"run",title:"First run day",mins:"~45 min",
     note:"<b>Easy start.</b> The jogs should feel almost too slow. We're building stamina, not speed.",
     items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
     runInt("6 rounds","1 min easy jog + 2 min walk, 6 times (18 min). Treadmill jog ≈ 7–7.5 km/h."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
-    E.flow
-  ]},
-  "2026-09-26":{t:"rest",title:"Active recovery",note:"Optional: a 30–45 min walk outside or a yoga class. Nothing hard.",items:[
-    X("Easy walk or yoga","30–45 min","Stay loose, get some sunlight.","gentle yoga for recovery")
+    Object.assign({},E.flow,{rx:"10 min"})
   ]},
   "2026-09-27":{t:"rest",title:"Rest day",rest:"Full rest. Eat well, hit your protein, sleep. Muscles grow while you rest.",items:[]},
 
