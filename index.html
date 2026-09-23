@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F5F4EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141A23" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nana's Training">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg fill='%234A6FA5'%3E%3Cellipse cx='20' cy='9' rx='7' ry='9'/%3E%3Cellipse cx='20' cy='31' rx='7' ry='9'/%3E%3Cellipse cx='9' cy='20' rx='9' ry='7'/%3E%3Cellipse cx='31' cy='20' rx='9' ry='7'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='7' fill='%23E6B64A'/%3E%3C/svg%3E">
+<title>Nana's Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
+<style>
+:root{
+  --ground:#F5F4EF; --surface:#FFFFFD; --ink:#1F2B3A; --muted:#667181; --line:#E4E2DA;
+  --blue:#4A6FA5; --blue-soft:#E3EAF4; --blue-deep:#2E4A73;
+  --sun:#E6B64A; --sun-soft:#FAF0D4;
+  --leaf:#4E8768; --leaf-soft:#E0EEE5;
+  --rose:#BD5E78; --rose-soft:#F6E3E8;
+  --stone:#8C8F97; --stone-soft:#ECEBE6;
+  --photo:#FFFFFF;
+  --shadow:0 1px 2px rgba(31,43,58,.05),0 8px 24px rgba(31,43,58,.07);
+  --hero:linear-gradient(145deg,#DCE6F3 0%,#EEF1F4 55%,#FAF0D4 100%);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#141A23; --surface:#1C2430; --ink:#E7ECF3; --muted:#9AA6B6; --line:#2A3443;
+    --blue:#90B0DD; --blue-soft:#22324A; --blue-deep:#BFD2EE;
+    --sun:#EBC56C; --sun-soft:#3A3322;
+    --leaf:#88C3A2; --leaf-soft:#1E3329;
+    --rose:#E59AAF; --rose-soft:#3A2531;
+    --stone:#A6ABB4; --stone-soft:#262D38;
+    --photo:#E9EBEE;
+    --shadow:0 1px 2px rgba(0,0,0,.35);
+    --hero:linear-gradient(145deg,#22324A 0%,#1C2430 60%,#302B22 100%);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#141A23; --surface:#1C2430; --ink:#E7ECF3; --muted:#9AA6B6; --line:#2A3443;
+  --blue:#90B0DD; --blue-soft:#22324A; --blue-deep:#BFD2EE;
+  --sun:#EBC56C; --sun-soft:#3A3322;
+  --leaf:#88C3A2; --leaf-soft:#1E3329;
+  --rose:#E59AAF; --rose-soft:#3A2531;
+  --stone:#A6ABB4; --stone-soft:#262D38;
+  --photo:#E9EBEE;
+  --shadow:0 1px 2px rgba(0,0,0,.35);
+  --hero:linear-gradient(145deg,#22324A 0%,#1C2430 60%,#302B22 100%);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:400 16px/1.5 Figtree,system-ui,-apple-system,sans-serif;padding-inline:16px;padding-block:14px 56px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;margin:0;text-wrap:balance;letter-spacing:-.015em}
+a{color:inherit}
+.num{font-variant-numeric:tabular-nums}
+.hand{font-family:Caveat,"Segoe Print","Bradley Hand",cursive;font-weight:700}
+
+/* hero */
+.hero{background:var(--hero);border-radius:26px;padding:22px 20px 20px;position:relative;overflow:hidden}
+.hero .hi{font-size:34px;line-height:1;color:var(--blue-deep)}
+.hero h1{font-size:30px;font-weight:800;line-height:1.08;margin-top:8px;max-width:13ch}
+.hero p{margin:10px 0 0;color:var(--muted);font-size:14.5px;max-width:28ch}
+.hero .sig{margin-top:14px;font-size:24px;color:var(--rose);line-height:1}
+.hero svg{position:absolute;right:-18px;top:-14px;width:150px;height:150px;opacity:.95}
+
+/* week strip */
+.strip{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);margin-inline:-16px;padding:12px 16px 10px;margin-top:10px}
+.strip::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:12px;background:linear-gradient(var(--ground),transparent);pointer-events:none}
+.wk{display:grid;grid-template-columns:58px 1fr;align-items:center;gap:8px}
+.wk + .wk{margin-top:7px}
+.wk-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700;line-height:1.25}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.chip{appearance:none;border:0;background:var(--surface);color:var(--ink);border-radius:14px;padding:6px 0 7px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font:inherit;min-width:0;box-shadow:0 1px 2px rgba(31,43,58,.06);transition:transform .15s}
+.chip .dw{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.chip .dn{font-size:16px;font-weight:700;line-height:1.1}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:var(--c,var(--stone))}
+.chip.past .dn,.chip.past .dw{opacity:.5}
+.chip.today{box-shadow:inset 0 0 0 1.5px var(--blue)}
+.chip[aria-pressed="true"]{background:var(--blue-deep);transform:translateY(-1px)}
+.chip[aria-pressed="true"] .dw,.chip[aria-pressed="true"] .dn{color:var(--surface);opacity:1}
+.chip:focus-visible,.done-btn:focus-visible,.how:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* day */
+.day{margin-top:14px;display:flex;flex-direction:column;gap:14px}
+.day-head{background:var(--cs);border-radius:22px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
+.eyebrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12.5px;font-weight:700;color:var(--c)}
+.eyebrow .pill{background:var(--surface);color:var(--c);padding:3px 10px;border-radius:99px}
+.eyebrow .soft{color:var(--muted);font-weight:600}
+.day-head h2{font-size:28px;font-weight:800;line-height:1.1}
+.day-head .date{color:var(--muted);font-size:14px;font-weight:600}
+.progress{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-weight:600;margin-top:6px}
+.bar{flex:1;height:7px;border-radius:99px;background:var(--surface);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--c);border-radius:99px;transition:width .35s}
+.note{background:var(--surface);border-radius:18px;padding:14px 16px;font-size:15px;box-shadow:var(--shadow);border-left:4px solid var(--sun)}
+.note b{font-weight:700}
+
+/* exercise cards */
+.card{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .2s,opacity .2s}
+.card.done{box-shadow:inset 0 0 0 2px var(--leaf),var(--shadow)}
+.card-top{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start}
+.step{width:28px;height:28px;border-radius:50%;background:var(--blue-soft);color:var(--blue-deep);display:grid;place-items:center;font-weight:700;font-size:13px;font-variant-numeric:tabular-nums;margin-top:1px}
+.card.done .step{background:var(--leaf);color:var(--surface)}
+.card h3{font-size:18.5px;font-weight:700;line-height:1.2}
+.card.done h3{color:var(--muted)}
+.rx{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-weight:700;font-size:14.5px;white-space:nowrap;background:var(--cs);color:var(--c);padding:4px 10px;border-radius:10px;font-variant-numeric:tabular-nums}
+.cue{font-size:14.5px;color:var(--muted);line-height:1.45;margin:0}
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pics figure,.tile figure{margin:0;position:relative;border-radius:14px;overflow:hidden;background:var(--photo)}
+.pics img,.tile img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--photo)}
+.pics figcaption{position:absolute;left:8px;bottom:8px;font-size:11px;font-weight:700;background:rgba(31,43,58,.72);color:#fff;padding:2px 8px;border-radius:99px}
+.tiles{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(128px,42%);gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-14px;padding:2px 14px 6px;scrollbar-width:none}
+.tiles::-webkit-scrollbar{display:none}
+.tile{scroll-snap-align:start;display:flex;flex-direction:column;gap:6px;min-width:0}
+.tile .tn{font-weight:700;font-size:14px;line-height:1.25}
+.tile .tr{font-size:12.5px;color:var(--muted);line-height:1.3}
+.ph{aspect-ratio:4/3;display:grid;place-items:center;background:var(--blue-soft)}
+.ph svg{width:44%;height:auto}
+.swipe{font-size:12px;color:var(--muted);font-weight:600;margin-top:-4px}
+.skipped{font-size:12px;font-weight:700;color:var(--rose);background:var(--rose-soft);border-radius:99px;padding:2px 10px;align-self:flex-start}
+.card-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:2px}
+.how{font-size:13.5px;font-weight:700;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:8px 2px}
+.how svg{width:17px;height:17px}
+.done-btn{appearance:none;border:1.5px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:700;border-radius:99px;padding:8px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.done-btn svg{width:16px;height:16px}
+.done-btn[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--surface)}
+.after{display:flex;gap:12px;align-items:center;background:var(--rose-soft);border-radius:20px;padding:14px 16px;font-size:15px}
+.after svg{flex:none;width:24px;height:24px;color:var(--rose)}
+.rest-art{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:22px;text-align:center;color:var(--muted)}
+.rest-art .hand{font-size:28px;color:var(--blue-deep);display:block;margin-bottom:4px}
+
+/* sections */
+section.block{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+section.block h2{font-size:23px;font-weight:800}
+section.block > p{margin:0;color:var(--muted);font-size:15px}
+.split{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.split div{background:var(--cs);color:var(--c);border-radius:12px;padding:10px 2px;text-align:center;font-size:11px;font-weight:700;line-height:1.25}
+.split div b{display:block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;opacity:.75;margin-bottom:3px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.table-wrap{overflow-x:auto;background:var(--surface);border-radius:20px;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px 14px;text-align:left;border-top:1px solid var(--line);vertical-align:top}
+thead th{border-top:0;font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+td:first-child{font-weight:700;white-space:nowrap;color:var(--blue-deep)}
+tr.goal td{background:var(--blue-soft)}
+.rules{display:grid;gap:10px}
+@media (min-width:520px){.rules{grid-template-columns:1fr 1fr}}
+.rule{background:var(--surface);border-radius:18px;padding:15px 16px;box-shadow:var(--shadow)}
+.rule h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.rule p{margin:0;font-size:14.5px;color:var(--muted)}
+footer{margin-top:40px;text-align:center}
+footer .hand{font-size:30px;color:var(--rose)}
+@media (prefers-reduced-motion:reduce){.bar i,.chip,.card{transition:none}}
+html{color-scheme:light}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <svg viewBox="0 0 120 120" aria-hidden="true">
+      <g fill="var(--sun)" opacity=".9">
+        <ellipse cx="60" cy="30" rx="15" ry="24"/><ellipse cx="60" cy="90" rx="15" ry="24"/>
+        <ellipse cx="30" cy="60" rx="24" ry="15"/><ellipse cx="90" cy="60" rx="24" ry="15"/>
+        <ellipse cx="39" cy="39" rx="13" ry="21" transform="rotate(-45 39 39)"/><ellipse cx="81" cy="81" rx="13" ry="21" transform="rotate(-45 81 81)"/>
+        <ellipse cx="81" cy="39" rx="13" ry="21" transform="rotate(45 81 39)"/><ellipse cx="39" cy="81" rx="13" ry="21" transform="rotate(45 39 81)"/>
+      </g>
+      <circle cx="60" cy="60" r="17" fill="#DE8A2E"/><circle cx="60" cy="60" r="9" fill="#C36A22"/>
+    </svg>
+    <div class="hi hand">Hi Nana,</div>
+    <h1>Your training plan</h1>
+    <p>Build muscle, lose a little fat, run further, and get more flexible. One day at a time.</p>
+    <div class="sig hand">By Neel, with love ♡</div>
+  </header>
+
+  <nav class="strip" aria-label="Pick a day">
+    <div class="wk"><div class="wk-label">This<br>week</div><div class="days" id="w0"></div></div>
+    <div class="wk"><div class="wk-label">Next<br>week</div><div class="days" id="w1"></div></div>
+  </nav>
+
+  <main class="day" id="day" aria-live="polite"></main>
+
+  <section class="block" id="split">
+    <h2>How each week works</h2>
+    <p>Upper and lower body twice a week each, so every muscle gets worked twice. Runs come the day after an upper-body day, never after legs, so your legs are fresh for them. One full rest day.</p>
+    <div class="split" id="splitgrid"></div>
+    <div class="legend">
+      <span style="--c:var(--rose)"><i></i>Upper body</span>
+      <span style="--c:var(--leaf)"><i></i>Lower body</span>
+      <span style="--c:var(--blue)"><i></i>Run + stretch</span>
+      <span style="--c:var(--stone)"><i></i>Rest</span>
+    </div>
+  </section>
+
+  <section class="block" id="running">
+    <h2>Running ladder to 30 minutes</h2>
+    <p>Jog slowly enough that you could still talk in full sentences. If the last round of a session felt like a fight, repeat that week before moving up.</p>
+    <div class="table-wrap">
+      <table class="num">
+        <thead><tr><th>Week</th><th>Wed run</th><th>Sat run</th></tr></thead>
+        <tbody>
+          <tr><td>This week</td><td>—</td><td>Fri: 6 × (1 min jog + 2 min walk)</td></tr>
+          <tr><td>Week 1</td><td>6 × (1½ jog + 1½ walk)</td><td>5 × (3 jog + 1½ walk)</td></tr>
+          <tr><td>Week 2</td><td>5 × (3 jog + 1½ walk)</td><td>3 × (5 jog + 2 walk)</td></tr>
+          <tr><td>Week 3</td><td>3 × (6 jog + 1½ walk)</td><td>2 × (10 jog + 2 walk)</td></tr>
+          <tr><td>Week 4</td><td>15 min non-stop</td><td>20 min non-stop</td></tr>
+          <tr><td>Week 5</td><td>20 min, with 4 × 30 s a bit faster</td><td>25 min non-stop</td></tr>
+          <tr class="goal"><td>Week 6</td><td>20 min, with 6 × 30 s a bit faster</td><td>30 min non-stop 🎉</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Always do 5 min brisk walking before and after. On the treadmill: walk ≈ 5.5 km/h, easy jog ≈ 7–8 km/h, 1% incline.</p>
+  </section>
+
+  <section class="block" id="rules">
+    <h2>The rules</h2>
+    <div class="rules">
+      <div class="rule"><h3>Make the last 2 reps hard</h3><p>Pick a weight where the last couple of reps are a real effort but your form stays clean. If it's easy, it's too light.</p></div>
+      <div class="rule"><h3>Go up when you hit the top</h3><p>When every set reaches the top of the rep range (e.g. 3 × 12), move to the next dumbbell or plate the following session.</p></div>
+      <div class="rule"><h3>Rest 60–90 seconds</h3><p>Up to 2 minutes on squats, hip thrusts and deadlifts. 30 seconds between exercises in a superset or circuit.</p></div>
+      <div class="rule"><h3>Protein every day</h3><p>About 1.6 g per kg of bodyweight (~85 g if you're 55 kg). The post-workout shake counts. Muscle gets built from it.</p></div>
+      <div class="rule"><h3>Don't crash diet</h3><p>You're already lean. Eat about normal amounts; the lifting and running will change how your body looks. Sleep 7–8 hours.</p></div>
+      <div class="rule"><h3>Pain means stop</h3><p>A burn is fine. A sharp or joint pain, or feeling dizzy, means stop that exercise and tell me.</p></div>
+    </div>
+  </section>
+
+  <footer><span class="hand">By Neel, with love ♡</span></footer>
+</div>
+
+<script>
+(function(){
+const T = {
+  upper:{label:"Upper body",c:"var(--rose)",cs:"var(--rose-soft)"},
+  lower:{label:"Lower body",c:"var(--leaf)",cs:"var(--leaf-soft)"},
+  run:{label:"Run + stretch",c:"var(--blue)",cs:"var(--blue-soft)"},
+  rest:{label:"Rest",c:"var(--stone)",cs:"var(--stone-soft)"}
+};
+const yt = q => "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
+const M = (n,r,im) => ({n,r,im});
+
+// circuits and routines: shown as swipeable photo tiles
+const E = {
+  warm:{n:"Warm-up",rx:"~10 min",cue:"Loosen everything up, top to bottom. Slow and controlled.",q:"full body dynamic warm up before workout",moves:[
+    M("Arm circles","10 forward, 10 back","Arm_Circles"),
+    M("Shoulder circles","10 each way","Shoulder_Circles"),
+    M("Head rotations","5 slow circles each way","Side_Neck_Stretch"),
+    M("Hip rotations","10 each way","Standing_Hip_Circles"),
+    M("Back swings","Feet apart, arms out, twist and look behind you. 10 each side","Torso_Rotation"),
+    M("Alternate toe touches","Opposite hand to foot, 10 each side","Standing_Toe_Touches"),
+    M("Hamstring stretch","30 s each leg","Hamstring_Stretch"),
+    M("Leg swings","10 front-back + 10 side-to-side, each leg","Front_Leg_Raises"),
+    M("Cat-cow","8 slow rounds","Cat_Stretch"),
+    M("World's greatest stretch","5 each side","Worlds_Greatest_Stretch"),
+    M("Hip-flexor stretch","30 s each side","Kneeling_Hip_Flexor")
+  ]},
+  abs:{n:"Abs circuit",rx:"× 2 rounds",cue:"Go straight from one to the next. Rest 1 min after each round.",q:"kneeling cable rope crunch",moves:[
+    M("(K)NEELing rope crunch","× 12","Cable_Crunch"),
+    M("Hanging knee raises","× 10","Hanging_Leg_Raise"),
+    M("Russian twists","5 kg dumbbell, × 20","Russian_Twist")
+  ]},
+  core:{n:"Core circuit",rx:"× 2 rounds",cue:"Slow and controlled. Rest 1 min after each round.",q:"dead bug plank side plank core",moves:[
+    M("Dead bug","10 each side","Dead_Bug"),
+    M("Plank","30–40 s","Plank"),
+    M("Side plank","20 s each side","Side_Bridge")
+  ]},
+  stretch:{n:"Full-body stretch",rx:"10 min",cue:"Hold each for 30–45 s and breathe out into it. This is where the flexibility comes from.",q:"full body stretch routine after workout",moves:[
+    M("Hamstring stretch","45 s each leg","Hamstring_Stretch"),
+    M("Hip-flexor stretch","45 s each side","Kneeling_Hip_Flexor"),
+    M("Pigeon stretch","45 s each side",null),
+    M("Butterfly","45 s","Groin_and_Back_Stretch"),
+    M("Chest & shoulder stretch","30 s each side","Chest_And_Front_Of_Shoulder_Stretch"),
+    M("Child's pose","60 s","Childs_Pose")
+  ]},
+  flow:{n:"Flexibility flow",rx:"15 min",cue:"Slow breathing. Ease a little deeper on every breath out.",q:"15 minute flexibility flow",moves:[
+    M("Cat-cow","10 slow rounds","Cat_Stretch"),
+    M("World's greatest stretch","5 each side","Worlds_Greatest_Stretch"),
+    M("Downward dog","45 s",null),
+    M("Pigeon stretch","45 s each side",null),
+    M("Hamstring stretch","45 s each leg","Hamstring_Stretch"),
+    M("Butterfly","60 s","Groin_and_Back_Stretch")
+  ]}
+};
+const IMG = {
+  "Pec deck fly":"Butterfly","Barbell / dumbbell rows":"Bent_Over_Two-Dumbbell_Row",
+  "Reverse delt fly":"Reverse_Machine_Flyes","Reverse pec deck":"Reverse_Machine_Flyes",
+  "Incline walk":"Walking_Treadmill","Hip thrusts":"Barbell_Hip_Thrust","Hip thrust":"Barbell_Hip_Thrust",
+  "Leg curls (machine)":"Seated_Leg_Curl","Leg curl (machine)":"Seated_Leg_Curl",
+  "Leg extension (machine)":"Leg_Extensions","Calf raises (Smith machine)":"Smith_Machine_Calf_Raise",
+  "Lat pulldown":"Wide-Grip_Lat_Pulldown","Dumbbell shoulder press":"Dumbbell_Shoulder_Press",
+  "Dumbbell lateral raises":"Side_Lateral_Raise","Goblet squat":"Goblet_Squat",
+  "Dumbbell Romanian deadlift":"Stiff-Legged_Dumbbell_Deadlift","Bulgarian split squat":"Split_Squat_with_Dumbbells",
+  "Hip abduction machine":"Thigh_Abductor","Brisk walk warm-up":"Walking_Treadmill","Cool-down walk":"Walking_Treadmill",
+  "Easy walk or yoga":"Trail_Running_Walking","Incline dumbbell press":"Incline_Dumbbell_Press",
+  "One-arm dumbbell row":"One-Arm_Dumbbell_Row","Leg press":"Leg_Press","Cable glute kickback":"One-Legged_Cable_Kickback",
+  "Seated cable row":"Seated_Cable_Rows","Walking lunges":"Dumbbell_Lunges"
+};
+const X = (n,rx,cue,q,extra) => Object.assign({n,rx,cue,q:q||n,im:IMG[n]},extra||{});
+const SS = (n,rx,cue,q,a,b) => ({n,rx,cue,q,moves:[a,b]});
+const curlPush = r => SS("Bicep curl + rope push-down",r,"Do the curls, then go straight to the push-downs. Rest 60 s after the pair.","bicep curl and rope tricep pushdown",
+  M("Bicep curl",r.includes("3")?"12 reps":"to a hard finish","Dumbbell_Bicep_Curl"),M("Rope push-down",r.includes("3")?"12 reps":"to a hard finish","Triceps_Pushdown_-_Rope_Attachment"));
+const hammerOH = r => SS("Hammer curl + overhead tricep extension",r,"Back to back, then rest 60 s after the pair.","hammer curl and overhead dumbbell tricep extension",
+  M("Hammer curl",r.includes("3")?"12 reps":"to a hard finish","Hammer_Curls"),M("Overhead tricep extension",r.includes("3")?"12 reps":"to a hard finish","Standing_Dumbbell_Triceps_Extension"));
+const runInt = (rx,cue) => ({n:"Run / walk intervals",rx,cue,q:"run walk intervals beginner",moves:[M("Easy jog","Talking pace","Jogging_Treadmill"),M("Walk","≈ 5.5 km/h","Walking_Treadmill")]});
+
+const plan = {
+  "2026-09-21":{t:"upper",title:"Upper body A",done:true,items:[
+    E.warm,
+    X("Pec deck fly","2 sets","Chest."),
+    X("Barbell / dumbbell rows","2 sets","Back.","dumbbell bent over row"),
+    X("Reverse delt fly","2 sets","Back of the shoulders.","reverse pec deck"),
+    curlPush("2 supersets"),
+    Object.assign({},E.abs,{skipped:true}),
+    X("Incline walk","13–14 incline · 5.5","Treadmill.","incline treadmill walk",{skipped:true}),
+    E.stretch
+  ]},
+  "2026-09-22":{t:"lower",title:"Lower body A",done:true,items:[
+    E.warm,
+    X("Hip thrusts","comfortable weight","Glutes.","barbell hip thrust"),
+    X("Leg curls (machine)","sets","Hamstrings.","seated leg curl machine"),
+    X("Leg extension (machine)","sets","Quads.","leg extension machine"),
+    X("Calf raises (Smith machine)","sets","Calves.","smith machine calf raise"),
+    E.stretch
+  ]},
+  "2026-09-23":{t:"upper",title:"Upper body B",done:true,items:[
+    E.warm,
+    X("Lat pulldown","3 sets","Back."),
+    X("Dumbbell shoulder press","2 sets","Shoulders."),
+    X("Dumbbell lateral raises","2 sets","Side of the shoulders."),
+    hammerOH("2 supersets"),
+    E.abs,
+    X("Incline walk","13–14 incline · 5.5","Skip this if you're too tired.","incline treadmill walk"),
+    E.stretch
+  ]},
+  "2026-09-24":{t:"lower",title:"Lower body B",mins:"~60 min",
+    note:"<b>Squat and hinge day.</b> Tuesday was machines and glutes. Today uses free weights so your legs and glutes also get stronger for running. Core is here too because you skipped abs on Monday.",
+    items:[
+    E.warm,
+    X("Goblet squat","3 × 10","Hold one dumbbell at your chest. Sit down between your heels, chest up, knees follow your toes. Rest 90 s."),
+    X("Dumbbell Romanian deadlift","3 × 10","Soft knees, push your hips back, slide the dumbbells down your thighs until your hamstrings stretch. Flat back."),
+    X("Bulgarian split squat","2 × 8 each leg","Back foot on a bench. Start with bodyweight; add light dumbbells if it's easy. Lean slightly forward for more glute."),
+    X("Hip abduction machine","3 × 15","Lean your chest a little forward, push out and pause for 1 s. The burn is the side of your glutes working."),
+    E.core,
+    E.stretch
+  ]},
+  "2026-09-25":{t:"run",title:"First run day",mins:"~45 min",
+    note:"<b>Easy start.</b> The jogs should feel almost too slow. We're building stamina, not speed.",
+    items:[
+    X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
+    runInt("6 rounds","1 min easy jog + 2 min walk, 6 times (18 min). Treadmill jog ≈ 7–7.5 km/h."),
+    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
+    E.flow
+  ]},
+  "2026-09-26":{t:"rest",title:"Active recovery",note:"Optional: a 30–45 min walk outside or a yoga class. Nothing hard.",items:[
+    X("Easy walk or yoga","30–45 min","Stay loose, get some sunlight.","gentle yoga for recovery")
+  ]},
+  "2026-09-27":{t:"rest",title:"Rest day",rest:"Full rest. Eat well, hit your protein, sleep. Muscles grow while you rest.",items:[]},
+
+  "2026-09-29":{t:"upper",title:"Upper A: chest, back, arms",mins:"~65 min",
+    note:"3 sets instead of 2 on most exercises now, plus a new incline press for your chest.",
+    items:[
+    E.warm,
+    X("Pec deck fly","3 × 12","Slow squeeze, pause 1 s with your hands together."),
+    X("Incline dumbbell press","3 × 10","Bench on the 2nd or 3rd notch. Lower until the dumbbells are level with your chest."),
+    X("One-arm dumbbell row","3 × 10 each arm","Knee and hand on the bench. Pull your elbow toward your hip."),
+    X("Reverse pec deck","2 × 15","Light weight, arms long, squeeze your upper back.","reverse pec deck fly"),
+    curlPush("3 × 12 superset"),
+    E.abs,
+    X("Incline walk","15 min","Incline 12, speed 5.5. Skip if the session wiped you out.","incline treadmill walk"),
+    E.stretch
+  ]},
+  "2026-09-28":{t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",
+    note:"<b>New this week:</b> legs first, then upper body, then a run. Runs always come after an upper day so your legs are fresh for them. Most exercises go up to 3 sets.",
+    items:[
+    E.warm,
+    X("Hip thrust","3 × 10","Chin tucked, drive through your heels, hold 1 s at the top.","barbell hip thrust"),
+    X("Leg press","3 × 12","Feet high and wide on the platform to work glutes more.","leg press glute focus"),
+    X("Leg curl (machine)","3 × 12","Slow on the way back, 3 seconds.","seated leg curl machine"),
+    X("Cable glute kickback","2 × 12 each leg","Slight forward lean, kick back and up, don't arch your lower back."),
+    X("Calf raises (Smith machine)","3 × 15","Full stretch at the bottom, pause at the top.","smith machine calf raise"),
+    E.stretch
+  ]},
+  "2026-09-30":{t:"run",title:"Run 1: intervals",mins:"~45 min",items:[
+    X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
+    runInt("6 rounds","1½ min easy jog + 1½ min walk, 6 times (18 min)."),
+    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
+    E.flow
+  ]},
+  "2026-10-02":{t:"upper",title:"Upper B: back & shoulders",mins:"~65 min",items:[
+    E.warm,
+    X("Lat pulldown","3 × 10","Pull the bar to your upper chest, elbows down and back."),
+    X("Seated cable row","3 × 12","Tall chest, pull to your belly button, squeeze your shoulder blades."),
+    X("Dumbbell shoulder press","3 × 10","Don't arch your back. Press up and slightly in."),
+    X("Dumbbell lateral raises","3 × 15","Light weight. Lead with your elbows, stop at shoulder height."),
+    hammerOH("3 × 12 superset"),
+    E.abs,
+    X("Incline walk","10 min","Incline 12, speed 5.5. Optional.","incline treadmill walk"),
+    E.stretch
+  ]},
+  "2026-10-01":{t:"lower",title:"Lower B: squat & hinge",mins:"~60 min",
+    note:"If every goblet squat rep felt clean last Thursday, use a dumbbell 2 kg heavier today.",
+    items:[
+    E.warm,
+    X("Goblet squat","3 × 10","Chest up, sit between your heels. Rest 90 s."),
+    X("Dumbbell Romanian deadlift","3 × 10","Hips back, flat back, feel the hamstring stretch."),
+    X("Walking lunges","2 × 10 each leg","Long steps, back knee almost touches the floor.","dumbbell walking lunges"),
+    X("Leg extension (machine)","2 × 15","Squeeze for 1 s at the top.","leg extension machine"),
+    X("Hip abduction machine","2 × 15","Lean forward slightly, pause for 1 s out."),
+    E.core,
+    E.stretch
+  ]},
+  "2026-10-03":{t:"run",title:"Run 2: longer run",mins:"~55 min",items:[
+    X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
+    runInt("5 rounds","3 min easy jog + 1½ min walk, 5 times (22 min)."),
+    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
+    Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch today, since it's the end of the week."})
+  ]},
+  "2026-10-04":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]}
+};
+
+const keys = Object.keys(plan).sort();
+const pad = n => String(n).padStart(2,"0");
+const iso = d => d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const todayIso = iso(new Date());
+const parse = k => { const [y,m,d] = k.split("-").map(Number); return new Date(y,m-1,d); };
+const WD = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const WDL = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MO = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const store = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)||"null"); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+
+let current;
+const h = location.hash.replace("#d","");
+const hk = h.length===8 ? h.slice(0,4)+"-"+h.slice(4,6)+"-"+h.slice(6) : null;
+if (hk && plan[hk]) current = hk;
+else if (plan[todayIso]) current = todayIso;
+else current = keys.find(k => k >= todayIso) || keys[keys.length-1];
+
+function chips(){
+  ["w0","w1"].forEach((id,w) => {
+    const el = document.getElementById(id); el.innerHTML = "";
+    keys.slice(w*7,w*7+7).forEach(k => {
+      const d = parse(k), t = T[plan[k].t];
+      const b = document.createElement("button");
+      b.className = "chip" + (k < todayIso ? " past" : "") + (k === todayIso ? " today" : "");
+      b.setAttribute("aria-pressed", k === current);
+      b.setAttribute("aria-label", WDL[d.getDay()]+" "+d.getDate()+" "+MO[d.getMonth()]+": "+plan[k].title);
+      b.style.setProperty("--c", t.c);
+      b.innerHTML = '<span class="dw">'+WD[d.getDay()].slice(0,2)+'</span><span class="dn num">'+d.getDate()+'</span><span class="dot"></span>';
+      b.onclick = () => { current = k; try{ history.replaceState(null,"","#d"+k.replace(/-/g,"")); }catch(e){} chips(); render(); document.getElementById("day").scrollIntoView({behavior:"smooth",block:"start"}); };
+      el.appendChild(b);
+    });
+  });
+}
+
+const playIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z" fill="currentColor" stroke-linejoin="round"/></svg>';
+const checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
+const heart = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3.1 4.5 6.7 4.5c2 0 3.6 1.1 4.3 2.6h2c.7-1.5 2.3-2.6 4.3-2.6 3.6 0 5.8 3.7 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg>';
+const flower = '<svg viewBox="0 0 40 40" aria-hidden="true"><g fill="var(--blue)" opacity=".55"><ellipse cx="20" cy="10" rx="6" ry="9"/><ellipse cx="20" cy="30" rx="6" ry="9"/><ellipse cx="10" cy="20" rx="9" ry="6"/><ellipse cx="30" cy="20" rx="9" ry="6"/></g><circle cx="20" cy="20" r="6" fill="var(--sun)"/></svg>';
+const esc = s => String(s).replace(/"/g,"&quot;");
+
+function media(it){
+  if (it.moves){
+    const tiles = it.moves.map(m =>
+      '<div class="tile"><figure>'+(m.im ? '<img loading="lazy" src="img/'+m.im+'_1.jpg" alt="'+esc(m.n)+'">' : '<div class="ph">'+flower+'</div>')+'</figure>'
+      +'<div><div class="tn">'+m.n+'</div><div class="tr">'+m.r+'</div></div></div>').join("");
+    return '<div class="tiles">'+tiles+'</div>'+(it.moves.length>2?'<div class="swipe">Swipe for all '+it.moves.length+' →</div>':'');
+  }
+  if (it.im) return '<div class="pics"><figure><img loading="lazy" src="img/'+it.im+'_0.jpg" alt="'+esc(it.n)+': start"><figcaption>Start</figcaption></figure><figure><img loading="lazy" src="img/'+it.im+'_1.jpg" alt="'+esc(it.n)+': finish"><figcaption>Finish</figcaption></figure></div>';
+  return "";
+}
+
+function render(){
+  const p = plan[current], t = T[p.t], d = parse(current);
+  const saved = store.get("chk-"+current) || {};
+  const rel = current === todayIso ? "Today" : (current < todayIso ? "Done ✓" : null);
+  const col = 'style="--c:'+t.c+';--cs:'+t.cs+'"';
+  let out = '<div class="day-head" '+col+'><div class="eyebrow"><span class="pill">'+t.label+'</span>'
+    + (p.mins ? '<span class="soft">'+p.mins+'</span>' : '')
+    + (rel ? '<span class="soft">· '+rel+'</span>' : '')
+    + '</div><h2>'+p.title+'</h2><div class="date">'+WDL[d.getDay()]+', '+d.getDate()+' '+MO[d.getMonth()]+'</div>'
+    + (p.items.length ? '<div class="progress"><div class="bar"><i id="barfill"></i></div><span id="count" class="num"></span></div>' : '')
+    + '</div>';
+  if (p.note) out += '<div class="note">'+p.note+'</div>';
+  if (p.rest) out += '<div class="rest-art"><span class="hand">Rest &amp; recover, love</span>'+p.rest+'</div>';
+  p.items.forEach((it,i) => {
+    const on = (i in saved) ? saved[i] : (p.done && !it.skipped);
+    out += '<article class="card'+(on?' done':'')+'" '+col+' data-i="'+i+'">'
+      + '<div class="card-top"><span class="step">'+(i+1)+'</span><h3>'+it.n+'</h3><span class="rx">'+it.rx+'</span></div>'
+      + (it.cue ? '<p class="cue">'+it.cue+'</p>' : '')
+      + (it.skipped ? '<span class="skipped">Skipped this time</span>' : '')
+      + media(it)
+      + '<div class="card-foot"><a class="how" href="'+yt(it.q||it.n)+'" target="_blank" rel="noopener">'+playIcon+'Watch video</a>'
+      + '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'">'+checkIcon+'<span>'+(on?'Done':'Mark done')+'</span></button></div>'
+      + '</article>';
+  });
+  if (p.items.length && p.t !== "rest") out += '<div class="after">'+heart+'<span>After: protein shake, and send Neel your sweaty post-workout pic 😘</span></div>';
+  const el = document.getElementById("day");
+  el.innerHTML = out;
+  el.querySelectorAll(".done-btn").forEach(b => b.addEventListener("click", () => {
+    const card = b.closest(".card"), i = card.dataset.i, on = b.getAttribute("aria-pressed") !== "true";
+    const s = store.get("chk-"+current) || {}; s[i] = on; store.set("chk-"+current, s);
+    b.setAttribute("aria-pressed", on); b.querySelector("span").textContent = on ? "Done" : "Mark done";
+    card.classList.toggle("done", on); tally();
+  }));
+  tally();
+}
+function tally(){
+  const bs = [...document.querySelectorAll("#day .done-btn")];
+  if (!bs.length) return;
+  const n = bs.filter(b => b.getAttribute("aria-pressed") === "true").length;
+  document.getElementById("barfill").style.width = (n/bs.length*100)+"%";
+  document.getElementById("count").textContent = n === bs.length ? "All done 💪" : n+" of "+bs.length;
+}
+
+const tmpl = [["Mon","lower","Lower A"],["Tue","upper","Upper A"],["Wed","run","Run 1"],["Thu","lower","Lower B"],["Fri","upper","Upper B"],["Sat","run","Run 2"],["Sun","rest","Rest"]];
+document.getElementById("splitgrid").innerHTML = tmpl.map(([d,t,l]) => '<div style="--c:'+T[t].c+';--cs:'+T[t].cs+'"><b>'+d+'</b>'+l+'</div>').join("");
+
+chips(); render();
+})();
+</script>
+
+</body>
+</html>
