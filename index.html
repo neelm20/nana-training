@@ -71,6 +71,7 @@ a{color:inherit}
 .strip::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:12px;background:linear-gradient(var(--ground),transparent);pointer-events:none}
 .wk{display:grid;grid-template-columns:58px 1fr;align-items:center;gap:8px}
 .wk + .wk{margin-top:7px}
+.days .chip{grid-row:1}
 .wk-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700;line-height:1.25}
 .days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
 .chip{appearance:none;border:0;background:var(--surface);color:var(--ink);border-radius:14px;padding:6px 0 7px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font:inherit;min-width:0;box-shadow:0 1px 2px rgba(31,43,58,.06);transition:transform .15s}
@@ -131,6 +132,11 @@ a{color:inherit}
 .after{display:flex;gap:12px;align-items:center;background:var(--rose-soft);border-radius:20px;padding:14px 16px;font-size:15px}
 .after svg{flex:none;width:24px;height:24px;color:var(--rose)}
 .rest-art{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:22px;text-align:center;color:var(--muted)}
+.sick-card{background:var(--hero);border-radius:26px;padding:24px 20px 20px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.sick-card .sf{position:absolute;right:-26px;bottom:-26px;width:130px;height:130px;opacity:.55}
+.sick-card .big{display:block;font-size:34px;line-height:1.05;color:var(--blue-deep);margin-bottom:10px;max-width:12ch}
+.sick-card p{margin:0 0 10px;font-size:16px;line-height:1.55;max-width:34ch;position:relative}
+.sick-card .sig{display:block;font-size:28px;color:var(--rose);margin-top:4px;position:relative}
 .rest-art .hand{font-size:28px;color:var(--blue-deep);display:block;margin-bottom:4px}
 
 /* sections */
@@ -184,8 +190,7 @@ img{max-width:100%}
   </header>
 
   <nav class="strip" aria-label="Pick a day">
-    <div class="wk"><div class="wk-label">This<br>week</div><div class="days" id="w0"></div></div>
-    <div class="wk"><div class="wk-label">Next<br>week</div><div class="days" id="w1"></div></div>
+    <div id="weeks"></div>
   </nav>
 
   <main class="day" id="day" aria-live="polite"></main>
@@ -207,7 +212,7 @@ img{max-width:100%}
     <p>Jog slowly enough that you could still talk in full sentences. If the last round of a session felt like a fight, repeat that week before moving up.</p>
     <div class="table-wrap">
       <table class="num">
-        <thead><tr><th>Week</th><th>Wed run</th><th>Sat run</th></tr></thead>
+        <thead><tr><th>Week</th><th>Run 1</th><th>Run 2</th></tr></thead>
         <tbody>
           <tr><td>This week</td><td>—</td><td>6 × (1 min jog + 2 min walk)</td></tr>
           <tr><td>Week 1</td><td>6 × (1½ jog + 1½ walk)</td><td>5 × (3 jog + 1½ walk)</td></tr>
@@ -331,7 +336,10 @@ const plan = {
     X("Calf raises (Smith machine)","sets","Calves.","smith machine calf raise"),
     E.stretch
   ]},
-  "2026-09-23":{t:"upper",title:"Upper body B",done:true,items:[
+  "2026-09-23":{t:"rest",title:"Sick day = rest day",sick:true,items:[]},
+  "2026-09-24":{t:"upper",title:"Upper body B",mins:"~60 min",
+    note:"<b>Welcome back!</b> This is yesterday's workout, moved to today. If any headache is still hanging around, go lighter and skip the incline walk. Drink plenty of water before and during.",
+    items:[
     E.warm,
     X("Lat pulldown","3 sets","Back."),
     X("Dumbbell shoulder press","2 sets","Shoulders."),
@@ -341,7 +349,7 @@ const plan = {
     X("Incline walk","13–14 incline · 5.5","Skip this if you're too tired.","incline treadmill walk"),
     E.stretch
   ]},
-  "2026-09-24":{t:"lower",title:"Lower body B",mins:"~60 min",
+  "2026-09-25":{t:"lower",title:"Lower body B",mins:"~60 min",
     note:"<b>Squat, hinge and jump day.</b> First time for most of these, so go light and learn the moves. Stop each set with about 3 reps left in the tank. Heavier comes next week.",
     items:[
     Object.assign({},E.warm,{cue:"Loosen everything up, top to bottom. Then do 2 light sets of goblet squats to ease in."}),
@@ -353,13 +361,13 @@ const plan = {
     E.core,
     E.stretch
   ]},
-  "2026-09-25":{t:"rest",title:"Recovery + stretch",mins:"~45 min",
+  "2026-09-26":{t:"rest",title:"Recovery + stretch",mins:"~45 min",
     note:"<b>No run today.</b> Your legs need a day after yesterday, so the first run is tomorrow. A walk and a good stretch will help any soreness go away faster.",
     items:[
     X("Easy walk","25–30 min","Outside if you can. Easy pace, get some sunlight.","gentle yoga for recovery",{im:"Trail_Running_Walking"}),
     E.flow
   ]},
-  "2026-09-26":{t:"run",title:"First run day",mins:"~45 min",
+  "2026-09-27":{t:"run",title:"First run day",mins:"~45 min",
     note:"<b>Easy start.</b> The jogs should feel almost too slow. We're building stamina, not speed.",
     items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
@@ -367,9 +375,9 @@ const plan = {
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     Object.assign({},E.flow,{rx:"10 min"})
   ]},
-  "2026-09-27":{t:"rest",title:"Rest day",rest:"Full rest. Eat well, hit your protein, sleep. Muscles grow while you rest.",items:[]},
+  "2026-09-28":{t:"rest",title:"Rest day",rest:"Full rest. Eat well, hit your protein, sleep. Muscles grow while you rest.",items:[]},
 
-  "2026-09-29":{t:"upper",title:"Upper A: chest, back, arms",mins:"~65 min",
+  "2026-09-30":{t:"upper",title:"Upper A: chest, back, arms",mins:"~65 min",
     note:"3 sets instead of 2 on most exercises now, plus a new incline press for your chest.",
     items:[
     E.warm,
@@ -382,7 +390,7 @@ const plan = {
     X("Incline walk","15 min","Incline 12, speed 5.5. Skip if the session wiped you out.","incline treadmill walk"),
     E.stretch
   ]},
-  "2026-09-28":{t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",
+  "2026-09-29":{t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",
     note:"<b>New this week:</b> legs first, then upper body, then a run. Runs always come after an upper day so your legs are fresh for them. Most exercises go up to 3 sets.",
     items:[
     E.warm,
@@ -393,13 +401,13 @@ const plan = {
     X("Calf raises (Smith machine)","3 × 15","Full stretch at the bottom, pause at the top.","smith machine calf raise"),
     E.stretch
   ]},
-  "2026-09-30":{t:"run",title:"Run 1: intervals",mins:"~45 min",items:[
+  "2026-10-01":{t:"run",title:"Run 1: intervals",mins:"~45 min",items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
     runInt("6 rounds","1½ min easy jog + 1½ min walk, 6 times (18 min)."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     E.flow
   ]},
-  "2026-10-02":{t:"upper",title:"Upper B: back & shoulders",mins:"~65 min",items:[
+  "2026-10-03":{t:"upper",title:"Upper B: back & shoulders",mins:"~65 min",items:[
     E.warm,
     X("Lat pulldown","3 × 10","Pull the bar to your upper chest, elbows down and back."),
     X("Seated cable row","3 × 12","Tall chest, pull to your belly button, squeeze your shoulder blades."),
@@ -410,8 +418,8 @@ const plan = {
     X("Incline walk","10 min","Incline 12, speed 5.5. Optional.","incline treadmill walk"),
     E.stretch
   ]},
-  "2026-10-01":{t:"lower",title:"Lower B: squat & hinge",mins:"~60 min",
-    note:"If every goblet squat rep felt clean last Thursday, use a dumbbell 2 kg heavier today.",
+  "2026-10-02":{t:"lower",title:"Lower B: squat & hinge",mins:"~60 min",
+    note:"If every goblet squat rep felt clean last time, use a dumbbell 2 kg heavier today.",
     items:[
     E.warm,
     X("Goblet squat","3 × 10","Chest up, sit between your heels. Rest 90 s."),
@@ -422,13 +430,13 @@ const plan = {
     E.core,
     E.stretch
   ]},
-  "2026-10-03":{t:"run",title:"Run 2: longer run",mins:"~55 min",items:[
+  "2026-10-04":{t:"run",title:"Run 2: longer run",mins:"~55 min",items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
     runInt("5 rounds","3 min easy jog + 1½ min walk, 5 times (22 min)."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch today, since it's the end of the week."})
   ]},
-  "2026-10-04":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]}
+  "2026-10-05":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]}
 };
 
 const keys = Object.keys(plan).sort();
@@ -452,25 +460,36 @@ else if (plan[todayIso]) current = todayIso;
 else current = keys.find(k => k >= todayIso) || keys[keys.length-1];
 
 function chips(){
-  ["w0","w1"].forEach((id,w) => {
-    const el = document.getElementById(id); el.innerHTML = "";
-    keys.slice(w*7,w*7+7).forEach(k => {
+  const monday = k => { const d = parse(k); d.setDate(d.getDate()-((d.getDay()+6)%7)); return iso(d); };
+  const thisMon = monday(todayIso), groups = {};
+  keys.forEach(k => (groups[monday(k)] = groups[monday(k)] || []).push(k));
+  const wrap = document.getElementById("weeks"); wrap.innerHTML = "";
+  Object.keys(groups).sort().forEach(m => {
+    const diff = Math.round((parse(m)-parse(thisMon))/864e5/7), md = parse(m);
+    const label = diff===0 ? "This<br>week" : diff===1 ? "Next<br>week" : diff===-1 ? "Last<br>week" : "Wk of<br>"+md.getDate()+" "+MO[md.getMonth()];
+    const row = document.createElement("div"); row.className = "wk";
+    row.innerHTML = '<div class="wk-label">'+label+'</div><div class="days"></div>';
+    const el = row.querySelector(".days");
+    groups[m].forEach(k => {
       const d = parse(k), t = T[plan[k].t];
       const b = document.createElement("button");
       b.className = "chip" + (k < todayIso ? " past" : "") + (k === todayIso ? " today" : "");
+      b.style.gridColumn = ((d.getDay()+6)%7)+1;
       b.setAttribute("aria-pressed", k === current);
       b.setAttribute("aria-label", WDL[d.getDay()]+" "+d.getDate()+" "+MO[d.getMonth()]+": "+plan[k].title);
-      b.style.setProperty("--c", t.c);
+      b.style.setProperty("--c", plan[k].sick ? "var(--rose)" : t.c);
       b.innerHTML = '<span class="dw">'+WD[d.getDay()].slice(0,2)+'</span><span class="dn num">'+d.getDate()+'</span><span class="dot"></span>';
       b.onclick = () => { current = k; try{ history.replaceState(null,"","#d"+k.replace(/-/g,"")); }catch(e){} chips(); render(); document.getElementById("day").scrollIntoView({behavior:"smooth",block:"start"}); };
       el.appendChild(b);
     });
+    wrap.appendChild(row);
   });
 }
 
 const playIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z" fill="currentColor" stroke-linejoin="round"/></svg>';
 const checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
 const lockIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+const sickFlower = '<svg class="sf" viewBox="0 0 120 120" aria-hidden="true"><g fill="var(--sun)" opacity=".9"><ellipse cx="60" cy="30" rx="15" ry="24"/><ellipse cx="60" cy="90" rx="15" ry="24"/><ellipse cx="30" cy="60" rx="24" ry="15"/><ellipse cx="90" cy="60" rx="24" ry="15"/></g><circle cx="60" cy="60" r="17" fill="#DE8A2E"/></svg>';
 const heart = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3.1 4.5 6.7 4.5c2 0 3.6 1.1 4.3 2.6h2c.7-1.5 2.3-2.6 4.3-2.6 3.6 0 5.8 3.7 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg>';
 const flower = '<svg viewBox="0 0 40 40" aria-hidden="true"><g fill="var(--blue)" opacity=".55"><ellipse cx="20" cy="10" rx="6" ry="9"/><ellipse cx="20" cy="30" rx="6" ry="9"/><ellipse cx="10" cy="20" rx="9" ry="6"/><ellipse cx="30" cy="20" rx="9" ry="6"/></g><circle cx="20" cy="20" r="6" fill="var(--sun)"/></svg>';
 const esc = s => String(s).replace(/"/g,"&quot;");
@@ -501,6 +520,12 @@ function render(){
     + '</div>';
   if (p.note) out += '<div class="note">'+p.note+'</div>';
   if (p.rest) out += '<div class="rest-art"><span class="hand">Rest &amp; recover, love</span>'+p.rest+'</div>';
+  if (p.sick) out += '<div class="sick-card">'+sickFlower
+    + '<span class="hand big">Get well soon, Nana ♡</span>'
+    + '<p>That headache really knocked you out, and skipping the gym was exactly the right call. Your body needed rest more than it needed a workout.</p>'
+    + '<p>Nothing is lost. Today\'s upper body workout just moved to Thursday, and everything else moved one day later.</p>'
+    + '<p>I hope you\'re feeling much better, my love. Lots of water, good food and proper sleep. Come back stronger. 🌼</p>'
+    + '<span class="hand sig">Neel</span></div>';
   p.items.forEach((it,i) => {
     const on = isFuture ? false : ((i in saved) ? saved[i] : (p.done && !isToday && !it.skipped));
     const label = isFuture ? opens : (on ? "Done" : "Mark done");
@@ -533,7 +558,7 @@ function tally(){
   document.getElementById("count").textContent = n === bs.length ? "All done 💪" : n+" of "+bs.length;
 }
 
-const tmpl = [["Mon","lower","Lower A"],["Tue","upper","Upper A"],["Wed","run","Run 1"],["Thu","lower","Lower B"],["Fri","upper","Upper B"],["Sat","run","Run 2"],["Sun","rest","Rest"]];
+const tmpl = [["Tue","lower","Lower A"],["Wed","upper","Upper A"],["Thu","run","Run 1"],["Fri","lower","Lower B"],["Sat","upper","Upper B"],["Sun","run","Run 2"],["Mon","rest","Rest"]];
 document.getElementById("splitgrid").innerHTML = tmpl.map(([d,t,l]) => '<div style="--c:'+T[t].c+';--cs:'+T[t].cs+'"><b>'+d+'</b>'+l+'</div>').join("");
 
 chips(); render();
