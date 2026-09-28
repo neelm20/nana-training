@@ -375,9 +375,8 @@ const plan = {
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     Object.assign({},E.flow,{rx:"10 min"})
   ]},
-  "2026-09-28":{t:"rest",title:"Rest day",rest:"Full rest. Eat well, hit your protein, sleep. Muscles grow while you rest.",items:[]},
 
-  "2026-09-30":{t:"upper",title:"Upper A: chest, back, arms",mins:"~65 min",
+  "2026-09-29":{t:"upper",title:"Upper A: chest, back, arms",mins:"~65 min",
     note:"3 sets instead of 2 on most exercises now, plus a new incline press for your chest.",
     items:[
     E.warm,
@@ -390,7 +389,7 @@ const plan = {
     X("Incline walk","15 min","Incline 12, speed 5.5. Skip if the session wiped you out.","incline treadmill walk"),
     E.stretch
   ]},
-  "2026-09-29":{t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",
+  "2026-09-28":{t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",
     note:"<b>New this week:</b> legs first, then upper body, then a run. Runs always come after an upper day so your legs are fresh for them. Most exercises go up to 3 sets.",
     items:[
     E.warm,
@@ -401,13 +400,13 @@ const plan = {
     X("Calf raises (Smith machine)","3 × 15","Full stretch at the bottom, pause at the top.","smith machine calf raise"),
     E.stretch
   ]},
-  "2026-10-01":{t:"run",title:"Run 1: intervals",mins:"~45 min",items:[
+  "2026-09-30":{t:"run",title:"Run 1: intervals",mins:"~45 min",items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
     runInt("6 rounds","1½ min easy jog + 1½ min walk, 6 times (18 min)."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     E.flow
   ]},
-  "2026-10-03":{t:"upper",title:"Upper B: back & shoulders",mins:"~65 min",items:[
+  "2026-10-02":{t:"upper",title:"Upper B: back & shoulders",mins:"~65 min",items:[
     E.warm,
     X("Lat pulldown","3 × 10","Pull the bar to your upper chest, elbows down and back."),
     X("Seated cable row","3 × 12","Tall chest, pull to your belly button, squeeze your shoulder blades."),
@@ -418,7 +417,7 @@ const plan = {
     X("Incline walk","10 min","Incline 12, speed 5.5. Optional.","incline treadmill walk"),
     E.stretch
   ]},
-  "2026-10-02":{t:"lower",title:"Lower B: squat & hinge",mins:"~60 min",
+  "2026-10-01":{t:"lower",title:"Lower B: squat & hinge",mins:"~60 min",
     note:"If every goblet squat rep felt clean last time, use a dumbbell 2 kg heavier today.",
     items:[
     E.warm,
@@ -430,13 +429,13 @@ const plan = {
     E.core,
     E.stretch
   ]},
-  "2026-10-04":{t:"run",title:"Run 2: longer run",mins:"~55 min",items:[
+  "2026-10-03":{t:"run",title:"Run 2: longer run",mins:"~55 min",items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
     runInt("5 rounds","3 min easy jog + 1½ min walk, 5 times (22 min)."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch today, since it's the end of the week."})
   ]},
-  "2026-10-05":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]}
+  "2026-10-04":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]}
 };
 
 const keys = Object.keys(plan).sort();
@@ -558,7 +557,7 @@ function tally(){
   document.getElementById("count").textContent = n === bs.length ? "All done 💪" : n+" of "+bs.length;
 }
 
-const tmpl = [["Tue","lower","Lower A"],["Wed","upper","Upper A"],["Thu","run","Run 1"],["Fri","lower","Lower B"],["Sat","upper","Upper B"],["Sun","run","Run 2"],["Mon","rest","Rest"]];
+const tmpl = [["Mon","lower","Lower A"],["Tue","upper","Upper A"],["Wed","run","Run 1"],["Thu","lower","Lower B"],["Fri","upper","Upper B"],["Sat","run","Run 2"],["Sun","rest","Rest"]];
 document.getElementById("splitgrid").innerHTML = tmpl.map(([d,t,l]) => '<div style="--c:'+T[t].c+';--cs:'+T[t].cs+'"><b>'+d+'</b>'+l+'</div>').join("");
 
 chips(); render();
