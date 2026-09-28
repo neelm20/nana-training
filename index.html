@@ -208,23 +208,24 @@ img{max-width:100%}
   </section>
 
   <section class="block" id="running">
-    <h2>Running ladder to 30 minutes</h2>
-    <p>Jog slowly enough that you could still talk in full sentences. If the last round of a session felt like a fight, repeat that week before moving up.</p>
+    <h2>Running plan: 6 weeks</h2>
+    <p><b>Run 1 is intervals:</b> short runs at a hard-but-controlled pace (7–8 out of 10) with walking breaks. This makes you faster and fitter. <b>Run 2 is easy:</b> slow enough to talk the whole time. This builds stamina. Mostly easy, a little hard is how beginners improve fastest without getting hurt.</p>
+    <p>If the last round of a session felt like a fight, repeat that week before moving up.</p>
     <div class="table-wrap">
       <table class="num">
-        <thead><tr><th>Week</th><th>Run 1</th><th>Run 2</th></tr></thead>
+        <thead><tr><th>Week</th><th>Run 1 · intervals</th><th>Run 2 · easy</th></tr></thead>
         <tbody>
-          <tr><td>This week</td><td>—</td><td>6 × (1 min jog + 2 min walk)</td></tr>
-          <tr><td>Week 1</td><td>6 × (1½ jog + 1½ walk)</td><td>5 × (3 jog + 1½ walk)</td></tr>
-          <tr><td>Week 2</td><td>5 × (3 jog + 1½ walk)</td><td>3 × (5 jog + 2 walk)</td></tr>
-          <tr><td>Week 3</td><td>3 × (6 jog + 1½ walk)</td><td>2 × (10 jog + 2 walk)</td></tr>
-          <tr><td>Week 4</td><td>15 min non-stop</td><td>20 min non-stop</td></tr>
-          <tr><td>Week 5</td><td>20 min, with 4 × 30 s a bit faster</td><td>25 min non-stop</td></tr>
-          <tr class="goal"><td>Week 6</td><td>20 min, with 6 × 30 s a bit faster</td><td>30 min non-stop 🎉</td></tr>
+          <tr><td>Week 0 ✓</td><td>—</td><td>First run: 6 × (1 min easy + 2 min walk)</td></tr>
+          <tr><td>Week 1</td><td>8 × (1 min run + 2 min walk)</td><td>5 × (3 min easy + 1½ walk)</td></tr>
+          <tr><td>Week 2</td><td>8 × (1 min run + 1½ min walk)</td><td>3 × (5 min easy + 2 walk)</td></tr>
+          <tr><td>Week 3</td><td>6 × (2 min run + 2 min walk)</td><td>2 × (10 min easy + 2 walk)</td></tr>
+          <tr><td>Week 4</td><td>5 × (3 min run + 2 min walk)</td><td>20 min easy, non-stop</td></tr>
+          <tr><td>Week 5</td><td>4 × (4 min run + 2 min walk)</td><td>25 min easy, non-stop</td></tr>
+          <tr class="goal"><td>Week 6</td><td>10 × (1 min fast + 1 min walk)</td><td>30 min non-stop 🎉</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Always do 5 min brisk walking before and after. On the treadmill: walk ≈ 5.5 km/h, easy jog ≈ 7–8 km/h, 1% incline.</p>
+    <p>Always warm up (walk, easy run, high knees, butt kicks) and walk 5 min after. Treadmill guide at 1% incline: walk ≈ 5.5 km/h, easy run ≈ 7–8 km/h, interval run ≈ 9–10 km/h. Go by feel over the numbers.</p>
   </section>
 
   <section class="block" id="rules">
@@ -315,7 +316,9 @@ const curlPush = r => SS("Bicep curl + rope push-down",r,"Do the curls, then go 
   M("Bicep curl",r.includes("3")?"12 reps":"to a hard finish","Dumbbell_Bicep_Curl"),M("Rope push-down",r.includes("3")?"12 reps":"to a hard finish","Triceps_Pushdown_-_Rope_Attachment"));
 const hammerOH = r => SS("Hammer curl + overhead tricep extension",r,"Back to back, then rest 60 s after the pair.","hammer curl and overhead dumbbell tricep extension",
   M("Hammer curl",r.includes("3")?"12 reps":"to a hard finish","Hammer_Curls"),M("Overhead tricep extension",r.includes("3")?"12 reps":"to a hard finish","Standing_Dumbbell_Triceps_Extension"));
-const runInt = (rx,cue) => ({n:"Run / walk intervals",rx,cue,q:"run walk intervals beginner",moves:[M("Easy jog","Talking pace","Jogging_Treadmill"),M("Walk","≈ 5.5 km/h","Walking_Treadmill")]});
+const runInt = (rx,cue) => ({n:"Run / walk intervals",rx,cue,q:"run walk intervals beginner",moves:[M("Easy run","Talking pace","Jogging_Treadmill"),M("Walk","≈ 5.5 km/h","Walking_Treadmill")]});
+const runFast = (rx,cue) => ({n:"Interval runs",rx,cue,q:"beginner running intervals treadmill",moves:[M("Run","Hard but controlled: a few words, not a sentence. ≈ 9–10 km/h","Running_Treadmill"),M("Walk","Recover fully. ≈ 5.5 km/h","Walking_Treadmill")]});
+const runWarm = X("Warm-up: walk + easy run","8 min","5 min brisk walk, then 3 min very easy running. Finish with 20 s high knees + 20 s butt kicks, twice.","running warm up drills high knees butt kicks",{im:"Jogging_Treadmill"});
 
 const plan = {
   "2026-09-21":{t:"upper",title:"Upper body A",done:true,items:[
@@ -371,7 +374,7 @@ const plan = {
     note:"<b>Easy start.</b> The jogs should feel almost too slow. We're building stamina, not speed.",
     items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
-    runInt("6 rounds","1 min easy jog + 2 min walk, 6 times (18 min). Treadmill jog ≈ 7–7.5 km/h."),
+    runInt("6 rounds","1 min easy run + 2 min walk, 6 times (18 min). Treadmill ≈ 7–7.5 km/h."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     Object.assign({},E.flow,{rx:"10 min"})
   ]},
@@ -400,9 +403,11 @@ const plan = {
     X("Calf raises (Smith machine)","3 × 15","Full stretch at the bottom, pause at the top.","smith machine calf raise"),
     E.stretch
   ]},
-  "2026-09-30":{t:"run",title:"Run 1: intervals",mins:"~45 min",items:[
-    X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
-    runInt("6 rounds","1½ min easy jog + 1½ min walk, 6 times (18 min)."),
+  "2026-09-30":{t:"run",title:"Run 1: interval running",mins:"~50 min",
+    note:"<b>Real running today, not jogging.</b> Each 1-minute run should feel hard but controlled, about 7–8 out of 10. You can say a few words but not a whole sentence. Not a sprint. Every round should be the same speed; if the last two are much slower, start a bit slower next time.",
+    items:[
+    runWarm,
+    runFast("8 rounds","1 min run + 2 min walk, 8 times (24 min). Start around 9 km/h and adjust so round 8 feels as hard as round 1 did."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     E.flow
   ]},
@@ -429,9 +434,11 @@ const plan = {
     E.core,
     E.stretch
   ]},
-  "2026-10-03":{t:"run",title:"Run 2: longer run",mins:"~55 min",items:[
+  "2026-10-03":{t:"run",title:"Run 2: easy long run",mins:"~55 min",
+    note:"<b>Easy day.</b> The opposite of Wednesday: slow enough to chat the whole time. This is what builds stamina.",
+    items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
-    runInt("5 rounds","3 min easy jog + 1½ min walk, 5 times (22 min)."),
+    runInt("5 rounds","3 min easy run + 1½ min walk, 5 times (22 min). Treadmill ≈ 7–8 km/h."),
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch today, since it's the end of the week."})
   ]},
