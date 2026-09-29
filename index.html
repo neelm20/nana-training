@@ -58,6 +58,14 @@ a{color:inherit}
 .num{font-variant-numeric:tabular-nums}
 .hand{font-family:Caveat,"Segoe Print","Bradley Hand",cursive;font-weight:700}
 
+/* person switch */
+.who{display:flex;gap:4px;background:var(--surface);padding:4px;border-radius:99px;box-shadow:var(--shadow);width:max-content;max-width:100%;margin:0 auto 12px}
+.who button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-weight:700;font-size:15px;padding:8px 20px;border-radius:99px;cursor:pointer}
+.who button[aria-pressed="true"]{background:var(--blue-deep);color:var(--surface)}
+.who button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.steps-list{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.steps-list b{font-weight:700}
+
 /* hero */
 .hero{background:var(--hero);border-radius:26px;padding:22px 20px 20px;position:relative;overflow:hidden}
 .hero .hi{font-size:34px;line-height:1;color:var(--blue-deep)}
@@ -173,6 +181,11 @@ img{max-width:100%}
 <body>
 
 <div class="wrap">
+  <div class="who" role="group" aria-label="Whose plan">
+    <button type="button" id="who-nana" aria-pressed="true">Nana 🌼</button>
+    <button type="button" id="who-neel" aria-pressed="false">Neel 🏃</button>
+  </div>
+
   <header class="hero">
     <svg viewBox="0 0 120 120" aria-hidden="true">
       <g fill="var(--sun)" opacity=".9">
@@ -183,10 +196,10 @@ img{max-width:100%}
       </g>
       <circle cx="60" cy="60" r="17" fill="#DE8A2E"/><circle cx="60" cy="60" r="9" fill="#C36A22"/>
     </svg>
-    <div class="hi hand">Hi Nana,</div>
+    <div class="hi hand" id="hero-hi">Hi Nana,</div>
     <h1>Your training plan</h1>
-    <p>Build muscle, lose a little fat, run further, and get more flexible. One day at a time.</p>
-    <div class="sig hand">By Neel, with love ♡</div>
+    <p id="hero-sub">Build muscle, lose a little fat, run further, and get more flexible. One day at a time.</p>
+    <div class="sig hand" id="hero-sig">By Neel, with love ♡</div>
   </header>
 
   <nav class="strip" aria-label="Pick a day">
@@ -195,6 +208,7 @@ img{max-width:100%}
 
   <main class="day" id="day" aria-live="polite"></main>
 
+  <div id="sec-nana">
   <section class="block" id="split">
     <h2>How each week works</h2>
     <p>Upper and lower body twice a week each, so every muscle gets worked twice. Runs come the day after an upper-body day, never after legs, so your legs are fresh for them. One full rest day.</p>
@@ -240,7 +254,49 @@ img{max-width:100%}
     </div>
   </section>
 
-  <footer><span class="hand">By Neel, with love ♡</span></footer>
+  </div>
+
+  <div id="sec-neel" hidden>
+  <section class="block">
+    <h2>How your week works</h2>
+    <p>Endurance first: 4 runs and 3 lifts. Hard days hard, easy days easy. Heavy legs come about 36 hours before the 4×4, and the lighter injury-proofing day comes 48 hours before the long run.</p>
+    <div class="split">
+      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Mon</b>Lower · strength</div>
+      <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Tue</b>Upper A + easy run</div>
+      <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Wed</b>4×4</div>
+      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Thu</b>Lower · durability</div>
+      <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Fri</b>Upper B + easy run</div>
+      <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Sat</b>Long run</div>
+      <div style="--c:var(--stone);--cs:var(--stone-soft)"><b>Sun</b>Rest</div>
+    </div>
+    <p>Upper A is horizontal (presses and rows), Upper B is vertical (overhead press and pull-ups), so chest, back and shoulders all get trained twice a week.</p>
+  </section>
+
+  <section class="block">
+    <h2>Norwegian 4×4, done right</h2>
+    <ol class="steps-list">
+      <li><b>Warm up 10–15 min</b> easy, plus 3–4 × 20 s strides.</li>
+      <li><b>4 × 4 min at 85–95% of max heart rate.</b> Reach 90–95% by the end of each rep, not the start. If rep 1 feels like a sprint, reps 3–4 fall apart.</li>
+      <li><b>3 min easy jog</b> between reps at 60–70% of max heart rate. Keep moving.</li>
+      <li><b>Cool down 10 min</b> easy.</li>
+    </ol>
+    <p>Progress by letting 4×4 get easier at the same heart rate, then add speed or incline. A treadmill at 5–8% incline gives the same heart-rate stimulus with less pounding. Max heart rate estimate: 208 − 0.7 × age; a real max from a hard hill effort is better.</p>
+  </section>
+
+  <section class="block">
+    <h2>Your rules</h2>
+    <div class="rules">
+      <div class="rule"><h3>Heavy, not to failure</h3><p>Stop every set 1–2 reps short of failure. Strength for running comes from heavy sets of 4–6, not grinding sets of 10.</p></div>
+      <div class="rule"><h3>Add weight when it moves fast</h3><p>Squat and bench: +2.5 kg a week while every rep stays crisp. If a set grinds, repeat the weight.</p></div>
+      <div class="rule"><h3>80% of running is easy</h3><p>Conversational, Zone 2 (about 65–75% of max heart rate). The 4×4 is the only hard run. Add weekly running by no more than about 10%.</p></div>
+      <div class="rule"><h3>Protein: about 2 g per kg</h3><p>Every day. This is what keeps the muscle on while you get lean.</p></div>
+      <div class="rule"><h3>Fuel the hard days</h3><p>Eat at maintenance on Wednesday and Saturday, with carbs before and after. Keep the 300–400 kcal deficit to easy and rest days. Lose no more than about 0.5% of bodyweight a week.</p></div>
+      <div class="rule"><h3>Every 4th week is lighter</h3><p>About 30% less running and lighter weights. That's when the fitness from the previous 3 weeks lands.</p></div>
+    </div>
+  </section>
+  </div>
+
+  <footer><span class="hand" id="foot">By Neel, with love ♡</span></footer>
 </div>
 
 <script>
@@ -320,7 +376,7 @@ const runInt = (rx,cue) => ({n:"Run / walk intervals",rx,cue,q:"run walk interva
 const runFast = (rx,cue) => ({n:"Interval runs",rx,cue,q:"beginner running intervals treadmill",moves:[M("Run","Hard but controlled: a few words, not a sentence. ≈ 9–10 km/h","Running_Treadmill"),M("Walk","Recover fully. ≈ 5.5 km/h","Walking_Treadmill")]});
 const runWarm = X("Warm-up: walk + easy run","8 min","5 min brisk walk, then 3 min very easy running. Finish with 20 s high knees + 20 s butt kicks, twice.","running warm up drills high knees butt kicks",{im:"Jogging_Treadmill"});
 
-const plan = {
+const PLAN_NANA = {
   "2026-09-21":{t:"upper",title:"Upper body A",done:true,items:[
     E.warm,
     X("Pec deck fly","2 sets","Chest."),
@@ -446,7 +502,104 @@ const plan = {
   "2026-10-04":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]}
 };
 
-const keys = Object.keys(plan).sort();
+
+// ---------- Neel: endurance-first ----------
+const XI = (n,rx,cue,im,q) => X(n,rx,cue,q||n,{im});
+const nWarm = Object.assign({},E.warm,{cue:"Loosen everything up. Then ramp-up sets on the first lift before the working weight."});
+const easyRun = mins => XI("Easy run",mins,"Fully conversational, Zone 2 (about 65–75% of max heart rate). Run before lifting, or 4+ hours apart.","Jogging_Treadmill","zone 2 easy running");
+const n4x4 = [
+  XI("Warm-up","15 min","10–15 min easy running, then 3–4 × 20 s strides.","Jogging_Treadmill","running strides warm up"),
+  {n:"Norwegian 4×4",rx:"4 × 4 min",cue:"4 min hard at 85–95% of max heart rate, reaching 90–95% by the end of each rep. 3 min easy jog between reps. Treadmill at 5–8% incline works great.",q:"norwegian 4x4 interval training",moves:[M("4 min hard","85–95% max HR · about 8/10","Running_Treadmill"),M("3 min easy jog","60–70% max HR, keep moving","Jogging_Treadmill")]},
+  XI("Cool-down","10 min","Easy running or walking.","Walking_Treadmill","cool down after intervals"),
+  Object.assign({},E.flow,{rx:"10 min"})
+];
+const nUpperA = [
+  nWarm,
+  easyRun("30 min · optional"),
+  XI("Barbell bench press","4 × 6–8","Shoulder blades pinched, feet planted, bar to lower chest. Ramp-up: bar × 10, then 2 lighter sets.","Barbell_Bench_Press_-_Medium_Grip","barbell bench press"),
+  XI("Barbell row","4 × 8","Hinge to about 45°, pull to your belly button, no body swing.","Bent_Over_Barbell_Row","barbell bent over row"),
+  X("Incline dumbbell press","3 × 10","Bench on a low incline. Full stretch at the bottom."),
+  XI("Single-arm cable row","3 × 10 each arm","Reach forward for the stretch, pull the elbow past your hip.","Seated_One-arm_Cable_Pulley_Rows","single arm cable row"),
+  X("Dumbbell lateral raises","3 × 15","Light and strict. Lead with the elbows."),
+  XI("Face pulls","2 × 15","Rope to your forehead, elbows high. Healthy shoulders.","Face_Pull","cable face pull"),
+  curlPush("2 × 12 superset"),
+  E.stretch
+];
+const nLower2 = [
+  nWarm,
+  XI("Kettlebell single-leg RDL","3 × 8 each leg","12–16 kg. Slow, hips square, feel the hamstring and the ankle working to balance.","Kettlebell_One-Legged_Deadlift","kettlebell single leg romanian deadlift"),
+  XI("Lateral step-downs","3 × 8 each leg","Stand on a box, slowly lower the other heel to tap the floor. Knee tracks over your toes. Stops runner's knee.","Dumbbell_Step_Ups","lateral step down knee"),
+  XI("Hip adduction machine","2 × 12","Protects the groin.","Thigh_Adductor","hip adduction machine"),
+  X("Hip abduction machine","2 × 12","Lean forward slightly, pause 1 s out."),
+  XI("Copenhagen plank","3 × 20 s each side","Top leg on a bench, hold a side plank. Start with the knee on the bench if full-leg is too hard.","Side_Bridge","copenhagen plank"),
+  XI("Seated calf raise","3 × 15","Bent knee works the soleus, the calf muscle that takes the most load when you run. Full stretch, pause at the top.","Seated_Calf_Raise","seated calf raise"),
+  XI("Tibialis raises","2 × 15","Back against a wall, heels forward, lift your toes as high as you can. Bulletproofs the shins.",null,"tibialis raise shin splints"),
+  XI("Pallof press","2 × 10 each side","Press the cable straight out and don't let it twist you. Running core.","Pallof_Press","pallof press"),
+  Object.assign({},E.flow,{n:"Hip & ankle mobility",rx:"10 min"})
+];
+const nUpperB = [
+  nWarm,
+  easyRun("30–40 min"),
+  XI("Weighted pull-ups","4 × 5–8","Full hang to chin over the bar. Add weight once you get 8 clean reps.","Weighted_Pull_Ups","weighted pull ups"),
+  XI("Overhead press","4 × 6–8","Squeeze glutes, bar straight up past your face, finish with the head through.","Standing_Military_Press","standing barbell overhead press"),
+  XI("Dips","3 × 8–12","Slight forward lean for chest. Add weight when 12 is easy.","Dips_-_Chest_Version","chest dips"),
+  X("Lat pulldown","3 × 10","Or chin-ups. Elbows down to your ribs."),
+  XI("Rear-delt fly","3 × 15","Reverse pec deck or cables. Light, arms long.","Reverse_Machine_Flyes","reverse pec deck"),
+  X("Dumbbell lateral raises","3 × 15","Strict, lead with the elbows."),
+  XI("Hammer curls","2 × 12","Controlled, no swing.","Hammer_Curls","hammer curl"),
+  E.stretch
+];
+const nLong = mins => [
+  XI("Long run",mins,"All easy, Zone 2. Carry water. After the first hour, take 30–60 g of carbs per hour.","Trail_Running_Walking","zone 2 long run"),
+  Object.assign({},E.flow,{rx:"15 min"})
+];
+const nRest = {t:"rest",title:"Rest day",restHead:"Recovery is training",rest:"Full rest. Protein, food and sleep. This is when the week's fitness actually lands.",items:[]};
+const PLAN_NEEL = {
+  "2026-09-28":{t:"lower",title:"Lower 1: strength (as logged)",done:true,mins:"35 min",
+    note:"<b>Logged in Motra.</b> Solid session, but everything was 10 reps at moderate weight, so it was neither a heavy day nor an injury-proofing day. Next Monday is the rebuilt heavy version.",
+    items:[
+    XI("Bodyweight squat + front squat","15 + 7 @ 20 kg","Next time: ramp-up sets instead (bar × 8, 40 × 5, 50 × 3).","Front_Barbell_Squat","front squat"),
+    XI("Jump squat","1 × 11","Next time: 3 × 5 with full rest, every rep explosive.","Freehand_Jump_Squat","jump squat"),
+    XI("Barbell back squat","3 × 10 @ 50 kg","",'Barbell_Squat',"barbell back squat"),
+    XI("Kettlebell single-leg RDL","3 × 10 @ 10 kg","","Kettlebell_One-Legged_Deadlift","kettlebell single leg romanian deadlift"),
+    XI("Dumbbell Bulgarian split squat","3 × 10 @ 10 kg","","Split_Squat_with_Dumbbells","bulgarian split squat"),
+    X("Hip abduction machine","2 × 10 @ 45 kg",""),
+    XI("Smith machine calf raise","15 / 15 / 18 @ 55 kg","","Smith_Machine_Calf_Raise","smith machine calf raise"),
+    XI("Hip adduction machine","2 × 10 @ 45 kg","","Thigh_Adductor","hip adduction machine")
+  ]},
+  "2026-09-29":{t:"upper",title:"Upper A: horizontal",mins:"~65 min",note:"<b>Chest and back thickness.</b> Presses and rows. Stop every set 1–2 reps short of failure.",items:nUpperA},
+  "2026-09-30":{t:"run",title:"Norwegian 4×4",mins:"~55 min",note:"<b>Your one hard run of the week.</b> About 36 hours after Monday's legs. Go by heart rate, not pace.",items:n4x4},
+  "2026-10-01":{t:"lower",title:"Lower 2: injury-proofing",mins:"~45 min",note:"<b>Durability day.</b> Moderate weights, slow and controlled. You should leave feeling better, not wrecked. Saturday's long run is 48 hours away.",items:nLower2},
+  "2026-10-02":{t:"upper",title:"Upper B: vertical",mins:"~70 min",note:"<b>Shoulders and lats.</b> Easy run first, then lift.",items:nUpperB},
+  "2026-10-03":{t:"run",title:"Long run",mins:"70–90 min",note:"<b>The most important session of your week.</b> All easy. It builds the engine.",items:nLong("70 min")},
+  "2026-10-04":nRest,
+  "2026-10-05":{t:"lower",title:"Lower 1: strength",mins:"~45 min",
+    note:"<b>The heavy version.</b> Fewer reps, more weight. Starting weights assume last week's 50 kg × 10 felt about 7 out of 10. If it was close to your limit, start the squat at 55 kg.",
+    items:[
+    Object.assign({},nWarm,{cue:"Loosen everything up. Squat ramp-up: bar × 8, 40 × 5, 50 × 3."}),
+    X("Box jumps","3 × 5","Full rest between sets. Every rep explosive; stop if they slow down.","box jump",{im:"Front_Box_Jump"}),
+    XI("Barbell back squat","4 × 5 @ ~60 kg","Stop 1–2 reps short of failure. +2.5 kg a week while the bar moves fast. Rest 2–3 min.","Barbell_Squat","barbell back squat"),
+    XI("Barbell Romanian deadlift","3 × 6 @ 50–60 kg","The heavy hamstring work you were missing. Hips back, bar close, flat back.","Romanian_Deadlift","barbell romanian deadlift"),
+    XI("Bulgarian split squat","3 × 6–8 each leg","14–16 kg dumbbells. Heavier than last week, fewer reps.","Split_Squat_with_Dumbbells","dumbbell bulgarian split squat"),
+    XI("Nordic hamstring curl","2 × 4","Lower yourself as slowly as you can, then use your hands to push back up. The best hamstring-strain prevention.","Natural_Glute_Ham_Raise","nordic hamstring curl"),
+    XI("Smith machine calf raise","3 × 10 @ 65 kg","Heavy. Full stretch, 1 s pause at the top.","Smith_Machine_Calf_Raise","smith machine calf raise"),
+    XI("Hanging leg raise","3 × 10","Controlled, no swinging.","Hanging_Leg_Raise","hanging leg raise"),
+    E.stretch
+  ]},
+  "2026-10-06":{t:"upper",title:"Upper A: horizontal",mins:"~65 min",note:"If every bench rep was crisp last week, add 2.5 kg.",items:nUpperA},
+  "2026-10-07":{t:"run",title:"Norwegian 4×4",mins:"~55 min",note:"Same 4×4. If last week's reps felt controlled at the same heart rate, add a little speed or 1% incline.",items:n4x4},
+  "2026-10-08":{t:"lower",title:"Lower 2: injury-proofing",mins:"~45 min",items:nLower2},
+  "2026-10-09":{t:"upper",title:"Upper B: vertical",mins:"~70 min",items:nUpperB},
+  "2026-10-10":{t:"run",title:"Long run",mins:"80 min",note:"10 minutes longer than last week, still all easy.",items:nLong("80 min")},
+  "2026-10-11":nRest
+};
+const PEOPLE = {
+  nana:{plan:PLAN_NANA,prefix:"chk-",title:"Nana's Training",hi:"Hi Nana,",sub:"Build muscle, lose a little fat, run further, and get more flexible. One day at a time.",sig:"By Neel, with love ♡",foot:"By Neel, with love ♡",after:"After: protein shake, and send Neel your sweaty post-workout pic 😘"},
+  neel:{plan:PLAN_NEEL,prefix:"chk-neel-",title:"Neel's Training",hi:"Hi Neel,",sub:"Endurance first: run further and faster, stay strong and lean.",sig:"Built for the long run",foot:"Train smart, recover harder",after:"After: protein and carbs within an hour, then log it in Motra 💪"}
+};
+const hashRaw = location.hash.slice(1);
+let person = hashRaw.startsWith("neel") ? "neel" : hashRaw.startsWith("nana") ? "nana" : null;
+let plan, keys;
 const pad = n => String(n).padStart(2,"0");
 const iso = d => d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
 const todayIso = iso(new Date());
@@ -460,11 +613,28 @@ const store = {
 };
 
 let current;
-const h = location.hash.replace("#d","");
-const hk = h.length===8 ? h.slice(0,4)+"-"+h.slice(4,6)+"-"+h.slice(6) : null;
-if (hk && plan[hk]) current = hk;
-else if (plan[todayIso]) current = todayIso;
-else current = keys.find(k => k >= todayIso) || keys[keys.length-1];
+if (!person) person = store.get("person") === "neel" ? "neel" : "nana";
+const hm = hashRaw.match(/d(\d{8})$/);
+const hk = hm ? hm[1].slice(0,4)+"-"+hm[1].slice(4,6)+"-"+hm[1].slice(6) : null;
+function setHash(){ try{ history.replaceState(null,"","#"+person+"-d"+current.replace(/-/g,"")); }catch(e){} }
+function usePerson(who, dayKey){
+  person = who; store.set("person", who);
+  const P = PEOPLE[who];
+  plan = P.plan; keys = Object.keys(plan).sort();
+  if (dayKey && plan[dayKey]) current = dayKey;
+  else if (plan[todayIso]) current = todayIso;
+  else current = keys.find(k => k >= todayIso) || keys[keys.length-1];
+  document.title = P.title;
+  document.getElementById("hero-hi").textContent = P.hi;
+  document.getElementById("hero-sub").textContent = P.sub;
+  document.getElementById("hero-sig").textContent = P.sig;
+  document.getElementById("foot").textContent = P.foot;
+  document.getElementById("sec-nana").hidden = who !== "nana";
+  document.getElementById("sec-neel").hidden = who !== "neel";
+  document.getElementById("who-nana").setAttribute("aria-pressed", who === "nana");
+  document.getElementById("who-neel").setAttribute("aria-pressed", who === "neel");
+}
+usePerson(person, hk);
 
 function chips(){
   const monday = k => { const d = parse(k); d.setDate(d.getDate()-((d.getDay()+6)%7)); return iso(d); };
@@ -486,7 +656,7 @@ function chips(){
       b.setAttribute("aria-label", WDL[d.getDay()]+" "+d.getDate()+" "+MO[d.getMonth()]+": "+plan[k].title);
       b.style.setProperty("--c", plan[k].sick ? "var(--rose)" : t.c);
       b.innerHTML = '<span class="dw">'+WD[d.getDay()].slice(0,2)+'</span><span class="dn num">'+d.getDate()+'</span><span class="dot"></span>';
-      b.onclick = () => { current = k; try{ history.replaceState(null,"","#d"+k.replace(/-/g,"")); }catch(e){} chips(); render(); document.getElementById("day").scrollIntoView({behavior:"smooth",block:"start"}); };
+      b.onclick = () => { current = k; setHash(); chips(); render(); document.getElementById("day").scrollIntoView({behavior:"smooth",block:"start"}); };
       el.appendChild(b);
     });
     wrap.appendChild(row);
@@ -514,7 +684,7 @@ function media(it){
 
 function render(){
   const p = plan[current], t = T[p.t], d = parse(current);
-  const saved = store.get("chk-"+current) || {};
+  const saved = store.get(PEOPLE[person].prefix+current) || {};
   const isToday = current === todayIso, isFuture = current > todayIso;
   const rel = isToday ? "Today" : (isFuture ? null : (p.done ? "Done ✓" : null));
   const opens = "Opens "+WD[d.getDay()]+" "+d.getDate();
@@ -526,7 +696,7 @@ function render(){
     + (p.items.length ? '<div class="progress"><div class="bar"><i id="barfill"></i></div><span id="count" class="num"></span></div>' : '')
     + '</div>';
   if (p.note) out += '<div class="note">'+p.note+'</div>';
-  if (p.rest) out += '<div class="rest-art"><span class="hand">Rest &amp; recover, love</span>'+p.rest+'</div>';
+  if (p.rest) out += '<div class="rest-art"><span class="hand">'+(p.restHead||"Rest &amp; recover, love")+'</span>'+p.rest+'</div>';
   if (p.sick) out += '<div class="sick-card">'+sickFlower
     + '<span class="hand big">Get well soon, Nana ♡</span>'
     + '<p>That headache really knocked you out, and skipping the gym was exactly the right call. Your body needed rest more than it needed a workout.</p>'
@@ -545,13 +715,13 @@ function render(){
       + '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'"'+(isFuture?' disabled title="You can tick this off on the day"':'')+'>'+(isFuture?lockIcon:checkIcon)+'<span>'+label+'</span></button></div>'
       + '</article>';
   });
-  if (p.items.length && p.t !== "rest") out += '<div class="after">'+heart+'<span>After: protein shake, and send Neel your sweaty post-workout pic 😘</span></div>';
+  if (p.items.length && p.t !== "rest") out += '<div class="after">'+heart+'<span>'+PEOPLE[person].after+'</span></div>';
   const el = document.getElementById("day");
   el.innerHTML = out;
   el.querySelectorAll(".done-btn").forEach(b => b.addEventListener("click", () => {
     if (current > todayIso) return;
     const card = b.closest(".card"), i = card.dataset.i, on = b.getAttribute("aria-pressed") !== "true";
-    const s = store.get("chk-"+current) || {}; s[i] = on; store.set("chk-"+current, s);
+    const key = PEOPLE[person].prefix+current, s = store.get(key) || {}; s[i] = on; store.set(key, s);
     b.setAttribute("aria-pressed", on); b.querySelector("span").textContent = on ? "Done" : "Mark done";
     card.classList.toggle("done", on); tally();
   }));
@@ -568,6 +738,10 @@ function tally(){
 const tmpl = [["Mon","lower","Lower A"],["Tue","upper","Upper A"],["Wed","run","Run 1"],["Thu","lower","Lower B"],["Fri","upper","Upper B"],["Sat","run","Run 2"],["Sun","rest","Rest"]];
 document.getElementById("splitgrid").innerHTML = tmpl.map(([d,t,l]) => '<div style="--c:'+T[t].c+';--cs:'+T[t].cs+'"><b>'+d+'</b>'+l+'</div>').join("");
 
+["nana","neel"].forEach(w => document.getElementById("who-"+w).addEventListener("click", () => {
+  if (w === person) return;
+  usePerson(w); setHash(); chips(); render();
+}));
 chips(); render();
 })();
 </script>
