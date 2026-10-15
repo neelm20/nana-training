@@ -259,17 +259,17 @@ img{max-width:100%}
   <div id="sec-neel" hidden>
   <section class="block">
     <h2>How your week works</h2>
-    <p>Endurance first: 4 runs and 3 lifts. Hard days hard, easy days easy. Heavy legs come about 36 hours before the 4×4, and the lighter injury-proofing day comes 48 hours before the long run.</p>
+    <p><b>Rebuild phase (8–10 weeks):</b> win back the muscle running took, while keeping your stamina. Lifting gets priority; running holds steady instead of growing. Legs come 48 hours before the hard run, and Friday's upper day keeps your legs fresh for the long run.</p>
     <div class="split">
-      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Mon</b>Lower · strength</div>
-      <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Tue</b>Upper A + easy run</div>
-      <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Wed</b>4×4</div>
-      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Thu</b>Lower · durability</div>
-      <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Fri</b>Upper B + easy run</div>
+      <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Mon</b>Zone 2 + core</div>
+      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Tue</b>Legs · deadlift</div>
+      <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Wed</b>Upper A · volume</div>
+      <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Thu</b>4×4 or football</div>
+      <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Fri</b>Upper B · heavy</div>
       <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Sat</b>Long run</div>
       <div style="--c:var(--stone);--cs:var(--stone-soft)"><b>Sun</b>Rest</div>
     </div>
-    <p>Upper A is horizontal (presses and rows), Upper B is vertical (overhead press and pull-ups), so chest, back and shoulders all get trained twice a week.</p>
+    <p>Upper A is moderate weight and more sets; Upper B is heavier with different angles. Chest, back and shoulders get trained twice a week, with 10–16 hard sets each across the week. That's the range that builds muscle.</p>
   </section>
 
   <section class="block">
@@ -286,11 +286,11 @@ img{max-width:100%}
   <section class="block">
     <h2>Your rules</h2>
     <div class="rules">
-      <div class="rule"><h3>Heavy, not to failure</h3><p>Stop every set 1–2 reps short of failure. Strength for running comes from heavy sets of 4–6, not grinding sets of 10.</p></div>
-      <div class="rule"><h3>Add weight when it moves fast</h3><p>Squat and bench: +2.5 kg a week while every rep stays crisp. If a set grinds, repeat the weight.</p></div>
-      <div class="rule"><h3>80% of running is easy</h3><p>Conversational, Zone 2 (about 65–75% of max heart rate). The 4×4 is the only hard run. Add weekly running by no more than about 10%.</p></div>
-      <div class="rule"><h3>Protein: about 2 g per kg</h3><p>Every day. This is what keeps the muscle on while you get lean.</p></div>
-      <div class="rule"><h3>Fuel the hard days</h3><p>Eat at maintenance on Wednesday and Saturday, with carbs before and after. Keep the 300–400 kcal deficit to easy and rest days. Lose no more than about 0.5% of bodyweight a week.</p></div>
+      <div class="rule"><h3>Sets of 6–12, close to failure</h3><p>Muscle comes from hard sets: stop 1–2 reps short of failure. Heavy compounds (deadlift, pull-ups, presses) at 5–8 reps, everything else at 8–15.</p></div>
+      <div class="rule"><h3>Beat last week</h3><p>One more rep or a little more weight on every exercise, logged in Motra. Deadlift +5 kg a week while every rep is fast with a flat back. If a set grinds, repeat the weight.</p></div>
+      <div class="rule"><h3>Running holds steady</h3><p>Three runs plus football, about 80% easy. The long run stays at 70 min during the rebuild phase. Don't add mileage until the muscle is back.</p></div>
+      <div class="rule"><h3>Protein: about 2 g per kg</h3><p>Every day, spread over 4 meals, plus a protein serving before bed. This is the raw material for rebuilding muscle.</p></div>
+      <div class="rule"><h3>Eat a little more, not less</h3><p>Running burned the muscle because there wasn't enough food for both. For this phase: maintenance + 200–300 kcal a day, carbs before and after runs and lifts. Aim for +0.25% of bodyweight a week. The cut to very low body fat comes after, from a bigger base.</p></div>
       <div class="rule"><h3>Every 4th week is lighter</h3><p>About 30% less running and lighter weights. That's when the fitness from the previous 3 weeks lands.</p></div>
     </div>
   </section>
@@ -625,23 +625,65 @@ const PLAN_NEEL = {
     XI("Football","Full match","Sprints, cuts and jumps. It counts as interval training.","Wind_Sprints","football conditioning"),
     Object.assign({},E.flow,{n:"Post-match mobility",rx:"10 min"})
   ]},
-  "2026-10-16":{t:"upper",title:"Upper B: heavy & vertical",mins:"~55 min",
-    note:"<b>The opposite of Wednesday.</b> Wednesday was 8–12 reps at moderate weight. Today is heavier and lower-rep, from different angles, and it covers what Wednesday missed: lateral raises, rear delts and core. Arms stay light because they got 8 sets on Wednesday. No easy run today: football yesterday plus tomorrow's long run is enough running.",
+  "2026-10-16":{t:"upper",title:"Upper B: heavy & vertical",mins:"~60 min",
+    note:"<b>Why this session:</b> Wednesday was 8–12 reps at moderate weight. Today is heavier (6–8 reps) from different angles: pull-ups instead of pulldowns, flat dumbbells instead of incline, a heavy barbell row instead of the cable row. It also fills Wednesday's gaps: lateral raises, rear delts and core. Arms stay at 3 sets because they got 8 on Wednesday. <b>No deadlifts today:</b> football yesterday plus tomorrow's long run means your back and hamstrings need to stay fresh. Deadlifts go on Tuesday's leg day instead. <b>No easy run today</b> either.",
     items:[
-    Object.assign({},nWarm,{cue:"Loosen everything up, plus 2 × 15 band pull-aparts. Ramp up to your working weight on pull-ups and bench."}),
-    XI("Pull-ups","4 × 5–8","Full hang to chin over the bar, no kipping. Once you get 4 × 8 clean, add 5 kg on a belt.","Weighted_Pull_Ups","strict pull ups"),
-    XI("Barbell bench press","4 × 5–6","Heavy: build up to a weight you can do 6 clean reps with, leaving about 2 in the tank. Rest 2–3 min. Shoulder blades pinched, bar to lower chest.","Barbell_Bench_Press_-_Medium_Grip","barbell bench press"),
-    XI("Barbell row","4 × 6–8","Hinge to about 45°, pull to your belly button, no body swing. Heavier than Wednesday's cable row.","Bent_Over_Barbell_Row","barbell bent over row"),
-    XI("Seated dumbbell shoulder press","3 × 8","About 14–16 kg dumbbells, back supported. Different stimulus from Wednesday's barbell press.","Dumbbell_Shoulder_Press","seated dumbbell shoulder press"),
-    XI("Lateral raises","3 × 15","Light and strict, lead with the elbows. Missing from Wednesday.","Side_Lateral_Raise","dumbbell lateral raise"),
+    Object.assign({},nWarm,{cue:"Loosen everything up, plus 2 × 15 band pull-aparts. Ramp up to your working weight on pull-ups and the dumbbell press."}),
+    XI("Pull-ups","4 × 6–8","Full hang to chin over the bar, no kipping. Once you get 4 × 8 clean, add 5 kg on a belt.","Weighted_Pull_Ups","strict pull ups"),
+    XI("Flat dumbbell bench press","4 × 6–8","Your gym has no barbell bench, so this is the main chest press. Go heavy: about 20–22.5 kg dumbbells (Wednesday's 12.5 kg incline looked light). Last 2 reps should be a fight. Rest 2 min. Smith machine bench works as a backup.","Dumbbell_Bench_Press","dumbbell bench press heavy"),
+    XI("Barbell row","4 × 8","Hinge to about 45°, pull to your belly button, no body swing. Heavier than Wednesday's cable row. Keep your back flat; it's tired from football.","Bent_Over_Barbell_Row","barbell bent over row"),
+    XI("Seated dumbbell shoulder press","3 × 8–10","About 14–16 kg dumbbells, back supported. A different stimulus from Wednesday's barbell press.","Dumbbell_Shoulder_Press","seated dumbbell shoulder press"),
+    XI("Lateral raises","4 × 12–15","Light and strict, lead with the elbows. Wider shoulders are the fastest way to look muscular again.","Side_Lateral_Raise","dumbbell lateral raise"),
     XI("Face pulls","3 × 15","Rope to your forehead, elbows high. Rear delts and healthy shoulders.","Face_Pull","cable face pull"),
-    SS("Hammer curl + overhead triceps extension","2 × 10–12 superset","Different angles from Wednesday's curls and pushdowns. Just 2 sets each.","hammer curl overhead triceps extension",M("Hammer curl","10–12 reps","Hammer_Curls"),M("Overhead triceps extension","12 reps","Standing_Dumbbell_Triceps_Extension")),
+    SS("Hammer curl + overhead triceps extension","3 × 10–12 superset","Different angles from Wednesday's curls and pushdowns. The overhead extension stretches the long head of the triceps, which is most of your arm size.","hammer curl overhead triceps extension",M("Hammer curl","10–12 reps","Hammer_Curls"),M("Overhead triceps extension","12 reps","Standing_Dumbbell_Triceps_Extension")),
     {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
     E.stretch
   ]},
   "2026-10-17":{t:"run",title:"Long run",mins:"75–80 min",note:"<b>All easy, Zone 2.</b> If your legs are still heavy from football, cap it at 60 min. Easy means easy.",items:nLong("75–80 min")},
-  "2026-10-18":nRest
+  "2026-10-18":nRest,
+
+  "2026-10-19":{t:"run",title:"Zone 2 run",mins:"45 min",
+    note:"<b>Rebuild phase starts.</b> Running stays steady and doesn't grow for now, so your food goes into muscle. Keep it truly easy.",
+    items:[
+    XI("Zone 2 run","45 min","Conversational, about 65–75% of max heart rate.","Jogging_Treadmill","zone 2 running"),
+    {n:"Core",rx:"× 2 rounds",cue:"10 minutes after the run.",q:"dead bug side plank",moves:[M("Dead bug","10 each side","Dead_Bug"),M("Side plank","30 s each side","Side_Bridge"),M("Hanging leg raise","× 10","Hanging_Leg_Raise")]}
+  ]},
+  "2026-10-20":{t:"lower",title:"Legs: deadlift day",mins:"~60 min",
+    note:"<b>Deadlifts are in.</b> They're the heavy hamstring and back work missing from your last two leg days. They replace the hip thrust's job, so hip thrusts drop to 2 sets. Starting weight is conservative: 70 kg. Add 5 kg a week while every rep is fast with a flat back.",
+    items:[
+    Object.assign({},nWarm,{cue:"Loosen everything up. Deadlift ramp-up: 40 × 5, 60 × 3, then working sets."}),
+    X("Box jumps","3 × 5","Full rest. Every rep explosive. Not 1 × 10.","box jump",{im:"Front_Box_Jump"}),
+    XI("Deadlift","4 × 5 @ 70 kg","Bar over mid-foot, push the floor away, hips and shoulders rise together, flat back. Reset each rep. Rest 2–3 min. Trap bar is fine if your gym has one.","Barbell_Deadlift","conventional deadlift form"),
+    XI("Leg press","3 × 8–10 @ ~160 kg","Heavier than last week's 150 × 12–15. Muscle comes from heavy-ish 6–12 rep sets.","Leg_Press","leg press"),
+    XI("Dumbbell Bulgarian split squat","3 × 8 each leg @ 14–16 kg","Up from 12.5 kg.","Split_Squat_with_Dumbbells","bulgarian split squat"),
+    XI("Barbell hip thrust","2 × 8 @ 85–90 kg","Pause 1 s at the top.","Barbell_Hip_Thrust","barbell hip thrust"),
+    XI("Nordic hamstring curl","2 × 5","Lower as slowly as you can; push back up with your hands.","Natural_Glute_Ham_Raise","nordic hamstring curl"),
+    XI("Smith machine calf raise","3 × 10–12 @ 80 kg","Full stretch, 1 s pause at the top.","Smith_Machine_Calf_Raise","smith machine calf raise"),
+    E.stretch
+  ]},
+  "2026-10-21":{t:"upper",title:"Upper A: chest & back volume",mins:"~55 min",
+    note:"<b>Your Wednesday session, built for muscle.</b> Same idea as last week (you liked it), with heavier incline dumbbells, lateral raises added and 3 sets of everything.",
+    items:[
+    nWarm,
+    XI("Dips","3 × 8–12","Add a 5 kg plate once you get 3 × 12.","Dips_-_Chest_Version","chest dips"),
+    XI("Incline dumbbell press","3 × 8–10 @ 15–17.5 kg","Up from 12.5 kg. Last 2 reps hard.","Incline_Dumbbell_Press","incline dumbbell press"),
+    XI("Lat pulldown","3 × 8–10 @ 50–55 kg","Elbows to your ribs, full stretch at the top.","Wide-Grip_Lat_Pulldown","lat pulldown"),
+    XI("Seated cable row","3 × 8–10 @ 50–55 kg","Chest tall, squeeze the shoulder blades.","Seated_Cable_Rows","seated cable row"),
+    XI("Pec deck","2 × 10–12 @ 59–64 kg","Slow squeeze, pause 1 s.","Butterfly","pec deck"),
+    XI("Lateral raises","3 × 15","Missing from last Wednesday.","Side_Lateral_Raise","dumbbell lateral raise"),
+    SS("Incline curl + rope pushdown","3 × 10–12 superset","","incline dumbbell curl rope pushdown",M("Incline curl","10–12 @ 12.5 kg","Incline_Dumbbell_Curl"),M("Rope pushdown","12 @ 36–40 kg","Triceps_Pushdown_-_Rope_Attachment")),
+    E.stretch
+  ]},
+  "2026-10-22":{t:"run",title:"Norwegian 4×4 or football",mins:"~55 min",
+    note:"<b>One hard conditioning day.</b> If you play football, that's it, no 4×4. Otherwise do the 4×4.",
+    items:n4x4},
+  "2026-10-23":{t:"upper",title:"Upper B: heavy & vertical",mins:"~60 min",
+    note:"Same as last Friday. Add a rep or a little weight wherever last week's sets felt controlled.",
+    items:null},
+  "2026-10-24":{t:"run",title:"Long run",mins:"70 min",note:"<b>Held at 70 min</b> during the rebuild phase. Stamina stays; the extra food goes to muscle, not more mileage.",items:nLong("70 min")},
+  "2026-10-25":nRest
 };
+PLAN_NEEL["2026-10-23"].items = PLAN_NEEL["2026-10-16"].items;
 const PEOPLE = {
   nana:{plan:PLAN_NANA,prefix:"chk-",title:"Nana's Training",hi:"Hi Nana,",sub:"Build muscle, lose a little fat, run further, and get more flexible. One day at a time.",sig:"By Neel, with love ♡",foot:"By Neel, with love ♡",after:"After: protein shake, and send Neel your sweaty post-workout pic 😘"},
   neel:{plan:PLAN_NEEL,prefix:"chk-neel-",title:"Neel's Training",hi:"Hi Neel,",sub:"Endurance first: run further and faster, stay strong and lean.",sig:"Built for the long run",foot:"Train smart, recover harder",after:"After: protein and carbs within an hour, then log it in Motra 💪"}
