@@ -610,14 +610,9 @@ const PLAN_NANA = {
     E.abs,
     E.stretch
   ]},
-  "2026-10-24":{t:"run",title:"Run 2: easy run",mins:"~50 min",
-    note:"<b>Big one: 20 minutes without stopping.</b> Week 4 of your running plan. Go slow enough to chat the whole way. If you need to walk for a minute, that's fine, then keep going.",
-    items:[
-    runWarm,
-    X("Easy run","20 min non-stop","Talking pace, about 7–7.5 km/h. Slower is fine; finishing is the goal.","easy running beginner",{im:"Jogging_Treadmill"}),
-    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
-    Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch today, since it's the end of the week."})
-  ]},
+  "2026-10-24":{t:"run",title:"Easy run with Neel",mins:"~40 min",date:"Neel",head:"Easy run with Neel",
+    sub:"5 min walk, then <b>20 minutes non-stop</b> at chatting pace. Your longest non-stop run yet 🎉 Stretch afterwards. 🏃‍♀️🏃",then:null,
+    items:[{n:"Easy run with Neel"}]},
   "2026-10-25":{t:"rest",title:"Rest day",rest:"Full rest. You earned it. Eat well, hit your protein, sleep.",items:[]}
 };
 
@@ -807,8 +802,8 @@ const PLAN_NEEL = {
   "2026-10-23":{t:"upper",title:"Upper B: heavy & vertical",mins:"~60 min",
     note:"Same session as last Friday, so beat it: a rep or a little weight wherever last week's sets felt controlled. The row stays chest-supported to keep your lower back fresh for tomorrow's long run.",
     items:null},
-  "2026-10-24":{t:"run",title:"Long run",mins:"70 min",
-    note:"<b>Held at 70 min</b> during the rebuild phase. Your stamina stays, and the extra food goes to muscle instead of more mileage. Banana before; protein and carbs within the hour after.",
+  "2026-10-24":{t:"run",title:"Long run (with Nana)",mins:"70 min",
+    note:"<b>Held at 70 min</b> during the rebuild phase. Your stamina stays, and the extra food goes to muscle instead of more mileage. Start with Nana: warm-up walk plus her 20 min non-stop at her pace (perfect Zone 2 for you), then carry on alone to 70 min. Banana before; protein and carbs within the hour after.",
     items:nLong("70 min")},
   "2026-10-25":nRest
 };
@@ -994,8 +989,8 @@ function render(){
     const btn = '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'"'+(isFuture?' disabled title="You can tick this off on the day"':'')+'>'+(isFuture?lockIcon:checkIcon)+'<span>'+label+'</span></button>';
     if (p.date){
       out += '<article class="card date-card'+(on?' done':'')+'" '+col+' data-i="'+i+'">'+dateArt
-        + '<div class="dc-body"><span class="hand big">Long easy run with '+p.date+'</span><p>Cubbon Park · slow enough to chat the whole way 🏃‍♀️🏃</p>'
-        + '<div class="dc-then">then</div><span class="hand big2">Breakfast &amp; coffee ☕</span></div>'
+        + '<div class="dc-body"><span class="hand big">'+(p.head||("Long easy run with "+p.date))+'</span><p>'+(p.sub||"Cubbon Park · slow enough to chat the whole way 🏃‍♀️🏃")+'</p>'
+        + (p.then===null ? '' : '<div class="dc-then">then</div><span class="hand big2">'+(p.then||"Breakfast &amp; coffee ☕")+'</span>') + '</div>'
         + '<div class="card-foot">'+btn+'</div></article>';
       return;
     }
