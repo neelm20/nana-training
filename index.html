@@ -80,6 +80,18 @@ a{color:inherit}
 .wk{display:grid;grid-template-columns:58px 1fr;align-items:center;gap:8px}
 .wk + .wk{margin-top:7px}
 .days .chip{grid-row:1}
+.chip.empty{background:transparent;box-shadow:inset 0 0 0 1px var(--line);cursor:default}
+.chip.empty .dn,.chip.empty .dw{opacity:.35}
+.strip-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.strip-range{font-size:12px;font-weight:700;color:var(--muted);text-align:center}
+.nav-btn{appearance:none;border:0;background:var(--surface);color:var(--blue-deep);font:inherit;font-size:13px;font-weight:700;padding:6px 12px;border-radius:99px;box-shadow:0 1px 2px rgba(31,43,58,.06);cursor:pointer}
+.nav-btn:disabled{opacity:.35;cursor:default}
+#weeks{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#weeks::-webkit-scrollbar{display:none}
+.wk-page{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
+.wk-page .wk + .wk{margin-top:7px}
+
+.nav-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .wk-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700;line-height:1.25}
 .days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
 .chip{appearance:none;border:0;background:var(--surface);color:var(--ink);border-radius:14px;padding:6px 0 7px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font:inherit;min-width:0;box-shadow:0 1px 2px rgba(31,43,58,.06);transition:transform .15s}
@@ -203,6 +215,11 @@ img{max-width:100%}
   </header>
 
   <nav class="strip" aria-label="Pick a day">
+    <div class="strip-nav">
+      <button type="button" class="nav-btn" id="wk-prev" aria-label="Show earlier weeks">‹ Earlier</button>
+      <span class="strip-range" id="wk-range"></span>
+      <button type="button" class="nav-btn" id="wk-next" aria-label="Show later weeks">Later ›</button>
+    </div>
     <div id="weeks"></div>
   </nav>
 
@@ -223,23 +240,22 @@ img{max-width:100%}
 
   <section class="block" id="running">
     <h2>Running plan: 6 weeks</h2>
-    <p><b>Run 1 is intervals:</b> short runs at a hard-but-controlled pace (7–8 out of 10) with walking breaks. This makes you faster and fitter. <b>Run 2 is easy:</b> slow enough to talk the whole time. This builds stamina. Mostly easy, a little hard is how beginners improve fastest without getting hurt.</p>
-    <p>If the last round of a session felt like a fight, repeat that week before moving up.</p>
+    <p><b>Run 1 is the Norwegian 4×4:</b> 4 minutes hard (breathing heavily, only a few words possible), 3 minutes easy, 4 times. If running hard for 4 minutes is too much yet, power-walk up a steep treadmill incline instead. It counts the same. <b>Run 2 is easy:</b> slow enough to talk the whole time. That builds stamina.</p>
+    <p>If a session felt like a fight, repeat that week before moving up.</p>
     <div class="table-wrap">
       <table class="num">
         <thead><tr><th>Week</th><th>Run 1 · intervals</th><th>Run 2 · easy</th></tr></thead>
         <tbody>
-          <tr><td>Week 0 ✓</td><td>—</td><td>First run: 6 × (1 min easy + 2 min walk)</td></tr>
           <tr><td>Week 1</td><td>8 × (1 min run + 2 min walk)</td><td>5 × (3 min easy + 1½ walk)</td></tr>
           <tr><td>Week 2</td><td>8 × (1 min run + 1½ min walk)</td><td>3 × (5 min easy + 2 walk)</td></tr>
-          <tr><td>Week 3</td><td>6 × (2 min run + 2 min walk)</td><td>2 × (10 min easy + 2 walk)</td></tr>
-          <tr><td>Week 4</td><td>5 × (3 min run + 2 min walk)</td><td>20 min easy, non-stop</td></tr>
-          <tr><td>Week 5</td><td>4 × (4 min run + 2 min walk)</td><td>25 min easy, non-stop</td></tr>
-          <tr class="goal"><td>Week 6</td><td>10 × (1 min fast + 1 min walk)</td><td>30 min non-stop 🎉</td></tr>
+          <tr><td>Week 3</td><td>—</td><td>With Neel: 2 × (10 min easy + 2 walk)</td></tr>
+          <tr><td>Week 4</td><td>Norwegian 4×4</td><td>20 min easy, non-stop</td></tr>
+          <tr><td>Week 5</td><td>4×4, a little faster or steeper</td><td>25 min easy, non-stop</td></tr>
+          <tr class="goal"><td>Week 6</td><td>4×4, running all 4 reps</td><td>30 min non-stop 🎉</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Always warm up (walk, easy run, high knees, butt kicks) and walk 5 min after. Treadmill guide at 1% incline: walk ≈ 5.5 km/h, easy run ≈ 7–8 km/h, interval run ≈ 9–10 km/h. Go by feel over the numbers.</p>
+    <p>Always warm up (walk, easy run, high knees, butt kicks) and walk 5 min after. Treadmill guide at 1% incline: walk ≈ 5.5 km/h, easy run ≈ 7–8 km/h, 4×4 hard ≈ 8.5–9 km/h. Go by feel over the numbers.</p>
   </section>
 
   <section class="block" id="rules">
@@ -499,7 +515,109 @@ const PLAN_NANA = {
     X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
     Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch today, since it's the end of the week."})
   ]},
-  "2026-10-04":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]}
+  "2026-10-04":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]},
+
+  "2026-10-15":{t:"lower",title:"Lower B: squat, hinge & jump",mins:"~60 min",
+    note:"<b>Legs today.</b> Bulgarian split squats go up to 3 sets. If every goblet squat rep felt clean last time, use a dumbbell 2 kg heavier.",
+    items:[
+    E.warm,
+    X("Box jumps","3 × 5","Land softly, then step down. Full rest between sets.","box jump beginner",{im:"Front_Box_Jump"}),
+    X("Goblet squat","3 × 8–10","Chest up, sit between your heels, pause 1 s at the bottom."),
+    X("Dumbbell Romanian deadlift","3 × 8–10","Hips back, flat back, feel the hamstring stretch."),
+    X("Bulgarian split squat","3 × 8 each leg","Back foot on a bench, front knee over your ankle. Weaker leg first."),
+    X("Single-leg calf raise","3 × 12 each leg","Hold a dumbbell on the working side. Full stretch down, pause at the top.","single leg dumbbell calf raise",{im:"Standing_Dumbbell_Calf_Raise"}),
+    X("Hip abduction machine","2 × 15","Lean forward slightly, pause 1 s out."),
+    E.core,
+    E.stretch
+  ]},
+  "2026-10-16":{t:"upper",title:"Upper B: back & shoulders",mins:"~55 min",
+    note:"No incline walk today, so your legs are fresh for tomorrow's long run with Neel.",
+    items:[
+    E.warm,
+    X("Lat pulldown","3 × 10","Pull the bar to your upper chest, elbows down and back."),
+    X("Seated cable row","3 × 12","Tall chest, pull to your belly button, squeeze your shoulder blades."),
+    X("Dumbbell shoulder press","3 × 10","Don't arch your back. Press up and slightly in."),
+    X("Dumbbell lateral raises","3 × 15","Light weight. Lead with your elbows, stop at shoulder height."),
+    hammerOH("3 × 12 superset"),
+    E.abs,
+    E.stretch
+  ]},
+  "2026-10-17":{t:"run",title:"Long run with Neel",mins:"~45 min",
+    note:"<b>Running together!</b> Neel runs at your pace, which is perfect easy training for him too. Slow enough to chat the whole way. Then he carries on alone.",
+    items:[
+    X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
+    runInt("2 rounds","10 min easy run + 2 min walk, twice. Talking pace."),
+    X("Easy finish together","10 min","Easy jog or brisk walk, your choice.","easy running beginner",{im:"Trail_Running_Walking"}),
+    Object.assign({},E.flow,{rx:"15 min"})
+  ]},
+  "2026-10-18":{t:"rest",title:"Rest day",rest:"Full rest. Big week done. Eat well, hit your protein, sleep.",items:[]},
+
+  "2026-10-19":{t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",
+    note:"<b>New week, a bit more of everything.</b> You've had a few weeks to learn these moves, so now the weights go up. Pick a weight where the last 2 reps of every set are a real fight, but your form stays clean.",
+    items:[
+    E.warm,
+    X("Hip thrust","4 × 8–10","Heavier than last time. Chin tucked, drive through your heels, hold 1 s at the top. This is your main glute builder.","barbell hip thrust"),
+    X("Leg press","3 × 10","Feet high and wide for glutes. Go up a plate from last time.","leg press glute focus"),
+    X("Leg curl (machine)","3 × 10–12","3 seconds on the way back. Slow is where the hamstrings grow.","seated leg curl machine"),
+    X("Cable glute kickback","3 × 12 each leg","Up from 2 sets. Slight forward lean, don't arch your lower back."),
+    X("Calf raises (Smith machine)","3 × 15","Full stretch at the bottom, pause at the top. Strong calves protect you when running.","smith machine calf raise"),
+    E.stretch
+  ]},
+  "2026-10-20":{t:"upper",title:"Upper A: chest, back, arms",mins:"~60 min",
+    note:"Same exercises as before. Aim to beat your last numbers: one more rep, or the next dumbbell up.",
+    items:[
+    E.warm,
+    X("Pec deck fly","3 × 12","Slow squeeze, pause 1 s with your hands together."),
+    X("Incline dumbbell press","3 × 10","Try the next dumbbell up from last time."),
+    X("One-arm dumbbell row","3 × 10 each arm","Pull your elbow toward your hip. A strong back is what makes you look athletic."),
+    X("Reverse pec deck","3 × 15","Up from 2 sets. Light weight, arms long, squeeze your upper back.","reverse pec deck fly"),
+    curlPush("3 × 12 superset"),
+    E.abs,
+    X("Incline walk","10 min","Incline 12, speed 5.5. Only 10 min, so your legs are fresh for tomorrow's run.","incline treadmill walk"),
+    E.stretch
+  ]},
+  "2026-10-21":{t:"run",title:"Run 1: Norwegian 4×4",mins:"~50 min",
+    note:"<b>New: Norwegian 4×4</b>, the same interval session Neel does. 4 minutes hard, 3 minutes easy, 4 times. It's one of the best workouts there is for getting fitter, fast.",
+    items:[
+    runWarm,
+    {n:"Norwegian 4×4",rx:"4 × 4 min",cue:"4 min hard, then 3 min easy, 4 times. Hard means breathing heavily and only able to say a few words. Run about 8.5–9 km/h, or power-walk at incline 8–10 at about 6 km/h if running hard for 4 minutes is too much yet. Same heart-rate effect. Easy means a walk or a very slow jog. Get harder through each rep, not all at once at the start.",q:"norwegian 4x4 interval training",moves:[M("4 min hard","Breathing hard, a few words only","Running_Treadmill"),M("3 min easy","Walk or very slow jog","Walking_Treadmill")]},
+    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
+    E.flow
+  ]},
+  "2026-10-22":{t:"lower",title:"Lower B: squat, hinge & jump",mins:"~60 min",
+    note:"<b>Second week of 3 sets of Bulgarians.</b> Hold light dumbbells if bodyweight felt easy on Thursday. If every goblet squat rep felt clean last time, use a dumbbell 2 kg heavier.",
+    items:[
+    E.warm,
+    X("Box jumps","3 × 5","Land softly, then step down. Full rest. You're getting more athletic with every session.","box jump beginner",{im:"Front_Box_Jump"}),
+    X("Goblet squat","3 × 8–10","Chest up, sit between your heels, pause 1 s at the bottom."),
+    X("Dumbbell Romanian deadlift","3 × 8–10","Hips back, flat back, feel the hamstring stretch. Heavier if your back stayed flat last time."),
+    X("Bulgarian split squat","3 × 8 each leg","Back foot on a bench, front knee over your ankle. Weaker leg first. Light dumbbells now if bodyweight felt easy."),
+    X("Single-leg calf raise","3 × 12 each leg","Hold a dumbbell on the working side. Full stretch down, pause at the top.","single leg dumbbell calf raise",{im:"Standing_Dumbbell_Calf_Raise"}),
+    X("Hip abduction machine","2 × 15","Lean forward slightly, pause 1 s out."),
+    E.core,
+    E.stretch
+  ]},
+  "2026-10-23":{t:"upper",title:"Upper B: back & shoulders",mins:"~60 min",
+    note:"Beat your last numbers on the pulldown and shoulder press. These two make your back and shoulders look strong.",
+    items:[
+    E.warm,
+    X("Lat pulldown","3 × 10","Pull the bar to your upper chest, elbows down and back. Next weight up if you got all 30 reps last time."),
+    X("Seated cable row","3 × 12","Tall chest, pull to your belly button, squeeze your shoulder blades."),
+    X("Dumbbell shoulder press","3 × 10","Don't arch your back. Press up and slightly in."),
+    X("Dumbbell lateral raises","3 × 15","Light weight. Lead with your elbows, stop at shoulder height."),
+    hammerOH("3 × 12 superset"),
+    E.abs,
+    E.stretch
+  ]},
+  "2026-10-24":{t:"run",title:"Run 2: easy run",mins:"~50 min",
+    note:"<b>Big one: 20 minutes without stopping.</b> Week 4 of your running plan. Go slow enough to chat the whole way. If you need to walk for a minute, that's fine, then keep going.",
+    items:[
+    runWarm,
+    X("Easy run","20 min non-stop","Talking pace, about 7–7.5 km/h. Slower is fine; finishing is the goal.","easy running beginner",{im:"Jogging_Treadmill"}),
+    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
+    Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch today, since it's the end of the week."})
+  ]},
+  "2026-10-25":{t:"rest",title:"Rest day",rest:"Full rest. You earned it. Eat well, hit your protein, sleep.",items:[]}
 };
 
 
@@ -639,7 +757,7 @@ const PLAN_NEEL = {
     {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
     E.stretch
   ]},
-  "2026-10-17":{t:"run",title:"Long run",mins:"75–80 min",note:"<b>All easy, Zone 2.</b> If your legs are still heavy from football, cap it at 60 min. Easy means easy.",items:nLong("75–80 min")},
+  "2026-10-17":{t:"run",title:"Long run",mins:"75–80 min",note:"<b>All easy, Zone 2.</b> The first ~40 min is with Nana at her pace, which is perfect Zone 2 for you. Then carry on alone. If your legs are still heavy from football, cap the total at 60 min.",items:nLong("75–80 min")},
   "2026-10-18":nRest,
 
   "2026-10-19":{t:"run",title:"Zone 2 run",mins:"45 min",
@@ -727,32 +845,87 @@ function usePerson(who, dayKey){
 }
 usePerson(person, hk);
 
-function chips(){
-  const monday = k => { const d = parse(k); d.setDate(d.getDate()-((d.getDay()+6)%7)); return iso(d); };
-  const thisMon = monday(todayIso), groups = {};
-  keys.forEach(k => (groups[monday(k)] = groups[monday(k)] || []).push(k));
-  const wrap = document.getElementById("weeks"); wrap.innerHTML = "";
-  Object.keys(groups).sort().forEach(m => {
-    const diff = Math.round((parse(m)-parse(thisMon))/864e5/7), md = parse(m);
-    const label = diff===0 ? "This<br>week" : diff===1 ? "Next<br>week" : diff===-1 ? "Last<br>week" : "Wk of<br>"+md.getDate()+" "+MO[md.getMonth()];
-    const row = document.createElement("div"); row.className = "wk";
-    row.innerHTML = '<div class="wk-label">'+label+'</div><div class="days"></div>';
-    const el = row.querySelector(".days");
-    groups[m].forEach(k => {
-      const d = parse(k), t = T[plan[k].t];
-      const b = document.createElement("button");
-      b.className = "chip" + (k < todayIso ? " past" : "") + (k === todayIso ? " today" : "");
-      b.style.gridColumn = ((d.getDay()+6)%7)+1;
-      b.setAttribute("aria-pressed", k === current);
-      b.setAttribute("aria-label", WDL[d.getDay()]+" "+d.getDate()+" "+MO[d.getMonth()]+": "+plan[k].title);
-      b.style.setProperty("--c", plan[k].sick ? "var(--rose)" : t.c);
-      b.innerHTML = '<span class="dw">'+WD[d.getDay()].slice(0,2)+'</span><span class="dn num">'+d.getDate()+'</span><span class="dot"></span>';
-      b.onclick = () => { current = k; setHash(); chips(); render(); document.getElementById("day").scrollIntoView({behavior:"smooth",block:"start"}); };
-      el.appendChild(b);
-    });
-    wrap.appendChild(row);
-  });
+const monday = k => { const d = parse(k); d.setDate(d.getDate()-((d.getDay()+6)%7)); return iso(d); };
+const addDays = (k,n) => { const d = parse(k); d.setDate(d.getDate()+n); return iso(d); };
+let wkOffset = 0; // 0 = last week + this week; 1 = this week + next week
+function wkBounds(){
+  const thisMon = monday(todayIso), weeks = n => Math.round((parse(n)-parse(thisMon))/864e5/7);
+  return { min: Math.min(0, weeks(monday(keys[0]))), max: Math.max(0, weeks(monday(keys[keys.length-1]))) };
 }
+function fitWindow(){
+  // the window always shows 2 weeks: (wkOffset-1) and wkOffset, relative to this week
+  const w = Math.round((parse(monday(current))-parse(monday(todayIso)))/864e5/7);
+  wkOffset = (w === -1 || w === 0) ? 0 : (w > 0 ? w : w + 1);
+}
+function weekRow(m, diff){
+  const md = parse(m);
+  const label = diff===0 ? "This<br>week" : diff===1 ? "Next<br>week" : diff===-1 ? "Last<br>week" : "Wk of<br>"+md.getDate()+" "+MO[md.getMonth()];
+  const row = document.createElement("div"); row.className = "wk";
+  row.innerHTML = '<div class="wk-label">'+label+'</div><div class="days"></div>';
+  const el = row.querySelector(".days");
+  for (let i = 0; i < 7; i++){
+    const k = addDays(m, i), d = parse(k), pk = plan[k];
+    const b2 = document.createElement("button");
+    b2.type = "button";
+    b2.innerHTML = '<span class="dw">'+WD[d.getDay()].slice(0,2)+'</span><span class="dn num">'+d.getDate()+'</span><span class="dot"></span>';
+    if (!pk){
+      b2.className = "chip empty"; b2.disabled = true;
+      b2.setAttribute("aria-label", WDL[d.getDay()]+" "+d.getDate()+" "+MO[d.getMonth()]+": nothing planned");
+    } else {
+      const t = T[pk.t];
+      b2.className = "chip" + (k < todayIso ? " past" : "") + (k === todayIso ? " today" : "");
+      b2.setAttribute("aria-pressed", k === current);
+      b2.setAttribute("aria-label", WDL[d.getDay()]+" "+d.getDate()+" "+MO[d.getMonth()]+": "+pk.title);
+      b2.style.setProperty("--c", pk.sick ? "var(--rose)" : t.c);
+      b2.onclick = () => { current = k; setHash(); chips(); render(); document.getElementById("day").scrollIntoView({behavior:"smooth",block:"start"}); };
+    }
+    el.appendChild(b2);
+  }
+  return row;
+}
+// Horizontal scroll track: one snap page per 2-week window (week wkOffset-1 and wkOffset).
+function chips(){
+  const thisMon = monday(todayIso), b = wkBounds();
+  wkOffset = Math.min(Math.max(wkOffset, b.min), b.max);
+  const wrap = document.getElementById("weeks"); wrap.innerHTML = "";
+  for (let off = b.min; off <= b.max; off++){
+    const page = document.createElement("div"); page.className = "wk-page";
+    page.appendChild(weekRow(addDays(thisMon, (off-1)*7), off-1));
+    page.appendChild(weekRow(addDays(thisMon, off*7), off));
+    wrap.appendChild(page);
+  }
+  wrap.style.scrollBehavior = "auto";
+  wrap.scrollLeft = (wkOffset - b.min) * wrap.clientWidth;
+  wrap.style.scrollBehavior = "";
+  updateNav();
+}
+function updateNav(){
+  const b = wkBounds(), first = addDays(monday(todayIso), (wkOffset-1)*7), last = addDays(first, 13);
+  const fd = parse(first), ld = parse(last);
+  document.getElementById("wk-range").textContent = fd.getDate()+" "+MO[fd.getMonth()]+" – "+ld.getDate()+" "+MO[ld.getMonth()]+" · scroll ↔";
+  document.getElementById("wk-prev").disabled = wkOffset <= b.min;
+  document.getElementById("wk-next").disabled = wkOffset >= b.max;
+}
+function shiftWeeks(dir){
+  const b = wkBounds(), next = Math.min(Math.max(wkOffset + dir, b.min), b.max);
+  if (next === wkOffset) return;
+  const wrap = document.getElementById("weeks");
+  wrap.scrollTo({left: (next - b.min) * wrap.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+}
+document.getElementById("wk-prev").addEventListener("click", () => shiftWeeks(-1));
+document.getElementById("wk-next").addEventListener("click", () => shiftWeeks(1));
+(() => {
+  const wrap = document.getElementById("weeks"); let t = null;
+  wrap.addEventListener("scroll", () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const b = wkBounds(), idx = Math.round(wrap.scrollLeft / Math.max(1, wrap.clientWidth));
+      const off = Math.min(Math.max(b.min + idx, b.min), b.max);
+      if (off !== wkOffset){ wkOffset = off; updateNav(); }
+    }, 80);
+  }, {passive:true});
+  addEventListener("resize", () => { wrap.scrollLeft = (wkOffset - wkBounds().min) * wrap.clientWidth; });
+})();
 
 const playIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z" fill="currentColor" stroke-linejoin="round"/></svg>';
 const checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
@@ -831,9 +1004,9 @@ document.getElementById("splitgrid").innerHTML = tmpl.map(([d,t,l]) => '<div sty
 
 ["nana","neel"].forEach(w => document.getElementById("who-"+w).addEventListener("click", () => {
   if (w === person) return;
-  usePerson(w); setHash(); chips(); render();
+  usePerson(w); setHash(); wkOffset = 0; fitWindow(); chips(); render();
 }));
-chips(); render();
+fitWindow(); chips(); render();
 })();
 </script>
 
