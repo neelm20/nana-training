@@ -285,7 +285,7 @@ img{max-width:100%}
     <h2>How your week works</h2>
     <p><b>Rebuild phase (8–10 weeks):</b> win back the muscle running took, while keeping your stamina. Lifting gets priority; running holds steady instead of growing. Heavy legs on Monday, after a rest day and 3 days before Thursday's hard session. Upper days are 72 hours apart. Wednesday's durability work is low-fatigue, and Friday's upper day keeps your legs fresh for the long run.</p>
     <div class="split">
-      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Mon</b>Legs · squat & hinge</div>
+      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Mon</b>Legs · deadlift & squat</div>
       <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Tue</b>Upper A + easy</div>
       <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Wed</b>Zone 2 + durability</div>
       <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Thu</b>4×4 or football</div>
@@ -311,7 +311,7 @@ img{max-width:100%}
     <h2>Your rules</h2>
     <div class="rules">
       <div class="rule"><h3>Sets of 6–12, close to failure</h3><p>Muscle comes from hard sets: stop 1–2 reps short of failure. Heavy compounds (deadlift, pull-ups, presses) at 5–8 reps, everything else at 8–15.</p></div>
-      <div class="rule"><h3>Leg day: same core, heavier each week</h3><p>Squat 4 × 5 and Romanian deadlift 3 × 8 are the two main lifts: +2.5 kg a week on the squat, +2.5–5 kg on the Romanian deadlift. Hip thrusts, Bulgarians, lunges, slow leg curls, calves and hip abduction/adduction every week. Never hinge heavy the day before a hard run or long run.</p></div>
+      <div class="rule"><h3>Leg day: same core, heavier each week</h3><p>Deadlift 3 × 5 (+5 kg a week) and back squat 3 × 6 (+2.5 kg) are the two main lifts. Single-leg Romanian deadlifts, hip thrusts, Bulgarians, lunges, slow leg curls, calves and abduction/adduction every week. Never deadlift the day before a hard run or long run.</p></div>
       <div class="rule"><h3>Beat last week</h3><p>One more rep or a little more weight on every exercise, logged in Motra. Deadlift +5 kg a week while every rep is fast with a flat back. If a set grinds, repeat the weight.</p></div>
       <div class="rule"><h3>Running holds steady</h3><p>Three runs plus football, about 80% easy. The long run stays at 70 min during the rebuild phase. Don't add mileage until the muscle is back.</p></div>
       <div class="rule"><h3>Protein: about 2 g per kg</h3><p>Every day, spread over 4 meals, plus a protein serving before bed. This is the raw material for rebuilding muscle.</p></div>
@@ -756,16 +756,17 @@ const PLAN_NEEL = {
   "2026-10-17":{t:"run",title:"Long easy run with Nana",mins:"Cubbon Park",date:"Nana",items:[{n:"Long easy run with Nana"}]},
   "2026-10-18":nRest,
 
-  "2026-10-19":{t:"lower",title:"Legs: squat, hinge & glutes",mins:"~75 min",
-    note:"<b>Your leg day, every Monday.</b> Squats, Romanian deadlifts, hip thrusts, Bulgarians, lunges, calves, and hip abduction/adduction. The Romanian deadlift is your deadlift: it builds hamstrings and glutes through a big stretch and is far less draining than a conventional deadlift, so it fits a running week better. It gets heavier every week, just like the squat.",
+  "2026-10-19":{t:"lower",title:"Legs: deadlift, squat & glutes",mins:"~80 min",
+    note:"<b>Your leg day, every Monday.</b> Deadlift first while you're fresh, then squats, single-leg Romanian deadlifts, hip thrusts, Bulgarians, lunges, calves and hip abduction/adduction. Squats drop to 3 × 6 because two heavy barbell lifts at full volume in one session would wreck your recovery for Thursday. Short on time? Drop the lunges first.",
     items:[
-    Object.assign({},nWarm,{cue:"Loosen everything up. Squat ramp-up: bar × 8, 40 × 5, 50 × 3, then working sets."}),
+    Object.assign({},nWarm,{cue:"Loosen everything up. Deadlift ramp-up: 40 × 5, 60 × 3, then working sets."}),
     X("Box jumps","3 × 5","Full rest. Every rep explosive. Power for running and football. Takes 5 minutes.","box jump",{im:"Front_Box_Jump"}),
-    XI("Barbell back squat","4 × 5 @ 62.5–65 kg","Heavy: stop about 1 rep short of failure, with clean depth. +2.5 kg a week while the bar moves fast. Rest 2–3 min. Take 62.5 kg first; go to 65 kg if it moves fast.","Barbell_Squat","barbell back squat"),
-    XI("Romanian deadlift","3 × 8 @ 60 kg","Your main hinge. Hips back, bar close to your legs, flat back, feel the hamstrings stretch. +2.5–5 kg a week while your back stays flat. Rest 2 min.","Romanian_Deadlift","barbell romanian deadlift"),
+    XI("Deadlift","3 × 5 @ 70 kg","Conventional. Bar over mid-foot, push the floor away, hips and shoulders rise together, flat back. Reset each rep. Rest 2–3 min. +5 kg a week while every rep is fast with a flat back.","Barbell_Deadlift","conventional deadlift form"),
+    XI("Barbell back squat","3 × 6 @ ~60 kg","Stop 1–2 reps short of failure, clean depth. +2.5 kg a week while the bar moves fast. Rest 2–3 min.","Barbell_Squat","barbell back squat"),
+    XI("Single-leg Romanian deadlift","3 × 8 each leg @ 16–20 kg","One dumbbell or kettlebell in the opposite hand to the standing leg. Hips square, slow, feel the hamstring stretch. Trains hamstrings, glutes, the outer hip and balance at the same time.","Kettlebell_One-Legged_Deadlift","dumbbell single leg romanian deadlift"),
     XI("Barbell hip thrust","3 × 8–10 @ 90 kg","Up from 80 kg. Chin tucked, pause 1 s at the top.","Barbell_Hip_Thrust","barbell hip thrust"),
     XI("Dumbbell Bulgarian split squat","3 × 8 each leg @ 16 kg","Up from 12.5 kg. Weaker leg first.","Split_Squat_with_Dumbbells","bulgarian split squat"),
-    XI("Walking lunges","2 × 10 each leg @ 12.5–14 kg","Finisher. Long steps, back knee almost touches the floor.","Dumbbell_Lunges","dumbbell walking lunges"),
+    XI("Walking lunges","2 × 10 each leg @ 12.5–14 kg","Finisher. Long steps, back knee almost touches the floor. First to drop if you're short on time.","Dumbbell_Lunges","dumbbell walking lunges"),
     XI("Leg curl (machine), slow lowering","2 × 10","Curl up, then take a full 3 seconds to lower. Protects your hamstrings for football sprints.","Seated_Leg_Curl","seated leg curl slow eccentric"),
     XI("Smith machine calf raise","3 × 10–12 @ 85–90 kg","Full stretch, 1 s pause at the top.","Smith_Machine_Calf_Raise","smith machine calf raise"),
     SS("Hip abduction + adduction","2 × 12–15 superset","Abduction, then straight into adduction, then rest 60 s. Outer hip for knee and hip stability when you run; inner thigh for football's side-steps and cuts. Pause 1 s at the end of each rep. Last weights were 45 kg, so try 50 kg.","hip abduction adduction machine",M("Hip abduction","12–15 reps","Thigh_Abductor"),M("Hip adduction","12–15 reps","Thigh_Adductor")),
@@ -786,10 +787,9 @@ const PLAN_NEEL = {
     E.stretch
   ]},
   "2026-10-21":{t:"run",title:"Zone 2 + durability",mins:"~70 min",
-    note:"<b>Easy aerobic base, plus the stabilisers that keep runners and footballers healthy:</b> single-leg balance, soleus, shins, groin and core. Nothing heavy, so tomorrow's hard session isn't affected.",
+    note:"<b>Easy aerobic base, plus the small muscles that keep runners and footballers healthy:</b> soleus, shins, groin and core. Nothing heavy, so tomorrow isn't affected. Nothing heavy, so tomorrow's hard session isn't affected.",
     items:[
     XI("Zone 2 run","45 min","Conversational, about 65–75% of max heart rate. Strictly easy, because tomorrow is hard.","Jogging_Treadmill","zone 2 running"),
-    XI("Kettlebell single-leg RDL","2 × 8 each leg @ 12–16 kg","Slow and controlled, hips square. Trains the outer hip, ankle and balance on one leg, the stability that keeps your knees and hips steady when you run. Light enough to be fine the day before Thursday.","Kettlebell_One-Legged_Deadlift","kettlebell single leg romanian deadlift"),
     XI("Seated calf raise","3 × 15","Bent knee works the soleus, the calf muscle that takes the most load when you run.","Seated_Calf_Raise","seated calf raise"),
     XI("Tibialis raises","2 × 15","Back to a wall, lift your toes high. Protects your shins.",null,"tibialis raise"),
     XI("Copenhagen plank","3 × 20 s each side","Top leg on a bench. Protects the groin, which matters for football.","Side_Bridge","copenhagen plank"),
