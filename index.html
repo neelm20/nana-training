@@ -152,6 +152,14 @@ a{color:inherit}
 .after{display:flex;gap:12px;align-items:center;background:var(--rose-soft);border-radius:20px;padding:14px 16px;font-size:15px}
 .after svg{flex:none;width:24px;height:24px;color:var(--rose)}
 .rest-art{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:22px;text-align:center;color:var(--muted)}
+.date-card{padding:0;gap:0;overflow:hidden}
+.dc-art{display:block;width:100%;height:auto}
+.dc-body{padding:18px 18px 4px;display:flex;flex-direction:column;gap:4px}
+.dc-body .big{font-size:34px;line-height:1.05;color:var(--blue-deep)}
+.dc-body p{margin:0;color:var(--muted);font-size:15px}
+.dc-then{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:10px}
+.dc-body .big2{font-size:32px;line-height:1.05;color:var(--rose)}
+.date-card .card-foot{padding:8px 18px 16px;justify-content:flex-end}
 .sick-card{background:var(--hero);border-radius:26px;padding:24px 20px 20px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
 .sick-card .sf{position:absolute;right:-26px;bottom:-26px;width:130px;height:130px;opacity:.55}
 .sick-card .big{display:block;font-size:34px;line-height:1.05;color:var(--blue-deep);margin-bottom:10px;max-width:12ch}
@@ -541,15 +549,7 @@ const PLAN_NANA = {
     E.abs,
     E.stretch
   ]},
-  "2026-10-17":{t:"run",title:"Long run with Neel · Cubbon Park",mins:"~45 min",
-    after:"After: breakfast together 🥞 Make it your recovery meal: some protein (eggs, paneer, curd or dosa with sambar) plus carbs. No shake needed today. And yes, still send Neel the sweaty pic 😘",
-    note:"<b>Running together in Cubbon Park!</b> Neel runs at your pace, which is perfect easy training for him too. Go by feel: slow enough to chat the whole way. Go early while it's cool, and bring water. Then he carries on alone.",
-    items:[
-    X("Brisk walk warm-up","5 min","Walk briskly along the park paths, plus ankle circles and leg swings.","running warm up drills",{im:"Trail_Running_Walking"}),
-    X("Run / walk intervals","2 rounds","10 min easy run + 2 min walk, twice. Talking pace. Use a phone timer, not distance.","run walk intervals beginner",{im:"Trail_Running_Walking"}),
-    X("Easy finish together","10 min","Easy jog or brisk walk, your choice.","easy running beginner",{im:"Trail_Running_Walking"}),
-    Object.assign({},E.flow,{rx:"15 min",cue:"On the grass in the park, before breakfast."})
-  ]},
+  "2026-10-17":{t:"run",title:"Long easy run with Neel",mins:"Cubbon Park",date:"Neel",items:[{n:"Long easy run with Neel"}]},
   "2026-10-18":{t:"rest",title:"Rest day",rest:"Full rest. Big week done. Eat well, hit your protein, sleep.",items:[]},
 
   "2026-10-19":{t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",
@@ -757,8 +757,7 @@ const PLAN_NEEL = {
     {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
     E.stretch
   ]},
-  "2026-10-17":{t:"run",title:"Long run · Cubbon Park",mins:"75–80 min",
-    after:"Before: a banana or toast 30–60 min before you start. After: breakfast with Nana is your recovery meal. Get 30–40 g of protein plus a good serving of carbs within the hour, and drink plenty of water. You're in the rebuild phase, so don't skimp.",note:"<b>All easy, Zone 2, in Cubbon Park.</b> The first ~40 min is with Nana at her pace, which is perfect Zone 2 for you. Then carry on alone with easy loops of the park. Go by heart rate and time, not pace. Start early before it heats up, and carry water. If your legs are still heavy from football, cap the total at 60 min.",items:nLong("75–80 min")},
+  "2026-10-17":{t:"run",title:"Long easy run with Nana",mins:"Cubbon Park",date:"Nana",items:[{n:"Long easy run with Nana"}]},
   "2026-10-18":nRest,
 
   "2026-10-19":{t:"run",title:"Zone 2 run",mins:"45 min",
@@ -932,6 +931,16 @@ const playIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
 const lockIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 const sickFlower = '<svg class="sf" viewBox="0 0 120 120" aria-hidden="true"><g fill="var(--sun)" opacity=".9"><ellipse cx="60" cy="30" rx="15" ry="24"/><ellipse cx="60" cy="90" rx="15" ry="24"/><ellipse cx="30" cy="60" rx="24" ry="15"/><ellipse cx="90" cy="60" rx="24" ry="15"/></g><circle cx="60" cy="60" r="17" fill="#DE8A2E"/></svg>';
+const dateArt = '<svg class="dc-art" viewBox="0 0 320 170" role="img" aria-label="A park with trees, a sunny path, a coffee cup and a breakfast plate">'
+  + '<rect width="320" height="170" fill="var(--blue-soft)"/>'
+  + '<circle cx="64" cy="42" r="20" fill="var(--sun)"/>'
+  + '<path d="M0 116 Q80 88 160 108 T320 98 V170 H0Z" fill="var(--leaf-soft)"/>'
+  + '<g fill="var(--leaf)"><rect x="104" y="88" width="4" height="22" fill="#8A6A4A"/><circle cx="106" cy="80" r="15"/><rect x="138" y="92" width="4" height="18" fill="#8A6A4A"/><circle cx="140" cy="86" r="11"/><rect x="18" y="96" width="4" height="20" fill="#8A6A4A"/><circle cx="20" cy="88" r="13"/><rect x="290" y="84" width="4" height="22" fill="#8A6A4A"/><circle cx="292" cy="76" r="14"/></g>'
+  + '<path d="M0 138 Q90 116 180 132 T320 124 V170 H0Z" fill="var(--leaf)" opacity=".5"/>'
+  + '<path d="M70 170 C95 146 140 134 190 122" stroke="#F4EFE4" stroke-width="9" fill="none" stroke-linecap="round" opacity=".85"/>'
+  + '<g transform="translate(186 128)"><ellipse cx="26" cy="22" rx="30" ry="9" fill="#F7F4EC"/><ellipse cx="22" cy="19" rx="12" ry="5.5" fill="#FFFDF7"/><circle cx="23" cy="18" r="3.8" fill="var(--sun)"/><path d="M38 14 l10 6 l-12 4z" fill="#D9A55B"/></g>'
+  + '<g transform="translate(244 98)"><path d="M14 0 q-5 -7 0 -14 M26 0 q-5 -7 0 -14" stroke="#9AA6B6" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M0 6 h40 v20 a14 14 0 0 1 -14 14 h-12 a14 14 0 0 1 -14 -14z" fill="#FFFDF7"/><rect y="14" width="40" height="6" fill="#4A6FA5"/><path d="M40 12 a9 9 0 0 1 0 18" stroke="#FFFDF7" stroke-width="4" fill="none"/><ellipse cx="20" cy="44" rx="26" ry="5" fill="#F7F4EC" opacity=".8"/></g>'
+  + '</svg>';
 const heart = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3.1 4.5 6.7 4.5c2 0 3.6 1.1 4.3 2.6h2c.7-1.5 2.3-2.6 4.3-2.6 3.6 0 5.8 3.7 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg>';
 const flower = '<svg viewBox="0 0 40 40" aria-hidden="true"><g fill="var(--blue)" opacity=".55"><ellipse cx="20" cy="10" rx="6" ry="9"/><ellipse cx="20" cy="30" rx="6" ry="9"/><ellipse cx="10" cy="20" rx="9" ry="6"/><ellipse cx="30" cy="20" rx="9" ry="6"/></g><circle cx="20" cy="20" r="6" fill="var(--sun)"/></svg>';
 const esc = s => String(s).replace(/"/g,"&quot;");
@@ -971,6 +980,14 @@ function render(){
   p.items.forEach((it,i) => {
     const on = isFuture ? false : ((i in saved) ? saved[i] : (p.done && !isToday && !it.skipped));
     const label = isFuture ? opens : (on ? "Done" : "Mark done");
+    const btn = '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'"'+(isFuture?' disabled title="You can tick this off on the day"':'')+'>'+(isFuture?lockIcon:checkIcon)+'<span>'+label+'</span></button>';
+    if (p.date){
+      out += '<article class="card date-card'+(on?' done':'')+'" '+col+' data-i="'+i+'">'+dateArt
+        + '<div class="dc-body"><span class="hand big">Long easy run with '+p.date+'</span><p>Cubbon Park · slow enough to chat the whole way 🏃‍♀️🏃</p>'
+        + '<div class="dc-then">then</div><span class="hand big2">Breakfast &amp; coffee ☕</span></div>'
+        + '<div class="card-foot">'+btn+'</div></article>';
+      return;
+    }
     out += '<article class="card'+(on?' done':'')+'" '+col+' data-i="'+i+'">'
       + '<div class="card-top"><span class="step">'+(i+1)+'</span><h3>'+it.n+'</h3><span class="rx">'+it.rx+'</span></div>'
       + (it.cue ? '<p class="cue">'+it.cue+'</p>' : '')
@@ -980,7 +997,7 @@ function render(){
       + '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'"'+(isFuture?' disabled title="You can tick this off on the day"':'')+'>'+(isFuture?lockIcon:checkIcon)+'<span>'+label+'</span></button></div>'
       + '</article>';
   });
-  if (p.items.length && p.t !== "rest") out += '<div class="after">'+heart+'<span>'+(p.after||PEOPLE[person].after)+'</span></div>';
+  if (p.items.length && p.t !== "rest" && !p.date) out += '<div class="after">'+heart+'<span>'+(p.after||PEOPLE[person].after)+'</span></div>';
   const el = document.getElementById("day");
   el.innerHTML = out;
   el.querySelectorAll(".done-btn").forEach(b => b.addEventListener("click", () => {
