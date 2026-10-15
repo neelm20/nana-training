@@ -285,7 +285,7 @@ img{max-width:100%}
     <h2>How your week works</h2>
     <p><b>Rebuild phase (8–10 weeks):</b> win back the muscle running took, while keeping your stamina. Lifting gets priority; running holds steady instead of growing. Heavy legs on Monday, after a rest day and 3 days before Thursday's hard session. Upper days are 72 hours apart. Wednesday's durability work is low-fatigue, and Friday's upper day keeps your legs fresh for the long run.</p>
     <div class="split">
-      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Mon</b>Legs · deadlift</div>
+      <div style="--c:var(--leaf);--cs:var(--leaf-soft)"><b>Mon</b>Legs · squat / deadlift</div>
       <div style="--c:var(--rose);--cs:var(--rose-soft)"><b>Tue</b>Upper A + easy</div>
       <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Wed</b>Zone 2 + durability</div>
       <div style="--c:var(--blue);--cs:var(--blue-soft)"><b>Thu</b>4×4 or football</div>
@@ -311,6 +311,7 @@ img{max-width:100%}
     <h2>Your rules</h2>
     <div class="rules">
       <div class="rule"><h3>Sets of 6–12, close to failure</h3><p>Muscle comes from hard sets: stop 1–2 reps short of failure. Heavy compounds (deadlift, pull-ups, presses) at 5–8 reps, everything else at 8–15.</p></div>
+      <div class="rule"><h3>Leg day rotates</h3><p>Week A: heavy back squat (4 × 5) + moderate Romanian deadlift (3 × 8). Week B: heavy deadlift (4 × 5) + moderate back squat (3 × 8). Bulgarians, lunges, Nordics and calves every week. Never deadlift heavy the day before a hard run or long run.</p></div>
       <div class="rule"><h3>Beat last week</h3><p>One more rep or a little more weight on every exercise, logged in Motra. Deadlift +5 kg a week while every rep is fast with a flat back. If a set grinds, repeat the weight.</p></div>
       <div class="rule"><h3>Running holds steady</h3><p>Three runs plus football, about 80% easy. The long run stays at 70 min during the rebuild phase. Don't add mileage until the muscle is back.</p></div>
       <div class="rule"><h3>Protein: about 2 g per kg</h3><p>Every day, spread over 4 meals, plus a protein serving before bed. This is the raw material for rebuilding muscle.</p></div>
@@ -760,16 +761,16 @@ const PLAN_NEEL = {
   "2026-10-17":{t:"run",title:"Long easy run with Nana",mins:"Cubbon Park",date:"Nana",items:[{n:"Long easy run with Nana"}]},
   "2026-10-18":nRest,
 
-  "2026-10-19":{t:"lower",title:"Legs: heavy, deadlift day",mins:"~60 min",
-    note:"<b>Legs move to Monday.</b> You're fresh after Sunday's rest, with 3 days before Thursday's hard session and 5 before the long run. This is the best spot in the week for your heaviest lifts. Deadlifts are in: the heavy hamstring and back work missing from your last two leg days. Start at a conservative 70 kg and add 5 kg a week while every rep is fast with a flat back.",
+  "2026-10-19":{t:"lower",title:"Legs A: heavy squat",mins:"~60 min",
+    note:"<b>Squat week.</b> Your leg day rotates: this week the back squat is heavy and the hinge (Romanian deadlift) is moderate. Next Monday flips: heavy deadlift, moderate squat. You train both every week without stacking two maximal lifts. Bulgarians, lunges and calves stay every week. The hinge and Nordics stay too, because football sprints and running need strong hamstrings.",
     items:[
-    Object.assign({},nWarm,{cue:"Loosen everything up. Deadlift ramp-up: 40 × 5, 60 × 3, then working sets."}),
+    Object.assign({},nWarm,{cue:"Loosen everything up. Squat ramp-up: bar × 8, 40 × 5, 50 × 3, then working sets."}),
     X("Box jumps","3 × 5","Full rest. Every rep explosive. Power for running and football.","box jump",{im:"Front_Box_Jump"}),
-    XI("Deadlift","4 × 5 @ 70 kg","Bar over mid-foot, push the floor away, hips and shoulders rise together, flat back. Reset each rep. Rest 2–3 min. Trap bar is fine if your gym has one.","Barbell_Deadlift","conventional deadlift form"),
-    XI("Leg press","3 × 8–10 @ ~160 kg","Heavier than your 150 × 12–15. Leg muscle grows from heavy 6–12 rep sets.","Leg_Press","leg press"),
-    XI("Dumbbell Bulgarian split squat","3 × 8 each leg @ 14–16 kg","Up from 12.5 kg.","Split_Squat_with_Dumbbells","bulgarian split squat"),
-    XI("Barbell hip thrust","2 × 8 @ 85–90 kg","Pause 1 s at the top. Only 2 sets because deadlifts already hit your glutes hard.","Barbell_Hip_Thrust","barbell hip thrust"),
-    XI("Nordic hamstring curl","2 × 5","Lower as slowly as you can; push back up with your hands. Football's sprints need strong hamstrings.","Natural_Glute_Ham_Raise","nordic hamstring curl"),
+    XI("Barbell back squat","4 × 5 @ ~60 kg","Heavy: stop 1–2 reps short of failure. +2.5 kg a week while the bar moves fast. Rest 2–3 min. If 50 kg × 10 was close to your limit, start at 55 kg.","Barbell_Squat","barbell back squat"),
+    XI("Romanian deadlift","3 × 8 @ 50–60 kg","Moderate this week. Hips back, bar close, flat back, feel the hamstrings stretch. Next week the conventional deadlift is the heavy lift.","Romanian_Deadlift","barbell romanian deadlift"),
+    XI("Dumbbell Bulgarian split squat","3 × 8 each leg @ 14–16 kg","Up from 12.5 kg. Weaker leg first.","Split_Squat_with_Dumbbells","bulgarian split squat"),
+    XI("Walking lunges","2 × 10 each leg @ 10–12.5 kg","Finisher. Long steps, back knee almost touches the floor. Short on purpose: Bulgarians already did the heavy single-leg work.","Dumbbell_Lunges","dumbbell walking lunges"),
+    XI("Nordic hamstring curl","2 × 5","Lower as slowly as you can; push back up with your hands. Sprint insurance.","Natural_Glute_Ham_Raise","nordic hamstring curl"),
     XI("Smith machine calf raise","3 × 10–12 @ 80 kg","Full stretch, 1 s pause at the top.","Smith_Machine_Calf_Raise","smith machine calf raise"),
     E.stretch
   ]},
