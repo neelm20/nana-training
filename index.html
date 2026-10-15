@@ -517,15 +517,14 @@ const PLAN_NANA = {
   ]},
   "2026-10-04":{t:"rest",title:"Rest day",rest:"Full rest. Week 2 starts tomorrow. Check the running ladder below for next week's runs.",items:[]},
 
-  "2026-10-15":{t:"lower",title:"Lower B: squat, hinge & jump",mins:"~60 min",
-    note:"<b>Legs today.</b> Bulgarian split squats go up to 3 sets. If every goblet squat rep felt clean last time, use a dumbbell 2 kg heavier.",
+  "2026-10-15":{t:"lower",title:"Lower B: easy comeback",mins:"~40 min",
+    note:"<b>A lighter leg day.</b> It's your first legs in a couple of weeks, and you're running with Neel on Saturday. So today is 2 sets of everything, with weights where you could still do 3–4 more reps. No jumps. You'll probably feel a little sore tomorrow, which is normal.",
     items:[
     E.warm,
-    X("Box jumps","3 × 5","Land softly, then step down. Full rest between sets.","box jump beginner",{im:"Front_Box_Jump"}),
-    X("Goblet squat","3 × 8–10","Chest up, sit between your heels, pause 1 s at the bottom."),
-    X("Dumbbell Romanian deadlift","3 × 8–10","Hips back, flat back, feel the hamstring stretch."),
-    X("Bulgarian split squat","3 × 8 each leg","Back foot on a bench, front knee over your ankle. Weaker leg first."),
-    X("Single-leg calf raise","3 × 12 each leg","Hold a dumbbell on the working side. Full stretch down, pause at the top.","single leg dumbbell calf raise",{im:"Standing_Dumbbell_Calf_Raise"}),
+    X("Goblet squat","2 × 10","Light dumbbell. Chest up, sit between your heels, pause 1 s at the bottom. Smooth reps, nothing grindy."),
+    X("Dumbbell Romanian deadlift","2 × 10","Light. Hips back, flat back, feel the hamstring stretch. Stop before it gets hard."),
+    X("Bulgarian split squat","2 × 8 each leg","Bodyweight only today. Back foot on a bench, front knee over your ankle. Weaker leg first."),
+    X("Standing calf raises","2 × 15","Both legs together, on the calf machine or a step holding a dumbbell. Full stretch down, pause at the top.","standing calf raise",{im:"Standing_Calf_Raises"}),
     X("Hip abduction machine","2 × 15","Lean forward slightly, pause 1 s out."),
     E.core,
     E.stretch
@@ -542,11 +541,11 @@ const PLAN_NANA = {
     E.abs,
     E.stretch
   ]},
-  "2026-10-17":{t:"run",title:"Long run with Neel",mins:"~45 min",
-    note:"<b>Running together!</b> Neel runs at your pace, which is perfect easy training for him too. Slow enough to chat the whole way. Then he carries on alone.",
+  "2026-10-17":{t:"run",title:"Long run with Neel · Cubbon Park",mins:"~45 min",
+    note:"<b>Running together in Cubbon Park!</b> Neel runs at your pace, which is perfect easy training for him too. Outdoors there's no treadmill speed, so go by feel: slow enough to chat the whole way. Go early while it's cool, and bring water. Then he carries on alone.",
     items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
-    runInt("2 rounds","10 min easy run + 2 min walk, twice. Talking pace."),
+    runInt("2 rounds","10 min easy run + 2 min walk, twice. Talking pace. Use a phone timer, not distance."),
     X("Easy finish together","10 min","Easy jog or brisk walk, your choice.","easy running beginner",{im:"Trail_Running_Walking"}),
     Object.assign({},E.flow,{rx:"15 min"})
   ]},
@@ -585,14 +584,14 @@ const PLAN_NANA = {
     E.flow
   ]},
   "2026-10-22":{t:"lower",title:"Lower B: squat, hinge & jump",mins:"~60 min",
-    note:"<b>Second week of 3 sets of Bulgarians.</b> Hold light dumbbells if bodyweight felt easy on Thursday. If every goblet squat rep felt clean last time, use a dumbbell 2 kg heavier.",
+    note:"<b>Back to full sets</b> now that your legs are used to training again: 3 sets of everything, and Bulgarian split squats go up to 3 sets. If last Thursday felt easy, hold light dumbbells for the Bulgarians and use a 2 kg heavier dumbbell for goblet squats.",
     items:[
     E.warm,
     X("Box jumps","3 × 5","Land softly, then step down. Full rest. You're getting more athletic with every session.","box jump beginner",{im:"Front_Box_Jump"}),
     X("Goblet squat","3 × 8–10","Chest up, sit between your heels, pause 1 s at the bottom."),
     X("Dumbbell Romanian deadlift","3 × 8–10","Hips back, flat back, feel the hamstring stretch. Heavier if your back stayed flat last time."),
     X("Bulgarian split squat","3 × 8 each leg","Back foot on a bench, front knee over your ankle. Weaker leg first. Light dumbbells now if bodyweight felt easy."),
-    X("Single-leg calf raise","3 × 12 each leg","Hold a dumbbell on the working side. Full stretch down, pause at the top.","single leg dumbbell calf raise",{im:"Standing_Dumbbell_Calf_Raise"}),
+    X("Standing calf raises","3 × 15","Both legs together, on the calf machine or a step holding a dumbbell. Full stretch down, pause at the top.","standing calf raise",{im:"Standing_Calf_Raises"}),
     X("Hip abduction machine","2 × 15","Lean forward slightly, pause 1 s out."),
     E.core,
     E.stretch
@@ -757,7 +756,7 @@ const PLAN_NEEL = {
     {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
     E.stretch
   ]},
-  "2026-10-17":{t:"run",title:"Long run",mins:"75–80 min",note:"<b>All easy, Zone 2.</b> The first ~40 min is with Nana at her pace, which is perfect Zone 2 for you. Then carry on alone. If your legs are still heavy from football, cap the total at 60 min.",items:nLong("75–80 min")},
+  "2026-10-17":{t:"run",title:"Long run · Cubbon Park",mins:"75–80 min",note:"<b>All easy, Zone 2, in Cubbon Park.</b> The first ~40 min is with Nana at her pace, which is perfect Zone 2 for you. Then carry on alone with easy loops of the park. Go by heart rate and time, not pace. Start early before it heats up, and carry water. If your legs are still heavy from football, cap the total at 60 min.",items:nLong("75–80 min")},
   "2026-10-18":nRest,
 
   "2026-10-19":{t:"run",title:"Zone 2 run",mins:"45 min",
