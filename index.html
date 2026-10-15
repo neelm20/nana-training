@@ -591,7 +591,56 @@ const PLAN_NEEL = {
   "2026-10-08":{t:"lower",title:"Lower 2: injury-proofing",mins:"~45 min",items:nLower2},
   "2026-10-09":{t:"upper",title:"Upper B: vertical",mins:"~70 min",items:nUpperB},
   "2026-10-10":{t:"run",title:"Long run",mins:"80 min",note:"10 minutes longer than last week, still all easy.",items:nLong("80 min")},
-  "2026-10-11":nRest
+  "2026-10-11":nRest,
+
+  "2026-10-12":{t:"run",title:"Zone 2 run",done:true,mins:"45 min",items:[
+    XI("Zone 2 run","45 min","Easy, conversational. Done.","Jogging_Treadmill","zone 2 running")
+  ]},
+  "2026-10-13":{t:"lower",title:"Legs (as logged)",done:true,mins:"34 min",
+    note:"<b>Logged in Motra.</b> Good progress: Bulgarians up to 12.5 kg, hip thrust 80 kg, calves 80 kg. Two gaps for next week: still no heavy hamstring hinge (Romanian deadlift or Nordics), and jumps were 1 × 10 again. Do 3 × 5 with full rest so every jump stays explosive.",
+    items:[
+    XI("Bodyweight squat","Warm-up × 15","","Bodyweight_Squat","bodyweight squat"),
+    XI("Jump squat","1 × 10","Next time: 3 × 5, full rest.","Freehand_Jump_Squat","jump squat"),
+    XI("Leg press","12 @ 125 · 12 @ 150 · 15 @ 150 kg","","Leg_Press","leg press"),
+    XI("Barbell hip thrust","12 @ 60 · 12 @ 80 · 10 @ 80 kg","","Barbell_Hip_Thrust","barbell hip thrust"),
+    XI("Dumbbell Bulgarian split squat","3 × 10 @ 12.5 kg","","Split_Squat_with_Dumbbells","bulgarian split squat"),
+    XI("Smith machine calf raise","15 @ 70 · 12 @ 80 kg","","Smith_Machine_Calf_Raise","smith machine calf raise")
+  ]},
+  "2026-10-14":{t:"upper",title:"Upper: push & pull (as logged)",done:true,mins:"41 min",
+    note:"<b>Logged in Motra.</b> A broad muscle-building session at 8–12 reps. Missing: lateral raises, rear delts and core, so Friday covers them. If the last reps on incline dumbbells at 12.5 kg weren't a real fight, go to 15 kg next time.",
+    items:[
+    XI("Push-ups","Warm-up 12 + 12","","Pushups","push ups"),
+    XI("Dips","8 · 9 reps @ BW","Add weight once you hit 3 × 12.","Dips_-_Chest_Version","chest dips"),
+    XI("Dumbbell incline bench press","10 · 12 · 10 @ 12.5 kg","","Incline_Dumbbell_Press","incline dumbbell press"),
+    XI("Lat pulldown","12 @ 45 · 12 @ 45 · 10 @ 50 kg","","Wide-Grip_Lat_Pulldown","lat pulldown"),
+    XI("Pec deck","12 · 10 @ 59 kg","","Butterfly","pec deck fly"),
+    XI("Seated cable row","12 @ 45 · 12 @ 45 · 10 @ 50 kg","","Seated_Cable_Rows","seated cable row"),
+    XI("Barbell overhead press","12 @ 25 · 8 @ 30 · 8 @ 30 kg","","Standing_Military_Press","overhead press"),
+    SS("Incline curl + bar pushdown","2 supersets","","incline dumbbell curl",M("Incline curl","10 · 10 @ 12.5 kg","Incline_Dumbbell_Curl"),M("Bar pushdown","12 @ 36 · 10 @ 40 kg","Triceps_Pushdown")),
+    SS("Preacher curl + rope pushdown","2 supersets","","dumbbell preacher curl",M("Preacher curl","12 · 10 @ 12.5 kg","Two-Arm_Dumbbell_Preacher_Curl"),M("Rope pushdown","10 @ 32 · 12 @ 36 kg","Triceps_Pushdown_-_Rope_Attachment"))
+  ]},
+  "2026-10-15":{t:"run",title:"Football",mins:"match",
+    note:"<b>This is your hard conditioning day this week.</b> It replaces the 4×4. Hydrate, eat carbs afterwards, and do 10 min of mobility once you're home.",
+    items:[
+    XI("Football","Full match","Sprints, cuts and jumps. It counts as interval training.","Wind_Sprints","football conditioning"),
+    Object.assign({},E.flow,{n:"Post-match mobility",rx:"10 min"})
+  ]},
+  "2026-10-16":{t:"upper",title:"Upper B: heavy & vertical",mins:"~55 min",
+    note:"<b>The opposite of Wednesday.</b> Wednesday was 8–12 reps at moderate weight. Today is heavier and lower-rep, from different angles, and it covers what Wednesday missed: lateral raises, rear delts and core. Arms stay light because they got 8 sets on Wednesday. No easy run today: football yesterday plus tomorrow's long run is enough running.",
+    items:[
+    Object.assign({},nWarm,{cue:"Loosen everything up, plus 2 × 15 band pull-aparts. Ramp up to your working weight on pull-ups and bench."}),
+    XI("Pull-ups","4 × 5–8","Full hang to chin over the bar, no kipping. Once you get 4 × 8 clean, add 5 kg on a belt.","Weighted_Pull_Ups","strict pull ups"),
+    XI("Barbell bench press","4 × 5–6","Heavy: build up to a weight you can do 6 clean reps with, leaving about 2 in the tank. Rest 2–3 min. Shoulder blades pinched, bar to lower chest.","Barbell_Bench_Press_-_Medium_Grip","barbell bench press"),
+    XI("Barbell row","4 × 6–8","Hinge to about 45°, pull to your belly button, no body swing. Heavier than Wednesday's cable row.","Bent_Over_Barbell_Row","barbell bent over row"),
+    XI("Seated dumbbell shoulder press","3 × 8","About 14–16 kg dumbbells, back supported. Different stimulus from Wednesday's barbell press.","Dumbbell_Shoulder_Press","seated dumbbell shoulder press"),
+    XI("Lateral raises","3 × 15","Light and strict, lead with the elbows. Missing from Wednesday.","Side_Lateral_Raise","dumbbell lateral raise"),
+    XI("Face pulls","3 × 15","Rope to your forehead, elbows high. Rear delts and healthy shoulders.","Face_Pull","cable face pull"),
+    SS("Hammer curl + overhead triceps extension","2 × 10–12 superset","Different angles from Wednesday's curls and pushdowns. Just 2 sets each.","hammer curl overhead triceps extension",M("Hammer curl","10–12 reps","Hammer_Curls"),M("Overhead triceps extension","12 reps","Standing_Dumbbell_Triceps_Extension")),
+    {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
+    E.stretch
+  ]},
+  "2026-10-17":{t:"run",title:"Long run",mins:"75–80 min",note:"<b>All easy, Zone 2.</b> If your legs are still heavy from football, cap it at 60 min. Easy means easy.",items:nLong("75–80 min")},
+  "2026-10-18":nRest
 };
 const PEOPLE = {
   nana:{plan:PLAN_NANA,prefix:"chk-",title:"Nana's Training",hi:"Hi Nana,",sub:"Build muscle, lose a little fat, run further, and get more flexible. One day at a time.",sig:"By Neel, with love ♡",foot:"By Neel, with love ♡",after:"After: protein shake, and send Neel your sweaty post-workout pic 😘"},
