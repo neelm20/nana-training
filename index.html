@@ -542,6 +542,7 @@ const PLAN_NANA = {
     E.stretch
   ]},
   "2026-10-17":{t:"run",title:"Long run with Neel · Cubbon Park",mins:"~45 min",
+    after:"After: breakfast together 🥞 Make it your recovery meal: some protein (eggs, paneer, curd or dosa with sambar) plus carbs. No shake needed today. And yes, still send Neel the sweaty pic 😘",
     note:"<b>Running together in Cubbon Park!</b> Neel runs at your pace, which is perfect easy training for him too. Outdoors there's no treadmill speed, so go by feel: slow enough to chat the whole way. Go early while it's cool, and bring water. Then he carries on alone.",
     items:[
     X("Brisk walk warm-up","5 min","Plus ankle circles and leg swings.","running warm up drills"),
@@ -756,7 +757,8 @@ const PLAN_NEEL = {
     {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
     E.stretch
   ]},
-  "2026-10-17":{t:"run",title:"Long run · Cubbon Park",mins:"75–80 min",note:"<b>All easy, Zone 2, in Cubbon Park.</b> The first ~40 min is with Nana at her pace, which is perfect Zone 2 for you. Then carry on alone with easy loops of the park. Go by heart rate and time, not pace. Start early before it heats up, and carry water. If your legs are still heavy from football, cap the total at 60 min.",items:nLong("75–80 min")},
+  "2026-10-17":{t:"run",title:"Long run · Cubbon Park",mins:"75–80 min",
+    after:"Before: a banana or toast 30–60 min before you start. After: breakfast with Nana is your recovery meal. Get 30–40 g of protein plus a good serving of carbs within the hour, and drink plenty of water. You're in the rebuild phase, so don't skimp.",note:"<b>All easy, Zone 2, in Cubbon Park.</b> The first ~40 min is with Nana at her pace, which is perfect Zone 2 for you. Then carry on alone with easy loops of the park. Go by heart rate and time, not pace. Start early before it heats up, and carry water. If your legs are still heavy from football, cap the total at 60 min.",items:nLong("75–80 min")},
   "2026-10-18":nRest,
 
   "2026-10-19":{t:"run",title:"Zone 2 run",mins:"45 min",
@@ -978,7 +980,7 @@ function render(){
       + '<button class="done-btn" type="button" id="b-'+current+'-'+i+'" aria-pressed="'+on+'"'+(isFuture?' disabled title="You can tick this off on the day"':'')+'>'+(isFuture?lockIcon:checkIcon)+'<span>'+label+'</span></button></div>'
       + '</article>';
   });
-  if (p.items.length && p.t !== "rest") out += '<div class="after">'+heart+'<span>'+PEOPLE[person].after+'</span></div>';
+  if (p.items.length && p.t !== "rest") out += '<div class="after">'+heart+'<span>'+(p.after||PEOPLE[person].after)+'</span></div>';
   const el = document.getElementById("day");
   el.innerHTML = out;
   el.querySelectorAll(".done-btn").forEach(b => b.addEventListener("click", () => {
