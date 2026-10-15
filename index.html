@@ -311,7 +311,7 @@ img{max-width:100%}
     <h2>Your rules</h2>
     <div class="rules">
       <div class="rule"><h3>Sets of 6–12, close to failure</h3><p>Muscle comes from hard sets: stop 1–2 reps short of failure. Heavy compounds (deadlift, pull-ups, presses) at 5–8 reps, everything else at 8–15.</p></div>
-      <div class="rule"><h3>Leg day: same core, heavier each week</h3><p>Squat 4 × 5 and Romanian deadlift 3 × 8 are the two main lifts: +2.5 kg a week on the squat, +2.5–5 kg on the Romanian deadlift. Hip thrusts, Bulgarians, lunges, slow leg curls and calves every week. Never hinge heavy the day before a hard run or long run.</p></div>
+      <div class="rule"><h3>Leg day: same core, heavier each week</h3><p>Squat 4 × 5 and Romanian deadlift 3 × 8 are the two main lifts: +2.5 kg a week on the squat, +2.5–5 kg on the Romanian deadlift. Hip thrusts, Bulgarians, lunges, slow leg curls, calves and hip abduction/adduction every week. Never hinge heavy the day before a hard run or long run.</p></div>
       <div class="rule"><h3>Beat last week</h3><p>One more rep or a little more weight on every exercise, logged in Motra. Deadlift +5 kg a week while every rep is fast with a flat back. If a set grinds, repeat the weight.</p></div>
       <div class="rule"><h3>Running holds steady</h3><p>Three runs plus football, about 80% easy. The long run stays at 70 min during the rebuild phase. Don't add mileage until the muscle is back.</p></div>
       <div class="rule"><h3>Protein: about 2 g per kg</h3><p>Every day, spread over 4 meals, plus a protein serving before bed. This is the raw material for rebuilding muscle.</p></div>
@@ -761,8 +761,8 @@ const PLAN_NEEL = {
   "2026-10-17":{t:"run",title:"Long easy run with Nana",mins:"Cubbon Park",date:"Nana",items:[{n:"Long easy run with Nana"}]},
   "2026-10-18":nRest,
 
-  "2026-10-19":{t:"lower",title:"Legs: squat, hinge & glutes",mins:"~70 min",
-    note:"<b>Your leg day, every Monday.</b> Squats, Romanian deadlifts, hip thrusts, Bulgarians, lunges and calves. The Romanian deadlift is your deadlift: it builds hamstrings and glutes through a big stretch and is far less draining than a conventional deadlift, so it fits a running week better. It gets heavier every week, just like the squat.",
+  "2026-10-19":{t:"lower",title:"Legs: squat, hinge & glutes",mins:"~75 min",
+    note:"<b>Your leg day, every Monday.</b> Squats, Romanian deadlifts, hip thrusts, Bulgarians, lunges, calves, and hip abduction/adduction. The Romanian deadlift is your deadlift: it builds hamstrings and glutes through a big stretch and is far less draining than a conventional deadlift, so it fits a running week better. It gets heavier every week, just like the squat.",
     items:[
     Object.assign({},nWarm,{cue:"Loosen everything up. Squat ramp-up: bar × 8, 40 × 5, 50 × 3, then working sets."}),
     X("Box jumps","3 × 5","Full rest. Every rep explosive. Power for running and football. Takes 5 minutes.","box jump",{im:"Front_Box_Jump"}),
@@ -773,6 +773,7 @@ const PLAN_NEEL = {
     XI("Walking lunges","2 × 10 each leg @ 12.5–14 kg","Finisher. Long steps, back knee almost touches the floor.","Dumbbell_Lunges","dumbbell walking lunges"),
     XI("Leg curl (machine), slow lowering","2 × 10","Curl up, then take a full 3 seconds to lower. Protects your hamstrings for football sprints.","Seated_Leg_Curl","seated leg curl slow eccentric"),
     XI("Smith machine calf raise","3 × 10–12 @ 85–90 kg","Full stretch, 1 s pause at the top.","Smith_Machine_Calf_Raise","smith machine calf raise"),
+    SS("Hip abduction + adduction","2 × 12–15 superset","Abduction, then straight into adduction, then rest 60 s. Outer hip for knee and hip stability when you run; inner thigh for football's side-steps and cuts. Pause 1 s at the end of each rep. Last weights were 45 kg, so try 50 kg.","hip abduction adduction machine",M("Hip abduction","12–15 reps","Thigh_Abductor"),M("Hip adduction","12–15 reps","Thigh_Adductor")),
     E.stretch
   ]},
   "2026-10-20":{t:"upper",title:"Upper A: chest & back volume",mins:"~65 min",
