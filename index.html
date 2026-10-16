@@ -739,19 +739,19 @@ const PLAN_NEEL = {
     XI("Football","Full match","Sprints, cuts and jumps. It counts as interval training.","Wind_Sprints","football conditioning"),
     Object.assign({},E.flow,{n:"Post-match mobility",rx:"10 min"})
   ]},
-  "2026-10-16":{t:"upper",title:"Upper B: heavy & vertical",mins:"~60 min",
-    note:"<b>Why this session:</b> Wednesday was 8–12 reps at moderate weight. Today is heavier (6–8 reps) from different angles: pull-ups instead of pulldowns, flat dumbbells instead of incline, a heavy chest-supported row instead of the cable row. It also fills Wednesday's gaps: lateral raises, rear delts and core. Arms stay at 3 sets because they got 8 on Wednesday. <b>No deadlifts today:</b> football yesterday plus tomorrow's long run means your back and hamstrings need to stay fresh. Deadlifts go on Tuesday's leg day instead. <b>No easy run today</b> either.",
+  "2026-10-16":{t:"upper",title:"Upper B: lighter (sore day)",mins:"~45 min",
+    note:"<b>You're sore, so today is lighter, not skipped.</b> Moving the sore muscles with moderate weight clears soreness faster than resting completely. About two-thirds of the usual sets, moderate weights, and stop every set about 3 reps short of failure. No grinding. <b>If one area is very sore, ease off that part:</b> sore chest means take the press lighter or skip it; sore lats means swap pull-ups for light pulldowns. Next Friday is the full heavy version.",
     items:[
-    Object.assign({},nWarm,{cue:"Loosen everything up, plus 2 × 15 band pull-aparts. Ramp up to your working weight on pull-ups and the dumbbell press."}),
-    XI("Pull-ups","4 × 6–8","Full hang to chin over the bar, no kipping. Once you get 4 × 8 clean, add 5 kg on a belt.","Weighted_Pull_Ups","strict pull ups"),
-    XI("Flat dumbbell bench press","4 × 6–8","Your gym has no barbell bench, so this is the main chest press. Go heavy: about 20–22.5 kg dumbbells (Wednesday's 12.5 kg incline looked light). Last 2 reps should be a fight. Rest 2 min. Smith machine bench works as a backup.","Dumbbell_Bench_Press","dumbbell bench press heavy"),
-    XI("Chest-supported dumbbell row","4 × 8","Chest on an incline bench, heavy dumbbells (about 22.5–25 kg), pull your elbows to your hips. Same back muscles as a barbell row, but your lower back stays fresh for tomorrow's long run.","Dumbbell_Incline_Row","chest supported dumbbell row"),
-    XI("Seated dumbbell shoulder press","3 × 8–10","About 14–16 kg dumbbells, back supported. A different stimulus from Wednesday's barbell press.","Dumbbell_Shoulder_Press","seated dumbbell shoulder press"),
-    XI("Lateral raises","4 × 12–15","Light and strict, lead with the elbows. Wider shoulders are the fastest way to look muscular again.","Side_Lateral_Raise","dumbbell lateral raise"),
-    XI("Face pulls","3 × 15","Rope to your forehead, elbows high. Rear delts and healthy shoulders.","Face_Pull","cable face pull"),
-    SS("Hammer curl + overhead triceps extension","3 × 10–12 superset","Different angles from Wednesday's curls and pushdowns. The overhead extension stretches the long head of the triceps, which is most of your arm size.","hammer curl overhead triceps extension",M("Hammer curl","10–12 reps","Hammer_Curls"),M("Overhead triceps extension","12 reps","Standing_Dumbbell_Triceps_Extension")),
-    {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
-    E.stretch
+    Object.assign({},nWarm,{rx:"~12 min",cue:"Take a longer warm-up today: everything loosened, 2 × 15 band pull-aparts, then a light set of each exercise before the working sets."}),
+    XI("Pull-ups","3 × 5","Smooth reps, nothing near failure. Light lat pulldowns are fine instead if your lats are the sore part.","Weighted_Pull_Ups","strict pull ups"),
+    XI("Flat dumbbell bench press","3 × 8 @ ~17.5 kg","Moderate, not heavy. Stop 3 reps short. Skip it if your chest is very sore.","Dumbbell_Bench_Press","dumbbell bench press"),
+    XI("Chest-supported dumbbell row","3 × 10 @ ~17.5–20 kg","Moderate. Chest on an incline bench, elbows to your hips. Your lower back stays fresh for tomorrow's long run.","Dumbbell_Incline_Row","chest supported dumbbell row"),
+    XI("Seated dumbbell shoulder press","2 × 10 @ ~12.5 kg","Light. Back supported.","Dumbbell_Shoulder_Press","seated dumbbell shoulder press"),
+    XI("Lateral raises","3 × 15","Light and strict. Shoulders tolerate this well even when sore.","Side_Lateral_Raise","dumbbell lateral raise"),
+    XI("Face pulls","2 × 15","Light. Rear delts; good for sore, tight shoulders.","Face_Pull","cable face pull"),
+    SS("Hammer curl + overhead triceps extension","2 × 12 superset","Light, just to move blood through the arms.","hammer curl overhead triceps extension",M("Hammer curl","12 reps, light","Hammer_Curls"),M("Overhead triceps extension","12 reps, light","Standing_Dumbbell_Triceps_Extension")),
+    {n:"Core",rx:"× 2 rounds",cue:"Core isn't sore, so this stays as planned.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
+    Object.assign({},E.stretch,{rx:"15 min",cue:"A longer stretch today, focused on chest, lats and shoulders. Hold each for 45 s."})
   ]},
   "2026-10-17":{t:"run",title:"Long easy run with Nana",mins:"Cubbon Park",date:"Nana",items:[{n:"Long easy run with Nana"}]},
   "2026-10-18":nRest,
@@ -798,14 +798,24 @@ const PLAN_NEEL = {
     note:"<b>Your one hard conditioning day.</b> If you play football, that's it, so skip the 4×4. Otherwise do the 4×4 below.",
     items:n4x4},
   "2026-10-23":{t:"upper",title:"Upper B: heavy & vertical",mins:"~60 min",
-    note:"Same session as last Friday, so beat it: a rep or a little weight wherever last week's sets felt controlled. The row stays chest-supported to keep your lower back fresh for tomorrow's long run.",
-    items:null},
+    note:"The full heavy version (last Friday was the lighter sore-day session). Flat dumbbell press at about 20–22.5 kg and chest-supported rows at about 22.5–25 kg. The row stays chest-supported to keep your lower back fresh for tomorrow's long run.",
+    items:[
+    Object.assign({},nWarm,{cue:"Loosen everything up, plus 2 × 15 band pull-aparts. Ramp up to your working weight on pull-ups and the dumbbell press."}),
+    XI("Pull-ups","4 × 6–8","Full hang to chin over the bar, no kipping. Once you get 4 × 8 clean, add 5 kg on a belt.","Weighted_Pull_Ups","strict pull ups"),
+    XI("Flat dumbbell bench press","4 × 6–8","Your gym has no barbell bench, so this is the main chest press. Go heavy: about 20–22.5 kg dumbbells (Wednesday's 12.5 kg incline looked light). Last 2 reps should be a fight. Rest 2 min. Smith machine bench works as a backup.","Dumbbell_Bench_Press","dumbbell bench press heavy"),
+    XI("Chest-supported dumbbell row","4 × 8","Chest on an incline bench, heavy dumbbells (about 22.5–25 kg), pull your elbows to your hips. Same back muscles as a barbell row, but your lower back stays fresh for tomorrow's long run.","Dumbbell_Incline_Row","chest supported dumbbell row"),
+    XI("Seated dumbbell shoulder press","3 × 8–10","About 14–16 kg dumbbells, back supported. A different stimulus from Wednesday's barbell press.","Dumbbell_Shoulder_Press","seated dumbbell shoulder press"),
+    XI("Lateral raises","4 × 12–15","Light and strict, lead with the elbows. Wider shoulders are the fastest way to look muscular again.","Side_Lateral_Raise","dumbbell lateral raise"),
+    XI("Face pulls","3 × 15","Rope to your forehead, elbows high. Rear delts and healthy shoulders.","Face_Pull","cable face pull"),
+    SS("Hammer curl + overhead triceps extension","3 × 10–12 superset","Different angles from Wednesday's curls and pushdowns. The overhead extension stretches the long head of the triceps, which is most of your arm size.","hammer curl overhead triceps extension",M("Hammer curl","10–12 reps","Hammer_Curls"),M("Overhead triceps extension","12 reps","Standing_Dumbbell_Triceps_Extension")),
+    {n:"Core",rx:"× 2 rounds",cue:"Your first core work this week.",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
+    E.stretch
+  ]},
   "2026-10-24":{t:"run",title:"Long run (with Nana)",mins:"70 min",
     note:"<b>Held at 70 min</b> during the rebuild phase. Your stamina stays, and the extra food goes to muscle instead of more mileage. Start with Nana: warm-up walk plus her 20 min non-stop at her pace (perfect Zone 2 for you), then carry on alone to 70 min. Banana before; protein and carbs within the hour after.",
     items:nLong("70 min")},
   "2026-10-25":nRest
 };
-PLAN_NEEL["2026-10-23"].items = PLAN_NEEL["2026-10-16"].items;
 const PEOPLE = {
   nana:{plan:PLAN_NANA,prefix:"chk-",title:"Nana's Training",hi:"Hi Nana,",sub:"Build muscle, lose a little fat, run further, and get more flexible. One day at a time.",sig:"By Neel, with love ♡",foot:"By Neel, with love ♡",after:"After: protein shake, and send Neel your sweaty post-workout pic 😘"},
   neel:{plan:PLAN_NEEL,prefix:"chk-neel-",title:"Neel's Training",hi:"Hi Neel,",sub:"Endurance first: run further and faster, stay strong and lean.",sig:"Built for the long run",foot:"Train smart, recover harder",after:"After: protein and carbs within an hour, then log it in Motra 💪"}
