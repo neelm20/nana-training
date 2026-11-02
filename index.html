@@ -247,7 +247,7 @@ img{max-width:100%}
   </section>
 
   <section class="block" id="running">
-    <h2>Running plan: 6 weeks</h2>
+    <h2>Running plan</h2>
     <p><b>Run 1 is the Norwegian 4×4:</b> 4 minutes hard (breathing heavily, only a few words possible), 3 minutes easy, 4 times. If running hard for 4 minutes is too much yet, power-walk up a steep treadmill incline instead. It counts the same. <b>Run 2 is easy:</b> slow enough to talk the whole time. That builds stamina.</p>
     <p>If a session felt like a fight, repeat that week before moving up.</p>
     <div class="table-wrap">
@@ -260,6 +260,8 @@ img{max-width:100%}
           <tr><td>Week 4</td><td>Norwegian 4×4</td><td>20 min easy, non-stop</td></tr>
           <tr><td>Week 5</td><td>4×4, a little faster or steeper</td><td>25 min easy, non-stop</td></tr>
           <tr class="goal"><td>Week 6</td><td>4×4, running all 4 reps</td><td>30 min non-stop 🎉</td></tr>
+          <tr><td>Week 7</td><td>4×4, all running, a touch faster</td><td>30 min, last 5 a little quicker</td></tr>
+          <tr><td>Week 8</td><td>4×4, same speed, feels easier</td><td>35 min non-stop</td></tr>
         </tbody>
       </table>
     </div>
@@ -816,6 +818,142 @@ const PLAN_NEEL = {
     items:nLong("70 min")},
   "2026-10-25":nRest
 };
+// ---------- 2 Nov – 29 Nov 2026: four weeks for each, built from the weekly templates ----------
+const dayK = (mon,n) => { const [y,m,d] = mon.split("-").map(Number); const t = new Date(y,m-1,d+n); return t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0"); };
+
+// Nana: Lower A · Upper A · 4×4 · Lower B · Upper B · easy run · rest
+const nana4x4Item = cue => ({n:"Norwegian 4×4",rx:"4 × 4 min",cue,q:"norwegian 4x4 interval training",moves:[M("4 min hard","Breathing hard, a few words only","Running_Treadmill"),M("3 min easy","Walk or very slow jog","Walking_Treadmill")]});
+const NANA_WEEKS = [
+  {mon:"2026-11-02", heavy:false, run:5,
+   lift:"<b>New week, beat your last numbers.</b> One more rep, or the next weight up, wherever the last 2 reps felt controlled.",
+   r1:"4 min hard, 3 min easy, 4 times. A little faster or steeper than last time. If you power-walked any reps before, try running the first one.",
+   r2:"25 min non-stop", r2note:"<b>25 minutes without stopping.</b> Week 5 of your running plan. Chatting pace the whole way."},
+  {mon:"2026-11-09", heavy:false, run:6,
+   lift:"Beat last week's numbers wherever the last reps felt controlled.",
+   r1:"4 min hard, 3 min easy, 4 times. Try to run all 4 hard reps, no power-walking.",
+   r2:"30 min non-stop", r2note:"<b>30 minutes non-stop, the goal of your 6-week plan 🎉</b> Slow is fine. Finishing is the win."},
+  {mon:"2026-11-16", heavy:true, run:7,
+   lift:"<b>New block: heavier, fewer reps.</b> The main lifts go to 4 sets of 8 with a heavier weight. The last 2 reps of every set should be a fight. That's what keeps the muscle coming.",
+   r1:"4 min hard, 3 min easy, 4 times, all running. A touch faster than last week at the same effort.",
+   r2:"30 min, last 5 quicker", r2note:"<b>30 minutes, with the last 5 a little quicker.</b> Still easy for the first 25."},
+  {mon:"2026-11-23", heavy:true, run:8,
+   lift:"Second week of the heavier block. Same weights as last week, or one step up if every rep was clean.",
+   r1:"4 min hard, 3 min easy, 4 times, all running. Same speed as last week; it should feel easier.",
+   r2:"35 min non-stop", r2note:"<b>35 minutes non-stop, your longest run yet.</b> Chatting pace."}
+];
+NANA_WEEKS.forEach(w => {
+  const h = w.heavy, d = n => dayK(w.mon, n);
+  PLAN_NANA[d(0)] = {t:"lower",title:"Lower A: glutes & hamstrings",mins:"~60 min",note:w.lift,items:[
+    E.warm,
+    X("Hip thrust", h?"4 × 8":"4 × 8–10","Chin tucked, drive through your heels, hold 1 s at the top. Your main glute builder.","barbell hip thrust"),
+    X("Leg press", h?"4 × 8":"3 × 10","Feet high and wide for glutes."+(h?" Heavier than last week.":""),"leg press glute focus"),
+    X("Leg curl (machine)","3 × 10–12","3 seconds on the way back.","seated leg curl machine"),
+    X("Cable glute kickback","3 × 12 each leg","Slight forward lean, don't arch your lower back."),
+    X("Calf raises (Smith machine)","3 × 15","Full stretch at the bottom, pause at the top.","smith machine calf raise"),
+    E.stretch ]};
+  PLAN_NANA[d(1)] = {t:"upper",title:"Upper A: chest, back, arms",mins:"~60 min",items:[
+    E.warm,
+    X("Pec deck fly","3 × 12","Slow squeeze, pause 1 s with your hands together."),
+    X("Incline dumbbell press", h?"4 × 8":"3 × 10", h?"Heavier dumbbells than last week.":"Try the next dumbbell up from last time."),
+    X("One-arm dumbbell row", h?"4 × 8 each arm":"3 × 10 each arm","Pull your elbow toward your hip."),
+    X("Reverse pec deck","3 × 15","Light weight, arms long, squeeze your upper back.","reverse pec deck fly"),
+    curlPush("3 × 12 superset"),
+    E.abs,
+    X("Incline walk","10 min","Incline 12, speed 5.5. Only 10 min, so your legs are fresh for tomorrow's run.","incline treadmill walk"),
+    E.stretch ]};
+  PLAN_NANA[d(2)] = {t:"run",title:"Run 1: Norwegian 4×4",mins:"~50 min",items:[
+    runWarm, nana4x4Item(w.r1),
+    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
+    E.flow ]};
+  PLAN_NANA[d(3)] = {t:"lower",title:"Lower B: squat, hinge & jump",mins:"~60 min",items:[
+    E.warm,
+    X("Box jumps","3 × 5","Land softly, then step down. Full rest.","box jump beginner",{im:"Front_Box_Jump"}),
+    X("Goblet squat", h?"4 × 8":"3 × 8–10","Chest up, sit between your heels, pause 1 s at the bottom."+(h?" Heavier dumbbell.":"")),
+    X("Dumbbell Romanian deadlift", h?"4 × 8":"3 × 8–10","Hips back, flat back, feel the hamstring stretch."),
+    X("Bulgarian split squat","3 × 8 each leg","Back foot on a bench, front knee over your ankle. Weaker leg first. Hold dumbbells once bodyweight is easy."),
+    X("Standing calf raises","3 × 15","Both legs together, on the calf machine or a step holding a dumbbell.","standing calf raise",{im:"Standing_Calf_Raises"}),
+    X("Hip abduction machine","2 × 15","Lean forward slightly, pause 1 s out."),
+    E.core, E.stretch ]};
+  PLAN_NANA[d(4)] = {t:"upper",title:"Upper B: back & shoulders",mins:"~55 min",note:"No incline walk today, so your legs are fresh for tomorrow's run.",items:[
+    E.warm,
+    X("Lat pulldown", h?"4 × 8":"3 × 10","Pull the bar to your upper chest, elbows down and back."),
+    X("Seated cable row","3 × 12","Tall chest, squeeze your shoulder blades."),
+    X("Dumbbell shoulder press", h?"4 × 8":"3 × 10","Don't arch your back. Press up and slightly in."),
+    X("Dumbbell lateral raises","3 × 15","Light weight. Lead with your elbows."),
+    hammerOH("3 × 12 superset"),
+    E.abs, E.stretch ]};
+  PLAN_NANA[d(5)] = {t:"run",title:"Run 2: easy run",mins:"~50 min",note:w.r2note+" If Neel is running with you, he runs at your pace.",items:[
+    runWarm,
+    X("Easy run", w.r2, "Talking pace, about 7–7.5 km/h on a treadmill, or by feel outdoors.","easy running beginner",{im:"Jogging_Treadmill"}),
+    X("Cool-down walk","5 min","Let your breathing settle.","cool down walk after running"),
+    Object.assign({},E.flow,{rx:"20 min",cue:"Long stretch at the end of the week."}) ]};
+  PLAN_NANA[d(6)] = {t:"rest",title:"Rest day",rest:"Full rest. Eat well, hit your protein, sleep.",items:[]};
+});
+
+// Neel: legs (squat/deadlift alternate) · Upper A · Zone 2 + durability · football/4×4 · Upper B · long run · rest
+const NEEL_WEEKS = [
+  {mon:"2026-11-02", wk:3, light:false, main:"deadlift", mainRx:"4 × 5 @ 75 kg", inc:false, long:"70 min"},
+  {mon:"2026-11-09", wk:4, light:true,  main:"squat",    mainRx:"3 × 5 @ 60 kg", inc:false, long:"50 min"},
+  {mon:"2026-11-16", wk:5, light:false, main:"deadlift", mainRx:"4 × 5 @ 80 kg", inc:true,  long:"70 min"},
+  {mon:"2026-11-23", wk:6, light:false, main:"squat",    mainRx:"4 × 5 @ 67.5 kg", inc:true, long:"70 min"}
+];
+NEEL_WEEKS.forEach(w => {
+  const L = w.light, s = L ? 2 : 3, d = n => dayK(w.mon, n);
+  const lightNote = "<b>Lighter week (every 4th week).</b> Fewer sets and lighter weights all week, and about 30% less running. This is when the last 3 weeks turn into muscle and fitness. Keep the form sharp; nothing near failure.";
+  const mainLift = w.main === "deadlift"
+    ? XI("Deadlift", w.mainRx, "This week's main lift. Bar over mid-foot, push the floor away, flat back, reset each rep. Rest 2–3 min. +5 kg next deadlift week if every rep was fast.","Barbell_Deadlift","conventional deadlift form")
+    : XI("Barbell back squat", w.mainRx, (L?"Lighter week: smooth reps, nowhere near failure. ":"This week's main lift. Stop about 1 rep short of failure, clean depth. ")+"Rest 2–3 min.","Barbell_Squat","barbell back squat");
+  PLAN_NEEL[d(0)] = {t:"lower",title:"Legs: "+w.main+" week"+(L?" (lighter)":""),mins:L?"~50 min":"~65 min",
+    note: L ? lightNote : "<b>"+(w.main==="deadlift"?"Deadlift":"Squat")+" week</b>, week "+w.wk+" of the rebuild phase. Main lift up from the last time it came round. Everything else stays: single-leg Romanian deadlifts, hip thrusts, Bulgarians, slow leg curls, calves and hip abduction/adduction.",
+    items:[
+    Object.assign({},nWarm,{cue:"Loosen everything up. Ramp up to the main lift: empty bar, then 3 lighter sets."}),
+    X("Box jumps", L?"2 × 5":"3 × 5","Full rest. Every rep explosive.","box jump",{im:"Front_Box_Jump"}),
+    mainLift,
+    XI("Single-leg Romanian deadlift", s+" × 8 each leg @ 16–20 kg","Hips square, slow, feel the hamstring stretch."+(w.main==="deadlift"?" Lighter on deadlift weeks: stop 3 reps short.":""),"Kettlebell_One-Legged_Deadlift","dumbbell single leg romanian deadlift"),
+    XI("Barbell hip thrust", L?"2 × 10 @ 80 kg":"3 × 8–10 @ 90–95 kg","Chin tucked, pause 1 s at the top.","Barbell_Hip_Thrust","barbell hip thrust"),
+    XI("Dumbbell Bulgarian split squat", L?"2 × 8 each leg @ 14 kg":"3 × 8 each leg @ 16–17.5 kg","Weaker leg first.","Split_Squat_with_Dumbbells","bulgarian split squat"),
+    XI("Leg curl (machine), slow lowering","2 × 10","3 seconds on the way down. Sprint insurance.","Seated_Leg_Curl","seated leg curl slow eccentric"),
+    XI("Smith machine calf raise", s+" × 10–12 @ "+(L?"80":"90")+" kg","Full stretch, 1 s pause at the top.","Smith_Machine_Calf_Raise","smith machine calf raise"),
+    SS("Hip abduction + adduction","2 × 12–15 superset","Abduction, then straight into adduction, then rest 60 s. Pause 1 s at the end of each rep.","hip abduction adduction machine",M("Hip abduction","12–15 reps","Thigh_Abductor"),M("Hip adduction","12–15 reps","Thigh_Adductor")),
+    E.stretch ]};
+  PLAN_NEEL[d(1)] = {t:"upper",title:"Upper A: chest & back volume",mins:L?"~50 min":"~65 min",note:L?lightNote:"Moderate weight, more sets. Beat last Tuesday: a rep or a little weight wherever the sets felt controlled.",items:[
+    nWarm,
+    easyRun(L?"20 min · optional":"30 min · optional"),
+    XI("Dips", s+" × 8–12","Add a 5 kg plate once you get 3 × 12.","Dips_-_Chest_Version","chest dips"),
+    XI("Incline dumbbell press", s+" × 8–10 @ "+(L?"15":w.inc?"17.5–20":"15–17.5")+" kg","Last 2 reps hard.","Incline_Dumbbell_Press","incline dumbbell press"),
+    XI("Lat pulldown", s+" × 8–10 @ "+(L?"45–50":w.inc?"55–60":"50–55")+" kg","Elbows to your ribs, full stretch at the top.","Wide-Grip_Lat_Pulldown","lat pulldown"),
+    XI("Seated cable row", s+" × 8–10 @ "+(L?"45–50":w.inc?"55–60":"50–55")+" kg","Chest tall, squeeze the shoulder blades.","Seated_Cable_Rows","seated cable row"),
+    XI("Pec deck","2 × 10–12","Slow squeeze, pause 1 s.","Butterfly","pec deck"),
+    XI("Lateral raises", s+" × 15","Strict, lead with the elbows.","Side_Lateral_Raise","dumbbell lateral raise"),
+    SS("Incline curl + rope pushdown", s+" × 10–12 superset","","incline dumbbell curl rope pushdown",M("Incline curl","10–12 reps","Incline_Dumbbell_Curl"),M("Rope pushdown","12 reps","Triceps_Pushdown_-_Rope_Attachment")),
+    E.stretch ]};
+  PLAN_NEEL[d(2)] = {t:"run",title:"Zone 2 + durability",mins:L?"~50 min":"~70 min",note:L?lightNote:"Easy aerobic base, then the small muscles that keep runners and footballers healthy. Nothing heavy, so tomorrow isn't affected.",items:[
+    XI("Zone 2 run", L?"30 min":"45 min","Conversational, about 65–75% of max heart rate. Strictly easy.","Jogging_Treadmill","zone 2 running"),
+    XI("Seated calf raise", s+" × 15","Bent knee works the soleus, your main running calf muscle.","Seated_Calf_Raise","seated calf raise"),
+    XI("Tibialis raises","2 × 15","Back to a wall, lift your toes high.",null,"tibialis raise"),
+    XI("Copenhagen plank", s+" × 20 s each side","Top leg on a bench. Protects the groin for football.","Side_Bridge","copenhagen plank"),
+    {n:"Core",rx:"× 2 rounds",cue:"",q:"pallof press dead bug",moves:[M("Pallof press","10 each side","Pallof_Press"),M("Dead bug","10 each side","Dead_Bug")]},
+    Object.assign({},E.flow,{n:"Hip & ankle mobility",rx:"10 min"}) ]};
+  PLAN_NEEL[d(3)] = {t:"run",title:"Football or Norwegian 4×4",mins:"~55 min",
+    note: L ? "<b>Lighter week.</b> If you play football, play, but skip the all-out sprints. No football: do 3 × 4 instead of 4 × 4." : "<b>Your one hard conditioning day.</b> If you play football, that's it, so skip the 4×4. Otherwise do the 4×4. If last time felt controlled at the same heart rate, add a little speed or 1% incline.",
+    items:n4x4};
+  PLAN_NEEL[d(4)] = {t:"upper",title:"Upper B: heavy & vertical"+(L?" (lighter)":""),mins:L?"~45 min":"~60 min",note:L?lightNote:"The heavy upper day. Chest-supported rows keep your lower back fresh for tomorrow's long run.",items:[
+    Object.assign({},nWarm,{cue:"Loosen everything up, plus 2 × 15 band pull-aparts. Ramp up on pull-ups and the press."}),
+    XI("Pull-ups", L?"3 × 5":"4 × 6–8","Full hang, chin over the bar. Add 5 kg once you get 4 × 8 clean.","Weighted_Pull_Ups","strict pull ups"),
+    XI("Flat dumbbell bench press", L?"3 × 8 @ 17.5 kg":"4 × 6–8 @ "+(w.inc?"22.5–25":"20–22.5")+" kg","Last 2 reps a fight. Rest 2 min.","Dumbbell_Bench_Press","dumbbell bench press heavy"),
+    XI("Chest-supported dumbbell row", L?"3 × 10 @ 17.5–20 kg":"4 × 8 @ "+(w.inc?"25–27.5":"22.5–25")+" kg","Chest on an incline bench, elbows to your hips.","Dumbbell_Incline_Row","chest supported dumbbell row"),
+    XI("Seated dumbbell shoulder press", L?"2 × 10 @ 12.5 kg":"3 × 8–10 @ "+(w.inc?"16–17.5":"14–16")+" kg","Back supported.","Dumbbell_Shoulder_Press","seated dumbbell shoulder press"),
+    XI("Lateral raises", L?"3 × 15":"4 × 12–15","Light and strict.","Side_Lateral_Raise","dumbbell lateral raise"),
+    XI("Face pulls", L?"2 × 15":"3 × 15","Rope to your forehead, elbows high.","Face_Pull","cable face pull"),
+    SS("Hammer curl + overhead triceps extension", L?"2 × 12 superset":"3 × 10–12 superset","","hammer curl overhead triceps extension",M("Hammer curl","10–12 reps","Hammer_Curls"),M("Overhead triceps extension","12 reps","Standing_Dumbbell_Triceps_Extension")),
+    {n:"Core",rx:"× 2 rounds",cue:"",q:"hanging leg raise pallof press",moves:[M("Hanging leg raise","× 10, no swing","Hanging_Leg_Raise"),M("Pallof press","× 10 each side","Pallof_Press")]},
+    E.stretch ]};
+  PLAN_NEEL[d(5)] = {t:"run",title:"Long run",mins:w.long,
+    note: (L ? "<b>Shorter this week: 50 min, all easy.</b>" : "<b>All easy, Zone 2.</b> Held at 70 min during the rebuild phase.")+" If Nana is running with you, start at her pace, then carry on alone. Banana before; protein and carbs within the hour after.",
+    items:nLong(w.long)};
+  PLAN_NEEL[d(6)] = nRest;
+});
+
 const PEOPLE = {
   nana:{plan:PLAN_NANA,prefix:"chk-",title:"Nana's Training",hi:"Hi Nana,",sub:"Build muscle, lose a little fat, run further, and get more flexible. One day at a time.",sig:"By Neel, with love ♡",foot:"By Neel, with love ♡",after:"After: protein shake, and send Neel your sweaty post-workout pic 😘"},
   neel:{plan:PLAN_NEEL,prefix:"chk-neel-",title:"Neel's Training",hi:"Hi Neel,",sub:"Endurance first: run further and faster, stay strong and lean.",sig:"Built for the long run",foot:"Train smart, recover harder",after:"After: protein and carbs within an hour, then log it in Motra 💪"}
