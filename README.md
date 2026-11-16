@@ -2,7 +2,8 @@
 
 A phone-friendly weekly gym and running plan for two people, **Nana** and **Neel**, on one page with a name switch at the top. Every day shows each exercise as a photo card (start and finish positions), the sets and reps, a short coaching cue, and a "Watch video" link. Nana and Neel tick off each day as they finish it.
 
-- **Live site:** https://neelm20.github.io/nana-training/ (this changes to `https://<new-owner>.github.io/nana-training/` after a repo transfer; see [Hosting](#hosting))
+- **Live site:** https://neel-m20.github.io/nana-training/
+- **Repo:** https://github.com/neel-m20/nana-training (moved from `neelm20/nana-training` in Nov 2026; the old `neelm20.github.io` link no longer works, see [Hosting](#hosting))
 - **Direct links:** `#nana`, `#neel`, or a specific day such as `#neel-d20261124`
 - Addressed "Hi Nana," and signed "By Neel, with love". Keep that tone.
 
@@ -149,8 +150,11 @@ Saturday long runs are often together at Cubbon Park, Bengaluru, followed by bre
 
 The site is a static GitHub Pages site served from **`main`, folder `/` (root)**.
 
-After a repo transfer:
+Owner: **neel-m20** (transferred from **neelm20**).
+
+After the transfer (or any future one):
 
 1. Check **Settings → Pages**. The source should be "Deploy from a branch", `main`, `/ (root)`. Re-enable it if it's off.
-2. The URL becomes `https://<new-owner>.github.io/nana-training/`. GitHub redirects git URLs, but **not** Pages URLs, so share the new link and update any phone home-screen shortcut.
-3. Point local clones at the new remote: `git remote set-url origin https://github.com/<new-owner>/nana-training.git`
+2. The URL becomes `https://neel-m20.github.io/nana-training/`. GitHub redirects git URLs, but **not** Pages URLs, so share the new link and update any phone home-screen shortcut. Ticks saved on the old link don't carry over.
+3. Point local clones at the new remote: `git remote set-url origin https://github.com/neel-m20/nana-training.git`
+4. Pushing needs git signed in as **neel-m20** (or neelm20 added as a collaborator with write access).
