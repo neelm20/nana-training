@@ -923,7 +923,7 @@ const NEEL_WEEKS = [
   {mon:"2026-11-16", wk:5, light:false, main:"deadlift", mainRx:"4 × 5 @ 80 kg", inc:true,  long:"70 min"},
   {mon:"2026-11-23", wk:6, light:false, main:"squat",    mainRx:"4 × 5 @ 67.5 kg", inc:true, long:"70 min"},
   {mon:"2026-11-30", wk:7, light:false, main:"deadlift", mainRx:"4 × 5 @ 85 kg", inc:true,  long:"70 min"},
-  {mon:"2026-12-07", wk:8, light:true,  main:"squat",    mainRx:"3 × 5 @ 62.5 kg", inc:false, long:"50 min"},
+  {mon:"2026-12-07", wk:8, light:false, main:"squat",    mainRx:"4 × 5 @ 70 kg", inc:true,  long:"70 min"},
   {mon:"2026-12-14", wk:9, light:false, main:"deadlift", mainRx:"4 × 5 @ 90 kg", inc:2,     long:"70 min"},
   {mon:"2026-12-21", wk:10, light:false, main:"squat",   mainRx:"4 × 5 @ 72.5 kg", inc:2,   long:"70 min"},
   {mon:"2026-12-28", wk:11, light:true, holiday:true, main:"deadlift", mainRx:"3 × 5 @ 75 kg", inc:false, long:"50 min"}
@@ -987,6 +987,36 @@ NEEL_WEEKS.forEach(w => {
     items:nLong(w.long)};
   PLAN_NEEL[d(6)] = nRest;
 });
+
+// ---------- Neel, week of 16 Nov: training Mon–Wed only, away Thu 19 – Mon 23 ----------
+(() => {
+  const pick = (day,name) => PLAN_NEEL[day].items.find(i => i.n === name);
+  const A = "2026-11-17", B = "2026-11-20", Z = "2026-11-18";
+  PLAN_NEEL[A] = {t:"upper",title:"Upper: one full session (A + B)",mins:"~70 min",
+    note:"<b>Your only upper day this week</b>, so it takes the heavy lifts from Friday plus the best of Tuesday. Heavy first, while you're fresh. Every working set close to failure; that's what keeps the muscle while you're away.",
+    items:[ PLAN_NEEL[B].items[0],
+      pick(B,"Pull-ups"), pick(B,"Flat dumbbell bench press"), pick(B,"Chest-supported dumbbell row"),
+      pick(A,"Incline dumbbell press"), pick(A,"Lat pulldown"), pick(B,"Seated dumbbell shoulder press"),
+      pick(B,"Lateral raises"), pick(A,"Incline curl + rope pushdown"), E.stretch ]};
+  PLAN_NEEL[Z] = {t:"run",title:"4×4 or Zone 2 (your call)",mins:"~60 min",
+    note:"<b>Decide in the warm-up.</b> Legs feel fresh after 10 min easy and the strides feel snappy → do the 4×4. Legs still heavy from Monday's deadlifts → skip the 4×4 and keep running easy to 45 min in Zone 2. Either way, finish with the calf and tibialis work below. It's low-fatigue and you've got 5 days off to recover.",
+    items:[ ...n4x4.slice(0,3),
+      XI("Or: Zone 2 run","45 min","Instead of the 4×4 if your legs are heavy. Conversational, 65–75% of max heart rate.","Jogging_Treadmill","zone 2 running"),
+      pick(Z,"Seated calf raise"), pick(Z,"Tibialis raises"), pick(Z,"Copenhagen plank"), n4x4[3] ]};
+  const away = {t:"rest",title:"Away",restHead:"Enjoy the break",
+    rest:"No plan these days. If you get a free 30 min, an easy run or a walk is a bonus, never a must. Keep protein high (about 2 g/kg) so the muscle stays. 5 days off won't cost you anything; you'll come back fresher.",items:[]};
+  // Week of 23 Nov starts Tuesday: legs Tue, Upper A Wed, 4×4 Thu, Upper B Fri, long run Sat
+  const legs = Object.assign({}, PLAN_NEEL["2026-11-23"]);
+  legs.title = "Legs: squat week (first day back)";
+  legs.note = "<b>First session back after 5 days off.</b> Squat 4 × 5 @ 65 kg; if the bar flies up, go to 67.5 kg from set 2. Everything else as normal. Expect sore legs tomorrow; that's the break, not lost fitness.";
+  legs.items = legs.items.map(i => i.n === "Barbell back squat" ? Object.assign({}, i, {rx:"4 × 5 @ 65–67.5 kg"}) : i);
+  PLAN_NEEL["2026-11-25"] = Object.assign({}, PLAN_NEEL["2026-11-24"], {note:"Legs day yesterday, so the optional easy run is truly optional: skip it if your legs are sore. Beat your last upper A numbers where you can."});
+  PLAN_NEEL["2026-11-24"] = legs;
+  ["2026-11-19","2026-11-20","2026-11-21","2026-11-22","2026-11-23"].forEach(k => PLAN_NEEL[k] = away);
+  PLAN_NEEL["2026-11-26"] = Object.assign({}, PLAN_NEEL["2026-11-26"], {note:"<b>Your one hard conditioning day.</b> Football if you play; otherwise the 4×4. Legs were Tuesday; if they're still heavy, run the hard reps a touch slower, not shorter."});
+  // Nana: Neel is away on Saturday 21 Nov
+  PLAN_NANA["2026-11-21"] = Object.assign({}, PLAN_NANA["2026-11-21"], {note:"<b>30 minutes, with the last 5 a little quicker.</b> Still easy for the first 25. Neel's away this weekend; put a podcast on."});
+})();
 
 const PEOPLE = {
   nana:{plan:PLAN_NANA,prefix:"chk-",title:"Nana's Training",hi:"Hi Nana,",sub:"Build muscle, lose a little fat, run further, and get more flexible. One day at a time.",sig:"By Neel, with love ♡",foot:"By Neel, with love ♡",after:"After: protein shake, and send Neel your sweaty post-workout pic 😘"},
